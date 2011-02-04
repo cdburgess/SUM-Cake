@@ -1,11 +1,13 @@
 <?php
 class AppController extends Controller {
 
-    var $components = array('Auth','Session');
+    var $components = array('Auth','Session','Facebook.Connect');
+    var $helpers = array('Session','Facebook.Facebook', 'Html', 'Javascript', 'Form','Youtube');
     var $user_id;
     var $permitted = array('Pages');                                                        // add any controllers that allow total access
     
     function beforeFilter(){
+        $this->set('facebook_user', $this->Connect->user());
         $this->checkAuthentication();
     }
     
@@ -28,7 +30,7 @@ class AppController extends Controller {
         if ( in_array('*', array_keys($permissions)) ||                                     // super user (access to everything)
              in_array('*', array_values($permissions[$this->name])) ||                      // global controller access
              in_array($this->action, array_values($permissions[$this->name]))               // access to controller:action
-                                                                                ) {
+        ) {
             return true;                                                                    // allow access
         } else {
             return false;                                                                   // reject access

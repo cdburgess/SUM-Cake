@@ -4,3 +4,10 @@ I was tired of not having any good user management systems. I decided to build S
 
 Simple User Management for CakePHP is designed to allow anyone to quickly build an AUTH protected site in cake.
 
+
+
+TODO:
+- implement terms of service validation?
+- system wide "block account" implementation (i.e. to deactivate account for payment failure)
+- Groups. A user can belong to a group that can share items within the group.
+

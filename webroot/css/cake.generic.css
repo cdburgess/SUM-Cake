@@ -579,3 +579,16 @@ div.nav ul li a:hover{
 	background: #f0f09a;
 	background: -webkit-gradient(linear, left top, left bottom, from(#f7f7e1), to(#eeeca9));
 }
+
+/** User Permissions Div **/
+div.link_content {
+	background: #fff;
+	clear: both;
+	color: #333;
+	overflow: auto;
+	width: 100%;
+}
+div.user_permissions {
+	float: right;
+	padding: 10px;
+}

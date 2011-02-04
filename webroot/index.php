@@ -51,7 +51,7 @@
  */
 	if (!defined('CAKE_CORE_INCLUDE_PATH')) {
 		//define('CAKE_CORE_INCLUDE_PATH', ROOT);
-		define('CAKE_CORE_INCLUDE_PATH', DS.'Users'.DS.'cburgess'.DS.'Sites'.DS.'cakephp-1.3.2');
+		define('CAKE_CORE_INCLUDE_PATH', DS.'Users'.DS.'cburgess'.DS.'Sites'.DS.'cakephp');
 	}
 
 /**
