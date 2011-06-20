@@ -122,6 +122,13 @@ __('To change the content of this page, modify: APP/views/elements/documentation
 	validated through a validation link, set autoValidate to true in the bootstrap file. If you do not want to send a
 	welcome email at all, you can also disable that in the bootstrap file.
 </p><br />
+
+<p>
+	If you need to use SMTP for email delivery, there is an option in the bootstrap that will allow you to enable SMTP
+	delivery and set all of the variables required. By setting the required variables and turning smtpEmailOn = true, 
+	the system will send the emails via SMTP instead of SENDMAIL.
+</p><br />
+
 <h4><b><?php __('Permissions'); ?></b></h4>
 <p>
 	As you start adding controllers and methods to your application, you will need to give the users permissions if they
