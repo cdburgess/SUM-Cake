@@ -53,3 +53,11 @@ Configure::write('SystemEmail', 'email@example.com');
 Configure::write('CompanyName', 'MyCompany');
 Configure::write('autoValidate', false);
 Configure::write('welcomeEmail', true);
+
+// email
+Configure::write('smtpEmailOn', false);
+Configure::write('smtpPort', 465);
+Configure::write('smtpTimeOut', 30);
+Configure::write('smtpHost', 'ssl://smtp.gmail.com');
+Configure::write('smtpUsername', 'user@gmail.com');
+Configure::write('smtpPassword', 'password');

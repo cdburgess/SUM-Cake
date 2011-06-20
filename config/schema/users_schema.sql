@@ -66,5 +66,5 @@ CREATE TABLE `users` (
 --
 -- both users passwords: password
 
-INSERT INTO `users` VALUES('4c5b1927-5e14-4379-95d1-3009e4ca782d', 'admin@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', NULL, 'Admin', '1', '2010-08-05 14:03:51', '2011-06-19 18:57:20');
+INSERT INTO `users` VALUES('4c5b1927-5e14-4379-95d1-3009e4ca782d', 'admin@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'Admin', '1', '2010-08-05 14:03:51', '2011-06-19 18:57:20');
 INSERT INTO `users` VALUES('4dfec325-c338-49e5-983c-43a8e4ca782d', 'user@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'User', '1', '2011-06-19 21:48:53', '2011-06-19 21:48:53');

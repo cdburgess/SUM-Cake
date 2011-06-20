@@ -64,5 +64,16 @@ class AppController extends Controller {
         }
         $this->Session->write('Permissions',$permissions);                                  // write the permissions to the users session
     }
+    
+    function useSmtp() {
+        $this->Email->smtpOptions = array(
+            'port' => Configure::read('smtpPort'),
+            'timeout' => Configure::read('smtpTimeOut'),
+            'host' => Configure::read('smtpHost'),
+            'username' => Configure::read('smtpUsername'),
+            'password' => Configure::read('smtpPassword'),
+         );
+        $this->Email->delivery = 'smtp';
+        return true;
+    }
 }
-?>

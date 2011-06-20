@@ -6,7 +6,7 @@ class UsersController extends AppController {
 	
 	function beforeFilter(){
 		parent::beforeFilter();
-		$this->Auth->allow('login','logout','register','password_request','reset_password');            
+		$this->Auth->allow('login','logout','register','password_request','reset_password','confirm');            
 	}
 
 	function login(){  }
@@ -83,16 +83,19 @@ class UsersController extends AppController {
 		if (!empty($this->data)) {
 			$user = $this->User->find('first', array('conditions' => array('email_address' => $this->data['User']['email_address'])));
 			if (!empty($user['User']['email_address'])) {
-		$system_email = Configure::read('SystemEmail');
-		$this->Email->to = $user['User']['email_address'];
-		$this->Email->subject = 'Password Reset Request';
-		$this->Email->replyTo = $system_email;
-		$this->Email->from = $system_email;
-		$this->Email->template = 'password_reset'; 
-		$this->Email->sendAs = 'both'; //Send as 'html', 'text' or 'both' (default is 'text')
-		$this->set('site', FULL_BASE_URL . $this->base);
-		$this->set('link', FULL_BASE_URL . $this->base . '/users/reset_password/'.$user['User']['id'].'/'.$user['User']['password']);
-		$this->Email->send();
+		        $system_email = Configure::read('SystemEmail');
+        		$this->Email->to = $user['User']['email_address'];
+        		$this->Email->subject = 'Password Reset Request';
+        		$this->Email->replyTo = $system_email;
+        		$this->Email->from = $system_email;
+        		$this->Email->template = 'password_reset'; 
+        		$this->Email->sendAs = 'both'; //Send as 'html', 'text' or 'both' (default is 'text')
+        		$this->set('site', FULL_BASE_URL . $this->base);
+        		$this->set('link', FULL_BASE_URL . $this->base . '/users/reset_password/'.$user['User']['id'].'/'.$user['User']['password']);
+        		if(Configure::read('smtpEmailOn') == true) {
+        		    $this->useSmtp(); // load the smpt values from app_controller.php
+        		}
+        		$this->Email->send();
 			}
 			$this->Session->setFlash(__('Reset email has been sent.', true));
 			$this->redirect(array('action' => 'login'));
@@ -125,6 +128,9 @@ class UsersController extends AppController {
                 		$this->set('link', FULL_BASE_URL . $this->base . '/users/confirm/' . $this->User->id);
             		}
             		$this->set('company_name', $company_name);
+            		if(Configure::read('smtpEmailOn') == true) {
+            		    $this->useSmtp(); // load the smpt values from app_controller.php
+            		}
             		$this->Email->send();
 		        }
         		$this->Session->setFlash(__('You have been registered!', true));
@@ -235,9 +241,10 @@ class UsersController extends AppController {
 	function _update_session() {
 	    $user = $this->User->find();
 	    foreach($user['User'] as $key => $value) {
-		if($key !== 'password') {
-		    $this->Session->write('Auth.User.'.$key, $value);
-		}
+		    if($key !== 'password') {
+    		    $this->Session->write('Auth.User.'.$key, $value);
+    		}
 	    }
 	}
+	
 }
