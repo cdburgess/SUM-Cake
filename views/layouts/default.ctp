@@ -19,7 +19,6 @@
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<?php echo $this->Facebook->html(); ?>
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
@@ -37,28 +36,10 @@
 		<div id="header">
 			<h1><?php echo $this->Html->link(__('CakePHP: the rapid development php framework', true), 'http://cakephp.org'); ?></h1>
 		</div>
-		<div class="link_content">
-			<div class="user_permissions" <?php if ($this->here == '/users/login') { echo 'style="visibility: hidden;"'; } ?>>
-				<?php
-				if ($facebook_user or $Auth) {
-					if ($facebook_user) {
-						echo $this->Facebook->logout(array('redirect' => array('controller' => 'users', 'action' => 'logout')));
-					} else {
-						echo $html->link('logout', array('controller' => 'users', 'action' => 'logout'));
-					}
-				} else {
-					echo $this->Facebook->login(array('perms' => 'email'));
-					echo ' or ';
-					echo $html->link('login', array('controller' => 'users', 'action' => 'login'));
-				}
-				?>
-			</div>
-		</div>
+		<?php echo $this->element('login'); ?>
 		<div id="content">
 			<?php echo $this->Session->flash(); ?>
-
 			<?php echo $content_for_layout; ?>
-			<?php //echo $youtube->video('0cPiXeSyCsw'); ?>
 		</div>
 		<div id="footer">
 			<?php echo $this->Html->link(
@@ -70,6 +51,5 @@
 		</div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
-	<?php echo $this->Facebook->init(); ?>
 </body>
 </html>

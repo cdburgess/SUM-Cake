@@ -21,7 +21,6 @@ class UsersController extends AppController {
 		$this->redirect($this->Auth->logout());
 	}
 	
-	
 	function confirm($id = null){
 	    if (!$id) {
 		$this->Session->setFlash(__('Sorry, this user could not be activated.', true));
@@ -102,29 +101,37 @@ class UsersController extends AppController {
 	
 	function register() {
 		if (!empty($this->data)) {
-	$this->data['User']['active'] = 0;
-	$this->User->create();
-	if ($this->User->save($this->data)) {
-		$company_name = Configure::read('CompanyName');
-		$system_email = Configure::read('SystemEmail');
+		    if(Configure::read('autoValidate') == true) {
+		        $this->data['User']['active'] = 1;
+		    } else {
+		        $this->data['User']['active'] = 0;
+		    }
+        	$this->User->create();
+        	if ($this->User->save($this->data)) {
+	    
+	            if(Configure::read('welcomeEmail') == true) {
+        		    $company_name = Configure::read('CompanyName');
+            		$system_email = Configure::read('SystemEmail');
 		
-		// send welcome email with confirmation link
-		$this->Email->to = $this->data['User']['email_address'];
-		$this->Email->subject = 'Welcome to '.$company_name;
-		$this->Email->replyTo = $system_email;
-		$this->Email->from = $system_email;
-		$this->Email->template = 'welcome'; 
-		$this->Email->sendAs = 'both'; //Send as 'html', 'text' or 'both' (default is 'text')
-		$this->set('site', FULL_BASE_URL . $this->base);
-		$this->set('link', FULL_BASE_URL . $this->base . '/users/confirm/' . $this->User->id);
-		$this->set('company_name', $company_name);
-		$this->Email->send();
-		
-		$this->Session->setFlash(__('You have been registered!', true));
-		$this->redirect(array('action' => 'login'));
-	} else {
-		$this->Session->setFlash(__('You could not be registered. Please, try again.', true));
-	}
+            		// send welcome email with confirmation link
+            		$this->Email->to = $this->data['User']['email_address'];
+            		$this->Email->subject = 'Welcome to '.$company_name;
+            		$this->Email->replyTo = $system_email;
+            		$this->Email->from = $system_email;
+            		$this->Email->template = 'welcome'; 
+            		$this->Email->sendAs = 'both'; //Send as 'html', 'text' or 'both' (default is 'text')
+            		if(Configure::read('autoValidate') == false) {
+            		    $this->set('site', FULL_BASE_URL . $this->base);
+                		$this->set('link', FULL_BASE_URL . $this->base . '/users/confirm/' . $this->User->id);
+            		}
+            		$this->set('company_name', $company_name);
+            		$this->Email->send();
+		        }
+        		$this->Session->setFlash(__('You have been registered!', true));
+        		$this->redirect(array('action' => 'login'));
+        	} else {
+        		$this->Session->setFlash(__('You could not be registered. Please, try again.', true));
+        	}
 		}
 	}
         	
@@ -234,4 +241,3 @@ class UsersController extends AppController {
 	    }
 	}
 }
-?>

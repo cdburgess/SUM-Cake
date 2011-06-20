@@ -51,3 +51,5 @@
 
 Configure::write('SystemEmail', 'email@example.com');
 Configure::write('CompanyName', 'MyCompany');
+Configure::write('autoValidate', false);
+Configure::write('welcomeEmail', true);

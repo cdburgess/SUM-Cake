@@ -2,7 +2,7 @@
 class PermissionsController extends AppController {
 
 	var $name = 'Permissions';
-        var $components = array('ControllerList');
+    var $components = array('ControllerList');
         
 	function admin_index() {
 		$this->Permission->recursive = 0;
@@ -69,4 +69,3 @@ class PermissionsController extends AppController {
 	}
        
 }
-?>

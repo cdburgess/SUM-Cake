@@ -77,9 +77,9 @@ class DATABASE_CONFIG {
 		'driver' => 'mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'users',
-		'password' => 'users',
-		'database' => 'users',
+		'login' => 'sum-cake',
+		'password' => 'sum-cake',
+		'database' => 'sum-cake',
 		'prefix' => '',
 	);
 

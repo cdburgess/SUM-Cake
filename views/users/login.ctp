@@ -9,9 +9,6 @@
 <div class="login form">
     <?php echo $session->flash('auth'); ?>
     <h2>Login</h2>
-    Login with your Facebook account: <?php echo $this->Facebook->login(array('perms' => 'email')); ?>
-    <br><br>
-    <p> OR </p>
     <?php
     echo $form->create('User', array('action' => 'login'));
     echo $form->input('email_address',array('between'=>'<br>','class'=>'text'));

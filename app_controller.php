@@ -1,13 +1,12 @@
 <?php
 class AppController extends Controller {
 
-    var $components = array('Auth','Session','Facebook.Connect');
-    var $helpers = array('Session','Facebook.Facebook', 'Html', 'Javascript', 'Form','Youtube');
+    var $components = array('Auth','Session');
+    var $helpers = array('Session','Html', 'Javascript', 'Form');
     var $user_id;
     var $permitted = array('Pages');                                                        // add any controllers that allow total access
     
     function beforeFilter(){
-        $this->set('facebook_user', $this->Connect->user());
         $this->checkAuthentication();
     }
     
@@ -15,15 +14,16 @@ class AppController extends Controller {
         $this->Auth->fields = array('username'=>'email_address','password'=>'password');    //Override default fields used by Auth component
         $this->allowAccess();                                                               //run all generic access
         $this->Auth->logoutRedirect = '/';                                                  //Set the default redirect for users who logout
-        $this->Auth->loginRedirect = '/';                                                   //Set the default redirect for users who login
+        $this->Auth->loginRedirect = '/admin/users';                                        //Set the default redirect for users who login
         $this->Auth->authorize = 'controller';                                              //Extend auth component to include authorisation via isAuthorized action
         $this->Auth->userScope = array('User.active = 1');                                  //User must be active to gain access
         $this->set('Auth',$this->Auth->user());                                             //Pass auth component data over to view files
         if($this->Auth->user('role') !== 'Admin') {
             Configure::write('user_id', $this->Auth->user('id'));
+            $this->Auth->loginRedirect = '/users';
         }
     }
-        
+    
     function isAuthorized(){
         if (!$this->Session->check('Permissions')) { $this->buildPermissions(); }           // if permissions are not set in session
         $permissions = $this->Session->read('Permissions');                                 // read the permissions
