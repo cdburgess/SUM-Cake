@@ -1,13 +1,32 @@
 <?php
+/**
+* App model class.
+*
+* @link http://github.com/cdburgess/SUM-Cake
+* @package cake
+* @subpackage app
+* @license http://creativecommons.org/licenses/by-sa/3.0/
+*/
 class AppModel extends Model {
     
-    // set the user_id so it is available in any of the models as needed
+    /**
+    * Var User id
+    *
+    * Used because the session data is not available to the model.
+    *
+    * @var string $user_id;
+    * @access public
+    */
     var $user_id;
     
     /**
      * beforeFind
      *
-     * If the user_id is set, be sure to limit the data by the user_id
+     * If the user_id is set, limit the data by the user_id
+     *
+     * @param array $queryData The query data that is headed to the model
+     * @return array $queryData Pass the updated queryData back to caller
+     * @access public
      */
     function beforeFind($queryData) {
         if($this->user_id = Configure::read('user_id')) {
@@ -29,6 +48,9 @@ class AppModel extends Model {
      * beforeSave
      *
      * Make sure the user_id is set correctly for users trying to save their data.
+     *
+     * @return true
+     * @access public
      */
     function beforeSave() {
         if($this->user_id = Configure::read('user_id')) {
@@ -44,11 +66,13 @@ class AppModel extends Model {
      *
      * Get the enum values for any column that have ENUM values.
      * 
-     * USAGE: $this->set('name', $this->Model->getEnumValues('db_enum_field_name'));
+     * @param string $columnName The name of the column in the model that is the enum (MySQL Specific)
+     * @return array $options The options of all enum items
+     * @example $this->set('name', $this->Model->getEnumValues('db_enum_field_name'));
+     * @access public
      */ 
-    function getEnumValues($columnName = null)
-    {
-        if ($columnName==null) { return array(); } //no field specified
+    function getEnumValues($columnName = null) {
+        if ($columnName == null) { return array(); } //no field specified
 
         //Get the name of the table
         $db =& ConnectionManager::getDataSource($this->useDbConfig);
@@ -67,14 +91,11 @@ class AppModel extends Model {
         $values = explode("','", preg_replace("/(enum)\('(.+?)'\)/","\\2", $types) );
 
         //explode doesn't do assoc arrays, but cake needs an assoc to assign values
-        $assoc_values = array();
+        $options = array();
         foreach ( $values as $value ) {
             //leave the call to humanize if you want it to look pretty
-            $assoc_values[$value] = Inflector::humanize($value);
+            $options[$value] = Inflector::humanize($value);
         }
-
-        return $assoc_values;
-
-    } //end getEnumValues
+        return $options;
+    }
 }
-?>

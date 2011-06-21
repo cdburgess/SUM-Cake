@@ -4,7 +4,12 @@ if (Configure::read() == 0):
 endif;
 ?>
 <h2><?php echo 'Documentation for SUM-Cake.'; ?></h2>
-<a href="http://github.com/cdburgess/SUM-Cake"><?php __('SUM-Cake Source Code Here'); ?> </a>
+<br>
+<div width="200px">
+	<center>
+		<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">SUM-Cake</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://blockchuck.com" property="cc:attributionName" rel="cc:attributionURL">Chuck Burgess</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://github.com/cdburgess/SUM-Cake" rel="dct:source">github.com</a>.
+	</center>
+</div>
 <?php
 if (Configure::read() > 0):
 	Debugger::checkSecurityKeys();

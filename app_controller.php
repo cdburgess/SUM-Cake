@@ -1,4 +1,12 @@
 <?php
+/**
+* App controller class.
+*
+* @link http://github.com/cdburgess/SUM-Cake
+* @package cake
+* @subpackage app
+* @license http://creativecommons.org/licenses/by-sa/3.0/
+*/
 class AppController extends Controller {
 
     var $components = array('Auth','Session');
@@ -6,11 +14,25 @@ class AppController extends Controller {
     var $user_id;
     var $permitted = array('Pages');                                                        // add any controllers that allow total access
     
+    /**
+    * Before Filter
+    *
+    * @return void
+    * @access public
+    */
     function beforeFilter(){
-        $this->checkAuthentication();
+        $this->_checkAuthentication();
     }
     
-    private function checkAuthentication() {
+    /**
+    * Check Authentication
+    *
+    * Check to see if the user is logged in.
+    *
+    * @return void
+    * @access private
+    */
+    private function _checkAuthentication() {
         $this->Auth->fields = array('username'=>'email_address','password'=>'password');    //Override default fields used by Auth component
         $this->allowAccess();                                                               //run all generic access
         $this->Auth->logoutRedirect = '/';                                                  //Set the default redirect for users who logout
@@ -24,6 +46,14 @@ class AppController extends Controller {
         }
     }
     
+    /**
+    * Is Authorized?
+    *
+    * What does the user have access to? This will set the permissions availble to this users role
+    *
+    * @return mixed True/False If the user is authorized to access or not
+    * @access public
+    */
     function isAuthorized(){
         if (!$this->Session->check('Permissions')) { $this->buildPermissions(); }           // if permissions are not set in session
         $permissions = $this->Session->read('Permissions');                                 // read the permissions
@@ -37,18 +67,31 @@ class AppController extends Controller {
         }
     }
 
+    /**
+    * Allow Access
+    *
+    * @return void
+    * @access private
+    */
     private function allowAccess() {
         if(in_array($this->name, $this->permitted)) {
           $this->Auth->allow('*');
         }
     }
     
+    /**
+    * Build Permissions
+    *
+    * Get the list of permissions from the database and build an access array
+    *
+    * @return void
+    * @access private
+    */
     private function buildPermissions() {
         $permissions = array();
         $permissions['Users'][] = 'logout';                                                 // everyone gets access to logout
-        App::import('Model', 'Permission');                                                 // get access to the Permissions model
-        $thisPermission = new Permission;                                                   // create a new Permission instance
-        $permissionList = $thisPermission->find('list', array(
+        $this->loadModel('Permission');                                                     // load the Permission model
+        $permissionList = $this->Permission->find('list', array(
                             'conditions' => array('Permission.role' => $this->Auth->user('role')),
                             'fields' => array('Permission.name'),
                             )
@@ -65,6 +108,14 @@ class AppController extends Controller {
         $this->Session->write('Permissions',$permissions);                                  // write the permissions to the users session
     }
     
+    /**
+    * Use SMPT
+    *
+    * Set the email component to allow for SMPT connections. Settings are in the Bootstrap file.
+    *
+    * @return true
+    * @access public
+    */
     function useSmtp() {
         $this->Email->smtpOptions = array(
             'port' => Configure::read('smtpPort'),

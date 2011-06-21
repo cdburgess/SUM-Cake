@@ -5,8 +5,6 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('email_address');
-		echo $this->Form->input('password');
-		echo $this->Form->input('confirm_password', array('type' => 'password'));
 		echo $this->Form->input('role', array('type' => 'select', 'options' => $role));
 		echo $this->Form->input('active', array('type' => 'select', 'options' => $active));
 	?>

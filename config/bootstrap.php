@@ -49,12 +49,13 @@
  *
  */
 
+// email settings
 Configure::write('SystemEmail', 'email@example.com');
 Configure::write('CompanyName', 'MyCompany');
 Configure::write('autoValidate', false);
 Configure::write('welcomeEmail', true);
 
-// email
+// email system
 Configure::write('smtpEmailOn', false);
 Configure::write('smtpPort', 465);
 Configure::write('smtpTimeOut', 30);

@@ -1,50 +1,125 @@
 <?php
+/**
+* Users controller class.
+*
+* @link http://github.com/cdburgess/SUM-Cake
+* @package cake
+* @subpackage app.controller
+* @license http://creativecommons.org/licenses/by-sa/3.0/
+*/
 class UsersController extends AppController {
 
+    /**
+    * Var Users
+    * @var string 'Users'
+    * @access public
+    */
 	var $name = 'Users';
+	
+	/**
+	* Var Components
+	* @var string Components
+	* @access public
+	*/
 	var $components = array('Email');
 	
+	/**
+	* Before Filer
+	*
+	* @return void
+	* @access public
+	*/
 	function beforeFilter(){
 		parent::beforeFilter();
 		$this->Auth->allow('login','logout','register','password_request','reset_password','confirm');            
 	}
 
+    /**
+    * Login for Users
+    *
+    * Anyone can login using this method
+    *
+    * @return void
+    * @access public
+    */
 	function login(){  }
+	
+	/**
+	* Admin Login
+	*
+	* Administrators can access this login.
+	*
+	* @return void
+	* @access public
+	*/
 	function admin_login(){ }
 
+    /**
+    * Logout
+    *
+    * Users will logout.
+    *
+    * @return void
+    * @access public
+    */
 	function logout(){  
 		$this->Session->delete('Permissions');
 		$this->redirect($this->Auth->logout());
 	}
+	
+	/** 
+	* Admin Logout
+	*
+	* Administrators logout.
+	*
+	* @return void
+	* @access public
+	*/
 	function admin_logout(){
 		$this->Session->delete('Permissions');
 		$this->redirect($this->Auth->logout());
 	}
 	
+	/**
+	* Confirm Account
+	*
+	* The user clicks a confirmation link sent via email during the registration process and
+	* is brought to this link to confirm they in fact are the subscriber. This will change the
+	* user record by setting the active column = 1. This allows the user to login.
+	*
+	* @param string $id The user_id to confirm.
+	* @return void
+	* @access public
+	*/
 	function confirm($id = null){
 	    if (!$id) {
-		$this->Session->setFlash(__('Sorry, this user could not be activated.', true));
-		$this->redirect(array('action' => 'index'));
-	    } else {
-		$this->set('user', $this->User->read(null, $id));
-		$this->User->set('id', $id);
-		$this->User->set('active', 1);
-		if ($this->User->save('', false)) {
-		    $this->Session->setFlash(__('You have been activated successfully.', true));
-		    $this->redirect(array('action' => 'login'));
-		} else {
 		    $this->Session->setFlash(__('Sorry, this user could not be activated.', true));
-		    $this->redirect(array('action' => 'login'));
-		}
+		    $this->redirect(array('action' => 'index'));
+	    } else {
+		    $this->set('user', $this->User->read(null, $id));
+		    $this->User->set('id', $id);
+		    $this->User->set('active', 1);
+		    if ($this->User->save('', false)) {
+    		    $this->Session->setFlash(__('You have been activated successfully.', true));
+    		    $this->redirect(array('action' => 'login'));
+    		} else {
+    		    $this->Session->setFlash(__('Sorry, this user could not be activated.', true));
+    		    $this->redirect(array('action' => 'login'));
+    		}
 	    }
 	}
 	
 	
 	/**
-	 * reset_password
+	 * Reset Password
 	 *
 	 * The custom code they come in with is only usable once. Once the password
-	 * is reset, the code will no longer work for resetting any passwords.
+	 * is reset, the code will no longer work for resetting any passwords. 
+	 *
+	 * @param string $user_id The user_id to reset the password for
+	 * @param string $password The encrypted password for the existing account
+	 * @return void
+	 * @access public
 	 */
 	function reset_password($user_id = null, $password = null) {
 		if (!empty($this->data)) {
@@ -55,11 +130,8 @@ class UsersController extends AppController {
 				$user = $this->User->find('first', array('conditions' => array('id' => $this->data['User']['id'])));   
 			}
 		} else {
-			// if data is empty, this is the first visit
 			if(!empty($user_id) and !empty($password)) {
-				// allow the user to reset the password if the userid and password match
 				$user = $this->User->find('first', array('conditions' => array('id' => $user_id)));
-				
 				if($user['User']['password'] !== $password) {
 					$this->Session->setFlash(__('Sorry! User information did not match.', true));
 					$this->redirect(array('action' => 'index'));
@@ -69,15 +141,18 @@ class UsersController extends AppController {
 				$this->redirect(array('action' => 'index'));
 			}
 		}
-		$this->set('id', $user_id);                                     // required for updating
-		$this->set('email_address', $user['User']['email_address']);    // required for hashing passwords
+		$this->set('id', $user_id);
+		$this->set('email_address', $user['User']['email_address']);
 	}
 	
 	/**
-	 * reset_password_request
+	 * Password Request
 	 *
 	 * Since the passwords are encrypted, we cannot just send them the password,
 	 * we have to send them the ability to reset the password.
+	 *
+	 * @return void
+	 * @access public
 	 */
 	function password_request() {
 		if (!empty($this->data)) {
@@ -93,7 +168,7 @@ class UsersController extends AppController {
         		$this->set('site', FULL_BASE_URL . $this->base);
         		$this->set('link', FULL_BASE_URL . $this->base . '/users/reset_password/'.$user['User']['id'].'/'.$user['User']['password']);
         		if(Configure::read('smtpEmailOn') == true) {
-        		    $this->useSmtp(); // load the smpt values from app_controller.php
+        		    $this->useSmtp();
         		}
         		$this->Email->send();
 			}
@@ -102,6 +177,17 @@ class UsersController extends AppController {
 		}
 	}
 	
+	/**
+	* Register
+	*
+	* Allows users to register. This will send a welcome email (if enabled) allowing them to activate
+	* their account from a link in an email. This provides a "double opt-in" security measure so people
+	* cannot be given access on an email account they do not own. If autoValidate is set to true, the
+	* account will be activated automatically.
+	*
+	* @return void
+	* @access public
+	*/
 	function register() {
 		if (!empty($this->data)) {
 		    if(Configure::read('autoValidate') == true) {
@@ -140,11 +226,28 @@ class UsersController extends AppController {
         	}
 		}
 	}
-        	
+    
+    /**
+    * Index
+    *
+    * The main screen for the user to see their credentials. This can be modified to incorporate other
+    * information as added by the developer. Currently it shows the users username (which is their email).
+    *
+    * @return void
+    * @access public
+    */
 	function index() {
 		$this->set('user', $this->User->find());
 	}
 
+    /**
+    * Change Password
+    *
+    * This function allows the user to change their password.
+    *
+    * @return void
+    * @access public
+    */
 	function change_password() {
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {
@@ -159,6 +262,14 @@ class UsersController extends AppController {
 		}
 	}
 	
+	/**
+	* Edit
+	*
+	* Allows the user to change their email address.
+	*
+	* @return void
+	* @access public
+	*/
 	function edit() {
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {
@@ -172,17 +283,34 @@ class UsersController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->User->find();
 		}
-        $this->set('gender', $this->User->getEnumValues('gender'));
 	}
 	
 	/**
 	 * Admin Content
 	 */
+    
+    /**
+    * Admin Index
+    *
+    * Show all users in the system.
+    *
+    * @return void
+    * @access public
+    */
 	function admin_index() {
             $this->User->recursive = 0;
             $this->set('users', $this->paginate());
 	}
 
+    /**
+    * Admin View
+    *
+    * View details of a specific user.
+    *
+    * @param string $id The id of the user to view.
+    * @return void
+    * @access public
+    */
 	function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid user', true));
@@ -191,6 +319,14 @@ class UsersController extends AppController {
 		$this->set('user', $this->User->read(null, $id));
 	}
 
+    /**
+    * Admin Add
+    * 
+    * Add a new user to the system.
+    *
+    * @return void
+    * @access public
+    */
 	function admin_add() {
 		if (!empty($this->data)) {
 			$this->User->create();
@@ -204,7 +340,16 @@ class UsersController extends AppController {
 		$this->set('role', $this->User->getEnumValues('role'));
                 $this->set('active', $this->User->getEnumValues('active'));
 	}
-
+    
+    /**
+    * Admin Edit
+    *
+    * Edit a user in the system.
+    *
+    * @param string $id The id of the user to edit
+    * @return void
+    * @access public
+    */
 	function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid user', true));
@@ -222,9 +367,46 @@ class UsersController extends AppController {
 			$this->data = $this->User->read(null, $id);
 		}
 		$this->set('role', $this->User->getEnumValues('role'));
-                $this->set('active', $this->User->getEnumValues('active'));
+        $this->set('active', $this->User->getEnumValues('active'));
 	}
 
+    /**
+    * Admin Change Password
+    *
+    * Change a users password in the system.
+    *
+    * @param string $id The id of the user to edit
+    * @return void
+    * @access public
+    */
+   	function admin_change_password($id = null) {
+   		if (!$id && empty($this->data)) {
+   			$this->Session->setFlash(__('Invalid user', true));
+   			$this->redirect(array('action' => 'index'));
+   		}
+   		if (!empty($this->data)) {
+   			if ($this->User->save($this->data)) {
+   				$this->Session->setFlash(__('The user has been saved', true));
+   				$this->redirect(array('action' => 'index'));
+   			} else {
+   			    $this->data = $this->User->read(null, $this->data['User']['id']);
+   				$this->Session->setFlash(__('The user could not be saved. Please, try again.', true));
+   			}
+   		}
+   		if (empty($this->data)) {
+   			$this->data = $this->User->read(null, $id);
+   		}
+   	}
+
+    /**
+    * Admin Delete
+    *
+    * Delete a user from the system.
+    *
+    * @param string id The id of the user to delete.
+    * @return void
+    * @access public
+    */
 	function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for user', true));
@@ -238,6 +420,13 @@ class UsersController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 	
+	/**
+	* Update Session
+	*
+	*
+	* @return void
+	* @access private
+	*/
 	function _update_session() {
 	    $user = $this->User->find();
 	    foreach($user['User'] as $key => $value) {
