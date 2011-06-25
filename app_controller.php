@@ -12,7 +12,7 @@ class AppController extends Controller {
     var $components = array('Auth','Session');
     var $helpers = array('Session','Html', 'Javascript', 'Form');
     var $user_id;
-    var $permitted = array('Pages');                                                        // add any controllers that allow total access
+    var $permitted = array('/','Pages');                                                        // add any controllers that allow total access
     
     /**
     * Before Filter
@@ -22,6 +22,7 @@ class AppController extends Controller {
     */
     function beforeFilter(){
         $this->_checkAuthentication();
+        $this->Auth->allow();         // override access by adding '*' inside the parenthesis
     }
     
     /**
@@ -34,7 +35,6 @@ class AppController extends Controller {
     */
     private function _checkAuthentication() {
         $this->Auth->fields = array('username'=>'email_address','password'=>'password');    //Override default fields used by Auth component
-        $this->allowAccess();                                                               //run all generic access
         $this->Auth->logoutRedirect = '/';                                                  //Set the default redirect for users who logout
         $this->Auth->loginRedirect = '/admin/users';                                        //Set the default redirect for users who login
         $this->Auth->authorize = 'controller';                                              //Extend auth component to include authorisation via isAuthorized action

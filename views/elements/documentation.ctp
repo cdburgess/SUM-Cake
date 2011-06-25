@@ -3,7 +3,7 @@ if (Configure::read() == 0):
 	$this->cakeError('error404');
 endif;
 ?>
-<h2><?php echo 'Documentation for SUM-Cake.'; ?></h2>
+<h2><?php echo 'Documentation for SUM-Cake. v1.0'; ?></h2>
 <br>
 <div width="200px">
 	<center>
@@ -115,6 +115,18 @@ __('To change the content of this page, modify: APP/views/elements/documentation
 	and you will be off and running. What I want to document here is some of the functionality that may NOT be so
 	obvious.
 </p><br />
+<h4><b><?php __('Set Up'); ?></b></h4>
+<p>
+	The SUM-Cake package is basically the app directory that you can start building an application in. You can add the
+	config/schema/users_schema.sql to the database, update the config/database.php and start using it. 
+</p>
+<p>	
+	If you want to override auth access temporarily to create your own users or add permissions, simply by adding '*' inside 
+	the parenthesis or the <b>$this->Auth->allow();</b> line in the beforeFilter() function of the app_controller.php. This 
+	will open the system granting access to anyone on the site. Just remember to comment it out before you go live or 
+	everyone will have access to everything.
+</p><br />
+
 <h4><b><?php __('User Validation'); ?></b></h4>
 <p>
 	Once a user registers, an email will be sent to that user with a validation link. The email content can be modified
