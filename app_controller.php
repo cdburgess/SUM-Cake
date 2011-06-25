@@ -57,7 +57,6 @@ class AppController extends Controller {
     function isAuthorized(){
         if (!$this->Session->check('Permissions')) { $this->buildPermissions(); }           // if permissions are not set in session
         $permissions = $this->Session->read('Permissions');                                 // read the permissions
-        pr($permissions);
         if ( in_array('*', array_keys($permissions)) ||                                     // super user (access to everything)
              in_array('*', array_values($permissions[$this->name])) ||                      // global controller access
              in_array($this->action, array_values($permissions[$this->name]))               // access to controller:action

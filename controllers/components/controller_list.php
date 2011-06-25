@@ -71,7 +71,7 @@ class ControllerListComponent extends Object {
 	* @access public
 	*/
 	function _getControllers() {
-		$controllerList = Configure::listObjects('controller');
+		$controllerList = App::objects('controller', App::path('controllers'), false);  // clear and rebuild the cache
 		$controllers = array();
 		foreach($controllerList as $controller) {
 			$controllers[$controller] = $this->_getControllerMethods($controller);
@@ -90,15 +90,12 @@ class ControllerListComponent extends Object {
 	*/
 	private function _getControllerMethods($controllerName) {
 		$classMethodsCleaned = array();
-		$file = APP.'controllers'.DS.Inflector::underscore($controllerName)."_controller.php";
-		if(file_exists($file)) { 
-			require_once($file);
-			$parentClassMethods = get_class_methods('Controller');
-			$subClassMethods = get_class_methods(Inflector::camelize($controllerName).'Controller');
-			$classMethods = array_diff($subClassMethods, $parentClassMethods);
-			foreach($classMethods as $method) {
-				if($method{0} <> "_") $classMethodsCleaned[] = $method;
-			}
+		App::import('Controller', $controllerName);
+		$parentClassMethods = get_class_methods('Controller');
+		$subClassMethods = get_class_methods(Inflector::camelize($controllerName).'Controller');
+		$classMethods = array_diff($subClassMethods, $parentClassMethods);
+		foreach($classMethods as $method) {
+			if($method{0} <> "_") $classMethodsCleaned[] = $method;
 		}
 		return $classMethodsCleaned;
 	}	
