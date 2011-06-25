@@ -119,12 +119,6 @@ __('To change the content of this page, modify: APP/views/elements/documentation
 <p>
 	The SUM-Cake package is basically the app directory that you can start building an application in. You can add the
 	config/schema/users_schema.sql to the database, update the config/database.php and start using it. 
-</p>
-<p>	
-	If you want to override auth access temporarily to create your own users or add permissions, simply by adding '*' inside 
-	the parenthesis or the <b>$this->Auth->allow();</b> line in the beforeFilter() function of the app_controller.php. This 
-	will open the system granting access to anyone on the site. Just remember to comment it out before you go live or 
-	everyone will have access to everything.
 </p><br />
 
 <h4><b><?php __('User Validation'); ?></b></h4>
