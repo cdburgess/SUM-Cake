@@ -427,7 +427,7 @@ class UsersController extends AppController {
 	* @return void
 	* @access private
 	*/
-	function _update_session() {
+	private function _update_session() {
 	    $user = $this->User->find();
 	    foreach($user['User'] as $key => $value) {
 		    if($key !== 'password') {

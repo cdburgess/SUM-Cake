@@ -3,7 +3,8 @@ if (Configure::read() == 0):
 	$this->cakeError('error404');
 endif;
 ?>
-<h2><?php echo 'Documentation for SUM-Cake. v1.0'; ?></h2>
+<h1>Simple User Management - Cake</h1>
+<h2><?php echo 'Documentation for SUM-Cake  v'.Configure::read('version'); ?></h2>
 <br>
 <div width="200px">
 	<center>
@@ -143,8 +144,16 @@ __('To change the content of this page, modify: APP/views/elements/documentation
 <h4><b><?php __('Permissions'); ?></b></h4>
 <p>
 	As you start adding controllers and methods to your application, you will need to give the users permissions if they
-	are going to access them. You can do this one of two ways.
+	are going to access them. All controllers will be available in the permissions list. This includes controllers found
+	in the main application, controllers added to the application by App::build(), and controllers found in plugins. The
+	naming conventions are as follows:
 </p><br />
+<table>
+	<tr><td><b>Main App</b></td><td> {ControllerName}:{MethodName}</td></tr>
+	<tr><td><b>App::build() paths</b></td><td> {ControllerName}:{MethodName}</td>
+	<tr><td><b>Plugins</b></td><td> {PluginName}.{ControllerName}:{MethodName}</td>
+</table>
+<br />
 <p>
 	<b>Global Access:</b> If you want to provide access to a specific controller or method, you simply add it inside the
 	controller. For controller wide access add $this->Auth->allow('*'); to your beforeFilter() method in the controller.
@@ -157,7 +166,6 @@ __('To change the content of this page, modify: APP/views/elements/documentation
 	(http://SEM-Cake/admin/permissions)
 </p><br />
 
-<br />
 <h3><?php __('More about Me'); ?></h3>
 <p>
 <?php __('I enjoy writing code. It is my passion. I learn more every day.'); ?>

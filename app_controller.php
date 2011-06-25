@@ -55,11 +55,18 @@ class AppController extends Controller {
     * @access public
     */
     function isAuthorized(){
+        $controller_name = $this->name;                                                     // name of the controller being accessed
+        if(!empty($this->params['plugin'])) {                                               // is this a plugin?
+            $controller_name = Inflector::camelize($this->params['plugin']).'.'.$controller_name;   // prepend the name of the plugin
+        }
         if (!$this->Session->check('Permissions')) { $this->buildPermissions(); }           // if permissions are not set in session
         $permissions = $this->Session->read('Permissions');                                 // read the permissions
         if ( in_array('*', array_keys($permissions)) ||                                     // super user (access to everything)
-             in_array('*', array_values($permissions[$this->name])) ||                      // global controller access
-             in_array($this->action, array_values($permissions[$this->name]))               // access to controller:action
+            ( isset($permissions[$controller_name]) and                                     // if permissions variable exists &&
+              ( in_array('*', array_values($permissions[$controller_name])) ||              // global controller access OR
+                in_array($this->action, array_values($permissions[$controller_name]))       // access to controller:action
+              )
+            ) 
         ) {
             return true;                                                                    // allow access
         } else {
@@ -114,9 +121,9 @@ class AppController extends Controller {
     * Set the email component to allow for SMPT connections. Settings are in the Bootstrap file.
     *
     * @return true
-    * @access public
+    * @access protected
     */
-    function useSmtp() {
+    protected function useSmtp() {
         $this->Email->smtpOptions = array(
             'port' => Configure::read('smtpPort'),
             'timeout' => Configure::read('smtpTimeOut'),
@@ -127,4 +134,5 @@ class AppController extends Controller {
         $this->Email->delivery = 'smtp';
         return true;
     }
+
 }

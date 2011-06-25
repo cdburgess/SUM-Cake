@@ -20,6 +20,7 @@
  * @since         CakePHP(tm) v 0.10.8.2117
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
+Configure::write('version', 1.1);
 
 /**
  * The settings below can be used to set additional paths to models, views and controllers.
