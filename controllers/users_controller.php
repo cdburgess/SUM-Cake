@@ -100,7 +100,7 @@ class UsersController extends AppController {
 		    $this->User->set('id', $id);
 		    $this->User->set('active', 1);
 		    if ($this->User->save('', false)) {
-    		    $this->Session->setFlash(__('You have been activated successfully.', true));
+    		    $this->Session->setFlash('You have been activated successfully.', 'flash_success');
     		    $this->redirect(array('action' => 'login'));
     		} else {
     		    $this->Session->setFlash(__('Sorry, this user could not be activated.', true));
@@ -124,7 +124,7 @@ class UsersController extends AppController {
 	function reset_password($user_id = null, $password = null) {
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {
-				$this->Session->setFlash(__('Password has been updated', true));
+				$this->Session->setFlash('Password has been updated', 'flash_success');
 				$this->redirect(array('action' => 'login'));
 			} else {
 				$user = $this->User->find('first', array('conditions' => array('id' => $this->data['User']['id'])));   
@@ -172,7 +172,7 @@ class UsersController extends AppController {
         		}
         		$this->Email->send();
 			}
-			$this->Session->setFlash(__('Reset email has been sent.', true));
+			$this->Session->setFlash('Reset email has been sent.', 'flash_success');
 			$this->redirect(array('action' => 'login'));
 		}
 	}
@@ -199,7 +199,7 @@ class UsersController extends AppController {
         	if ($this->User->save($this->data)) {
 	    
 	            if(Configure::read('welcomeEmail') == true) {
-        		    $company_name = Configure::read('CompanyName');
+        		    $company_name = Configure::read('WebsiteName');
             		$system_email = Configure::read('SystemEmail');
 		
             		// send welcome email with confirmation link
@@ -219,8 +219,12 @@ class UsersController extends AppController {
             		}
             		$this->Email->send();
 		        }
-        		$this->Session->setFlash(__('You have been registered!', true));
-        		$this->redirect(array('action' => 'login'));
+        		$this->Session->setFlash('You have been registered!', 'flash_success');
+        		if (Configure::read('autoValidate') == true) {
+        		    $this->redirect(array('action' => 'login'));
+        		} else {
+        		    $this->render('register_success');
+    		    }
         	} else {
         		$this->Session->setFlash(__('You could not be registered. Please, try again.', true));
         	}
@@ -251,7 +255,7 @@ class UsersController extends AppController {
 	function change_password() {
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {
-				$this->Session->setFlash(__('The user has been saved', true));
+				$this->Session->setFlash('Your password has been changed', 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.', true));
@@ -274,7 +278,7 @@ class UsersController extends AppController {
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {
 				$this->_update_session();
-				$this->Session->setFlash(__('The user has been saved', true));
+				$this->Session->setFlash('Your information has been updated', 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.', true));
@@ -331,7 +335,7 @@ class UsersController extends AppController {
 		if (!empty($this->data)) {
 			$this->User->create();
 			if ($this->User->save($this->data)) {
-				$this->Session->setFlash(__('The user has been saved', true));
+				$this->Session->setFlash('The user has been saved', 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.', true));
@@ -357,7 +361,7 @@ class UsersController extends AppController {
 		}
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {
-				$this->Session->setFlash(__('The user has been saved', true));
+				$this->Session->setFlash('The user has been saved', 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.', true));
@@ -386,7 +390,7 @@ class UsersController extends AppController {
    		}
    		if (!empty($this->data)) {
    			if ($this->User->save($this->data)) {
-   				$this->Session->setFlash(__('The user has been saved', true));
+   				$this->Session->setFlash('The user has been saved', 'flash_success');
    				$this->redirect(array('action' => 'index'));
    			} else {
    			    $this->data = $this->User->read(null, $this->data['User']['id']);
@@ -413,7 +417,7 @@ class UsersController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->User->delete($id)) {
-			$this->Session->setFlash(__('User deleted', true));
+			$this->Session->setFlash('User deleted', 'flash_success');
 			$this->redirect(array('action'=>'index'));
 		}
 		$this->Session->setFlash(__('User was not deleted', true));

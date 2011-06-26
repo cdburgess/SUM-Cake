@@ -3,7 +3,6 @@ if (Configure::read() == 0):
 	$this->cakeError('error404');
 endif;
 ?>
-<h1>Simple User Management - Cake</h1>
 <h2><?php echo 'Documentation for SUM-Cake  v'.Configure::read('version'); ?></h2>
 <br>
 <div width="200px">
@@ -126,7 +125,7 @@ __('To change the content of this page, modify: APP/views/elements/documentation
 <p>
 	Once a user registers, an email will be sent to that user with a validation link. The email content can be modified
 	and is stored in the email directory (APP/views/elements/email/html/welcome.ctp & APP/views/elements/email/text/welcome.ctp).
-	The email will be sent using the SystemEmail and CompanyName variables from the bootstrap file: APP/config/bootstrap.
+	The email will be sent using the SystemEmail and WebsiteName variables from the bootstrap file: APP/config/bootstrap.
 </p><br />
 <p>
 	Once a user clicks on the validation link in the email, the database is updated and the user is directed to the

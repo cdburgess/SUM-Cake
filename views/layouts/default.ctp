@@ -22,7 +22,7 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php __('CakePHP: the rapid development php framework:'); ?>
+		<?php __('SUM-Cake: simple user management:'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
@@ -34,7 +34,7 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $this->Html->link(__('CakePHP: the rapid development php framework', true), 'http://cakephp.org'); ?></h1>
+			<h1><?php echo $this->Html->link(__('SUM-Cake: simple user management', true), 'https://github.com/cdburgess/SUM-Cake'); ?></h1>
 		</div>
 		<?php echo $this->element('login'); ?>
 		<div id="content">

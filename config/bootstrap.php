@@ -52,7 +52,7 @@ Configure::write('version', 1.1);
 
 // email settings
 Configure::write('SystemEmail', 'email@example.com');
-Configure::write('CompanyName', 'MyCompany');
+Configure::write('WebsiteName', 'My Website');
 Configure::write('autoValidate', false);
 Configure::write('welcomeEmail', true);
 

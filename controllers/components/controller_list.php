@@ -64,7 +64,7 @@ class ControllerListComponent extends Object {
 				$methods[$key.':'.$action] = $key.':'.$action;
 			}
 		}
-		
+		sort($methods);
 		return $methods;
 	}
 	

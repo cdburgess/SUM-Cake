@@ -65,7 +65,7 @@ class PermissionsController extends AppController {
 		if (!empty($this->data)) {
 			$this->Permission->create();
 			if ($this->Permission->save($this->data)) {
-				$this->Session->setFlash(__('The permission has been saved', true));
+				$this->Session->setFlash('The permission has been saved', 'flash_success');
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
 				$this->Session->setFlash(__('The permission could not be saved. Please, try again.', true));
@@ -93,7 +93,7 @@ class PermissionsController extends AppController {
 		}
 		if (!empty($this->data)) {
 			if ($this->Permission->save($this->data)) {
-				$this->Session->setFlash(__('The permission has been saved', true));
+				$this->Session->setFlash('The permission has been saved', 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The permission could not be saved. Please, try again.', true));
@@ -123,7 +123,7 @@ class PermissionsController extends AppController {
 			$this->redirect(array('action'=>'admin_index'));
 		}
 		if ($this->Permission->delete($id)) {
-			$this->Session->setFlash(__('Permission deleted', true));
+			$this->Session->setFlash('Permission deleted', 'flash_success');
 			$this->redirect(array('action'=>'admin_index'));
 		}
 		$this->Session->setFlash(__('Permission was not deleted', true));
