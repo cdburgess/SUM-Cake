@@ -13,15 +13,6 @@ Features:
 - Limits data to users where user role = User
 
 
-Feature Ideas:
-- implement terms of service validation?
-- system wide "block account" implementation (i.e. to deactivate account for payment failure)
-- Groups. A user can belong to a group that can share items within the group.
-- Profiles. A user can set up their personal profile information (public & private)
-	- different types of profile categories? (athlete, business owner, developer, etc.)
-- administration panel in the backend
-- oauth 
-
 Contact
 If you have an idea for a feature that would enhance this project, please drop me a line.
 
