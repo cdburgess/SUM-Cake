@@ -47,6 +47,8 @@
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Permission', true), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('Copy Permissions', true), array('action' => 'copy')); ?></li>
+		<li><?php echo $this->Html->link(__('Delete Copies', true), array('action' => 'delete_copy')); ?></li>
 		<li><?php echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'admin_index')); ?></li>
 		<li><?php echo $this->Html->link(__('Logout', true), array('controller' => 'users', 'action' => 'admin_logout')); ?></li>
 	</ul>
