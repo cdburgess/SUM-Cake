@@ -38,7 +38,7 @@ class AppController extends Controller {
         $this->Auth->logoutRedirect = '/';                                                  //Set the default redirect for users who logout
         $this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'admin_index'); //Set the default redirect for users who login
         $this->Auth->authorize = 'controller';                                              //Extend auth component to include authorisation via isAuthorized action
-        $this->Auth->userScope = array('User.active = 1');                                  //User must be active to gain access
+        $this->Auth->userScope = array('User.active' => 1, 'User.disabled' => 0);           //User must be active to gain access
         $this->set('Auth',$this->Auth->user());                                             //Pass auth component data over to view files
         if($this->Auth->user('role') !== 'Admin') {
             Configure::write('user_id', $this->Auth->user('id'));

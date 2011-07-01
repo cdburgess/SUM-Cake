@@ -74,5 +74,41 @@ class User extends AppModel {
             $this->invalidate('checkpassword');
         }
         return $passed;
-    }   
+    }
+    
+    /**
+    * Disable user account
+    *
+    * Set the disable flag to 1
+    *
+    * @param string $id The id of the account to disable
+    * @return bool
+    * @access public
+    */
+    function disable($id = null) {
+        if ($id == null) {
+            return false;
+        }
+        $data['User']['id'] = $id;
+        $data['User']['disabled'] = 1;
+        return $this->save($data);
+    }
+    
+    /**
+    * Enable user account
+    *
+    * Set the disable flag to 0
+    *
+    * @param string $id The id of the account to enable
+    * @return bool
+    * @access public
+    */
+    function enable($id = null) {
+        if ($id == null) {
+            return false;
+        }
+        $data['User']['id'] = $id;
+        $data['User']['disabled'] = 0;
+        return $this->save($data);
+    }
 }

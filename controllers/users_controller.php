@@ -425,6 +425,53 @@ class UsersController extends AppController {
 	}
 	
 	/**
+    * Admin Disable
+    *
+    * Disable a user from logging into the system.
+    *
+    * @param string $id The id of the user to disable
+    * @return void
+    * @access public
+    */
+	function admin_disable($id = null) {
+		if (!$id) {
+			$this->Session->setFlash(__('Invalid user', true));
+			$this->redirect(array('action' => 'index'));
+		}
+		
+		if ($this->User->disable($id)) {
+			$this->Session->setFlash('The user has been disabled', 'flash_success');
+		} else {
+		    $this->Session->setFlash(__('The user could not be updated. Please, try again.', true));
+		}
+		$this->redirect(array('action' => 'index'));
+	}
+	
+	/**
+    * Admin Enable
+    *
+    * Enable a user so they can log into the system.
+    *
+    * @param string $id The id of the user to disable
+    * @return void
+    * @access public
+    */
+	function admin_enable($id = null) {
+		if (!$id) {
+			$this->Session->setFlash(__('Invalid user', true));
+			$this->redirect(array('action' => 'index'));
+		}
+		
+		if ($this->User->enable($id)) {
+			$this->Session->setFlash('The user has been enabled', 'flash_success');
+		} else {
+		    $this->Session->setFlash(__('The user could not be updated. Please, try again.', true));
+		}
+		$this->redirect(array('action' => 'index'));
+	}
+	
+	
+	/**
 	* Update Session
 	*
 	*
