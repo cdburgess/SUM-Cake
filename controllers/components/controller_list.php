@@ -65,7 +65,12 @@ class ControllerListComponent extends Object {
 			}
 		}
 		sort($methods);
-		return $methods;
+		
+		foreach($methods as $value) {
+		    $data[$value] = $value;
+		}
+		
+		return $data;
 	}
 	
 	/**
