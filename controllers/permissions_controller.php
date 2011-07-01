@@ -73,6 +73,7 @@ class PermissionsController extends AppController {
 		}
 		$this->set('role', $this->Permission->getEnumValues('role'));
         $controllerList = $this->ControllerList->methods();
+        
         array_unshift($controllerList, array('*' => '*'));
 		$this->set('controllerList', $controllerList);
 	}
@@ -130,4 +131,55 @@ class PermissionsController extends AppController {
 		$this->redirect(array('action' => 'admin_index'));
 	}
 	
+	/**
+    * Admin Copy
+    *
+    * Inherit permissions from one role to another without having to select each one individually. This
+    * will do a delete / copy so if the inheritance is run multiple times, it will not store multiple copies
+    * of the permissions for a given user.role.
+    *
+    * @return void
+    * @access public
+    */
+	function admin_copy() {
+	    if (!empty($this->data)) {
+	        if ($this->data['Permission']['copy_to'] == $this->data['Permission']['copy_from']) {
+	            $this->Session->setFlash(__('The roles cannot match. Please, try again.', true));
+	        } else {
+	            if ($this->Permission->copy($this->data['Permission']['copy_from'], $this->data['Permission']['copy_to'])) {
+    				$this->Session->setFlash('The permissions have been updated', 'flash_success');
+    				$this->redirect(array('action' => 'index'));
+    			} else {
+    				$this->Session->setFlash(__('The copied permissions could not be saved. Please, try again.', true));
+    			}
+	        }
+		}
+		// get the roles to use in both fields
+		$this->set('role', $this->Permission->getEnumValues('role'));
+	}
+	
+	/**
+    * Admin Delete Copy
+    *
+    * Remove the permissions copied to this role from another role.
+    *
+    * @return void
+    * @access public
+    */
+	function admin_delete_copy() {
+	    if (!empty($this->data)) {
+	        if ($this->data['Permission']['copy_to'] == $this->data['Permission']['copy_from']) {
+	            $this->Session->setFlash(__('The roles cannot match. Please, try again.', true));
+	        } else {
+	            if ($this->Permission->delete_copy($this->data['Permission']['copy_from'], $this->data['Permission']['copy_to'])) {
+    				$this->Session->setFlash('The copied permissions have been deleted', 'flash_success');
+    				$this->redirect(array('action' => 'index'));
+    			} else {
+    				$this->Session->setFlash(__('The copied permission could not be removed. Please, try again.', true));
+    			}
+	        }
+		}
+		// get the roles to use in both fields
+		$this->set('role', $this->Permission->getEnumValues('role'));
+	}
 }
