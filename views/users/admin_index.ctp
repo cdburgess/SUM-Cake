@@ -32,7 +32,7 @@
 					echo $this->Html->link(__('Disable', true), array('action' => 'disable', $user['User']['id']));
 				}
 			?>
-			<?php echo $this->Html->link(__('Change Password', true), array('action' => 'change_password', $user['User']['id'])); ?>
+			<?php echo $this->Html->link(__('Send Password', true), array('action' => 'reset_password', $user['User']['id'])); ?>
 			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $user['User']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $user['User']['id'])); ?>
 		</td>
 	</tr>

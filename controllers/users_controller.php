@@ -401,31 +401,37 @@ class UsersController extends AppController {
 	}
 
     /**
-    * Admin Change Password
+    * Admin Reset Password
     *
-    * Change a users password in the system.
+    * Sends the user a reset password request.
     *
     * @param string $id The id of the user to edit
     * @return void
     * @access public
     */
-   	function admin_change_password($id = null) {
-   		if (!$id && empty($this->data)) {
-   			$this->Session->setFlash(__('Invalid user', true));
-   			$this->redirect(array('action' => 'index'));
-   		}
-   		if (!empty($this->data)) {
-   			if ($this->User->save($this->data)) {
-   				$this->Session->setFlash('The user has been saved', 'flash_success');
-   				$this->redirect(array('action' => 'index'));
-   			} else {
-   			    $this->data = $this->User->read(null, $this->data['User']['id']);
-   				$this->Session->setFlash(__('The user could not be saved. Please, try again.', true));
-   			}
-   		}
-   		if (empty($this->data)) {
-   			$this->data = $this->User->read(null, $id);
-   		}
+   	function admin_reset_password($id = null) {
+   	    if ($id == null) {
+   	        $this->Session->setFlash(__('The user is not valid. Please, try again.', true));
+   	        $this->redirect(array('action' => 'index'));
+   	    }
+   		$user = $this->User->find('first', array('conditions' => array('id' => $id)));
+		if (!empty($user['User']['email_address'])) {
+	        $system_email = Configure::read('SystemEmail');
+    		$this->Email->to = $user['User']['email_address'];
+    		$this->Email->subject = 'Password Reset Request';
+    		$this->Email->replyTo = $system_email;
+    		$this->Email->from = $system_email;
+    		$this->Email->template = 'password_reset'; 
+    		$this->Email->sendAs = 'both'; //Send as 'html', 'text' or 'both' (default is 'text')
+    		$this->set('site', FULL_BASE_URL . $this->base);
+    		$this->set('link', FULL_BASE_URL . $this->base . '/users/reset_password/'.$user['User']['id'].'/'.$user['User']['password']);
+    		if(Configure::read('smtpEmailOn') == true) {
+    		    $this->useSmtp();
+    		}
+    		$this->Email->send();
+		}
+		$this->Session->setFlash('Password reset email has been sent.', 'flash_success');
+		$this->redirect(array('action' => 'index'));
    	}
 
     /**
