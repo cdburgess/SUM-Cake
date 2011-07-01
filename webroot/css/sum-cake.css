@@ -1,3 +1,7 @@
 tr.user_disabled {
   color: #E2B1B1;
 }
+
+div.flash_succcess {
+    clear: both; color: #fff; font-size: 140%; font-weight: bold; margin: 0 0 1em 0; background: green; padding: 5px;
+}

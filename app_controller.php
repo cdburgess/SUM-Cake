@@ -9,10 +9,32 @@
 */
 class AppController extends Controller {
 
+    /**
+    * Var Components
+    *
+    * Load specific components for use in the application.
+    * @var $components
+    * @access public
+    */
     var $components = array('Auth','Session');
+    
+    /**
+    * Var Helpers
+    *
+    * Load specific helpers for use in the application.
+    * @var $helpers
+    * @access public
+    */
     var $helpers = array('Session','Html', 'Javascript', 'Form');
-    var $user_id;
-    var $permitted = array('Pages');                                                        // add any controllers that allow total access
+    
+    /**
+    * Var Permitted
+    *
+    * Allow access to specific controllers for any visitors.
+    * @var $permitted
+    * @access public
+    */
+    var $permitted = array('Pages');
     
     /**
     * Before Filter
@@ -35,14 +57,16 @@ class AppController extends Controller {
     private function _checkAuthentication() {
         $this->Auth->fields = array('username'=>'email_address','password'=>'password');    //Override default fields used by Auth component
         $this->allowAccess();                                                               //run all generic access
+        $this->Auth->autoRedirect = false;
         $this->Auth->logoutRedirect = '/';                                                  //Set the default redirect for users who logout
-        $this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'admin_index'); //Set the default redirect for users who login
         $this->Auth->authorize = 'controller';                                              //Extend auth component to include authorisation via isAuthorized action
         $this->Auth->userScope = array('User.active' => 1, 'User.disabled' => 0);           //User must be active to gain access
         $this->set('Auth',$this->Auth->user());                                             //Pass auth component data over to view files
         if($this->Auth->user('role') !== 'Admin') {
             Configure::write('user_id', $this->Auth->user('id'));
-            $this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'index');
+            $this->Auth->loginRedirect = ('/users');
+        } else {
+            $this->Auth->loginRedirect = ('/admin/users');
         }
     }
     

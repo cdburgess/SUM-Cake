@@ -42,18 +42,44 @@ class UsersController extends AppController {
     * @return void
     * @access public
     */
-	function login(){  }
+	function login() { 
+	    if(!empty($this->data['User']) && $this->Auth->login($this->data)) {
+	        
+	        if($this->Session->read('Auth.redirect')) {
+	            $this->redirect($this->Session->read('Auth.redirect'));
+            } else {
+	            if($this->Auth->user('role') == 'Admin') {
+        	        $this->redirect('/admin/users/');
+                } elseif ($this->Auth->user('role') == 'User') {
+                    $this->redirect(array('controller' => 'users', 'action' => 'index'));
+                }
+            }
+        }        
+	}
 	
 	/**
-	* Admin Login
-	*
-	* Administrators can access this login.
-	*
-	* @return void
-	* @access public
-	*/
-	function admin_login(){ }
-
+    * Admin Login for Admins
+    *
+    * Anyone can login using this method
+    *
+    * @return void
+    * @access public
+    */
+	function admin_login() { 
+	    if(!empty($this->data['User']) && $this->Auth->login($this->data)) {
+	        
+	        if($this->Session->read('Auth.redirect')) {
+	            $this->redirect($this->Session->read('Auth.redirect'));
+            } else {
+	            if($this->Auth->user('role') == 'Admin') {
+        	        $this->redirect('/admin/users/');
+                } elseif ($this->Auth->user('role') == 'User') {
+                    $this->redirect(array('controller' => 'users', 'action' => 'index'));
+                }
+            }
+        }
+	}
+	
     /**
     * Logout
     *
