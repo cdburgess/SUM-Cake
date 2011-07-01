@@ -79,7 +79,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'sum-cake',
 		'password' => 'sum-cake',
-		'database' => 'sum-cake',
+		'database' => 'sum-cake2',
 		'prefix' => '',
 	);
 
