@@ -6,11 +6,13 @@
 		echo $this->Form->input('email_address');
 		echo $this->Form->input('password', array('value' => ''));
 		echo $this->Form->input('confirm_password', array('type' => 'password', 'value' => ''));
+		echo $this->Form->input('first_name');
+		echo $this->Form->input('last_name');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
 </div>
 <div class="actions">
 	<h3><?php __('Register'); ?></h3>
-	<p>You will recieve an email so you can confirm your registration.</p>
+	<p>You will receive an email so you can confirm your registration.</p>
 </div>

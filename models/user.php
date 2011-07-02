@@ -56,8 +56,29 @@ class User extends AppModel {
                 'message' => 'Your password cannot be empty.',
             ),
         ),
+        'first_name' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'Please enter your first name.',
+			),
+		),
+        'last_name' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'Please enter your last name.',
+			),
+		),
 	);
 
+    /**
+    * Var VirtualFields
+    * @var $virtualFields
+    * @access public
+    */
+    var $virtualFields = array(
+        'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'
+    );
+    
     
     /**
      * matchingPasswords

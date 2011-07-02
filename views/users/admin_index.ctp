@@ -2,6 +2,7 @@
 	<h2><?php __('Users');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
+			<th><?php echo $this->Paginator->sort('full_name');?></th>
 			<th><?php echo $this->Paginator->sort('email_address');?></th>
 			<th><?php echo $this->Paginator->sort('role');?></th>
 			<th><?php echo $this->Paginator->sort('active');?></th>
@@ -19,6 +20,7 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
+		<td><?php echo $user['User']['full_name']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['email_address']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['role']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['active']; ?>&nbsp;</td>

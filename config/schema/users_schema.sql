@@ -55,6 +55,8 @@ CREATE TABLE `users` (
   `id` char(36) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `first_name` varchar(25) NOT NULL,
+  `last_name` varchar(25) NOT NULL,
   `role` enum('Admin','User','Manager','Guest') NOT NULL DEFAULT 'User',
   `active` enum('1','0') NOT NULL DEFAULT '0',
   `disabled` enum('1','0') NOT NULL DEFAULT '0',
@@ -72,5 +74,5 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` VALUES('4c5b1927-5e14-4379-95d1-3009e4ca782d', 'admin@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'Admin', '1', '0', '0', '2010-08-05 14:03:51', '2011-07-01 15:16:17');
-INSERT INTO `users` VALUES('4dfec325-c338-49e5-983c-43a8e4ca782d', 'user@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'User', '1', '0', '0', '2011-06-19 21:48:53', '2011-07-01 15:16:25');
+INSERT INTO `users` VALUES('4c5b1927-5e14-4379-95d1-3009e4ca782d', 'admin@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'Admin', 'User', 'Admin', '1', '0', '0', '2010-08-05 14:03:51', '2011-07-02 09:46:42');
+INSERT INTO `users` VALUES('4dfec325-c338-49e5-983c-43a8e4ca782d', 'user@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'Example', 'User', 'User', '1', '0', '0', '2011-06-19 21:48:53', '2011-07-02 09:43:53');

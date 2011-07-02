@@ -6,7 +6,11 @@
 			<?php echo $user['User']['email_address']; ?>
 			&nbsp;
 		</dd>
-		
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Name'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $user['User']['full_name']; ?>
+			&nbsp;
+		</dd>	
 </div>
 <div class="actions">
 	<?php echo $this->element('users'); ?>
