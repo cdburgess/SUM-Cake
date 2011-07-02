@@ -44,7 +44,7 @@ class UsersController extends AppController {
     */
 	function login() { 
 	    if(!empty($this->data['User']) && $this->Auth->login($this->data)) {
-	        
+	        $this->User->unset_password_request($this->Auth->user('id'));
 	        if($this->Session->read('Auth.redirect')) {
 	            $this->redirect($this->Session->read('Auth.redirect'));
             } else {
@@ -67,7 +67,7 @@ class UsersController extends AppController {
     */
 	function admin_login() { 
 	    if(!empty($this->data['User']) && $this->Auth->login($this->data)) {
-	        
+	        $this->User->unset_password_request($this->Auth->user('id'));
 	        if($this->Session->read('Auth.redirect')) {
 	            $this->redirect($this->Session->read('Auth.redirect'));
             } else {
@@ -140,31 +140,37 @@ class UsersController extends AppController {
 	 * Reset Password
 	 *
 	 * The custom code they come in with is only usable once. Once the password
-	 * is reset, the code will no longer work for resetting any passwords. 
+	 * is reset, the code will no longer work for resetting any passwords. Also, the
+	 * password_requested flag on the users table must be set to 1 for the code to
+	 * to work.
 	 *
 	 * @param string $user_id The user_id to reset the password for
 	 * @param string $password The encrypted password for the existing account
 	 * @return void
 	 * @access public
 	 */
-	function reset_password($user_id = null, $password = null) {
+	function reset_password($user_id = null, $password_requested = null) {
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {
 				$this->Session->setFlash('Password has been updated', 'flash_success');
 				$this->redirect(array('action' => 'login'));
 			} else {
-				$user = $this->User->find('first', array('conditions' => array('id' => $this->data['User']['id'])));   
+			    $this->Session->setFlash(__('Sorry! User information could not be saved.', true));
+				$this->redirect(array('action' => 'login'));
 			}
 		} else {
-			if(!empty($user_id) and !empty($password)) {
-				$user = $this->User->find('first', array('conditions' => array('id' => $user_id)));
-				if($user['User']['password'] !== $password) {
-					$this->Session->setFlash(__('Sorry! User information did not match.', true));
-					$this->redirect(array('action' => 'index'));
-				}
-			} else {
-				$this->Session->setFlash(__('Sorry! You request cannot be granted.', true));
-				$this->redirect(array('action' => 'index'));
+		    if ($user_id == null or $password_requested == null) {
+    	        $this->Session->setFlash(__('Sorry! You request cannot be granted.', true));
+    			$this->redirect(array('action' => 'login'));
+    	    }
+			$user = $this->User->find('first', array('conditions' => array('id' => $user_id)));
+			if($user['User']['password_requested'] == 0) {
+			    $this->Session->setFlash(__('The password reset request was deactivated.', true));
+				$this->redirect(array('action' => 'login'));
+			}
+			if($user['User']['password_requested'] !== $password_requested) {
+				$this->Session->setFlash(__('Sorry! User information did not match.', true));
+				$this->redirect(array('action' => 'login'));
 			}
 		}
 		$this->set('id', $user_id);
@@ -182,7 +188,15 @@ class UsersController extends AppController {
 	 */
 	function password_request() {
 		if (!empty($this->data)) {
-			$user = $this->User->find('first', array('conditions' => array('email_address' => $this->data['User']['email_address'])));
+		    $user = '';
+			$my_user = $this->User->find('first', array('conditions' => array('email_address' => $this->data['User']['email_address'])));
+			if($this->User->set_password_request($my_user['User']['id'])) {
+			    $user = $this->User->find('first', array('conditions' => array('id' => $my_user['User']['id'])));
+			} else {
+			    $this->Session->setFlash(__('Password could not be reset. Please, try again.', true));
+    			$this->redirect(array('action' => 'login'));
+			}
+			
 			if (!empty($user['User']['email_address'])) {
 		        $system_email = Configure::read('SystemEmail');
         		$this->Email->to = $user['User']['email_address'];
@@ -192,7 +206,7 @@ class UsersController extends AppController {
         		$this->Email->template = 'password_reset'; 
         		$this->Email->sendAs = 'both'; //Send as 'html', 'text' or 'both' (default is 'text')
         		$this->set('site', FULL_BASE_URL . $this->base);
-        		$this->set('link', FULL_BASE_URL . $this->base . '/users/reset_password/'.$user['User']['id'].'/'.$user['User']['password']);
+        		$this->set('link', FULL_BASE_URL . $this->base . '/users/reset_password/'.$user['User']['id'].'/'.$user['User']['password_requested']);
         		if(Configure::read('smtpEmailOn') == true) {
         		    $this->useSmtp();
         		}
@@ -415,6 +429,7 @@ class UsersController extends AppController {
    	        $this->redirect(array('action' => 'index'));
    	    }
    		$user = $this->User->find('first', array('conditions' => array('id' => $id)));
+   		$password_request_id = $this->User->set_password_request($user['User']['id']);
 		if (!empty($user['User']['email_address'])) {
 	        $system_email = Configure::read('SystemEmail');
     		$this->Email->to = $user['User']['email_address'];
@@ -424,11 +439,12 @@ class UsersController extends AppController {
     		$this->Email->template = 'password_reset'; 
     		$this->Email->sendAs = 'both'; //Send as 'html', 'text' or 'both' (default is 'text')
     		$this->set('site', FULL_BASE_URL . $this->base);
-    		$this->set('link', FULL_BASE_URL . $this->base . '/users/reset_password/'.$user['User']['id'].'/'.$user['User']['password']);
+    		$this->set('link', FULL_BASE_URL . $this->base . '/users/reset_password/'.$user['User']['id'].'/'.$password_request_id);
     		if(Configure::read('smtpEmailOn') == true) {
     		    $this->useSmtp();
     		}
     		$this->Email->send();
+    		$this->User->set_password_request($user['User']['id']);
 		}
 		$this->Session->setFlash('Password reset email has been sent.', 'flash_success');
 		$this->redirect(array('action' => 'index'));

@@ -58,17 +58,19 @@ CREATE TABLE `users` (
   `role` enum('Admin','User','Manager','Guest') NOT NULL DEFAULT 'User',
   `active` enum('1','0') NOT NULL DEFAULT '0',
   `disabled` enum('1','0') NOT NULL DEFAULT '0',
+  `password_requested` char(36) NOT NULL DEFAULT '0',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`email_address`),
   KEY `disabled` (`disabled`),
-  KEY `active` (`active`)
+  KEY `active` (`active`),
+  KEY `password_requested` (`password_requested`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email_address`, `password`, `role`, `active`, `disabled`, `created`, `modified`) VALUES('4c5b1927-5e14-4379-95d1-3009e4ca782d', 'admin@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'Admin', '1', '0', '2010-08-05 14:03:51', '2011-07-01 00:11:24');
-INSERT INTO `users` (`id`, `email_address`, `password`, `role`, `active`, `disabled`, `created`, `modified`) VALUES('4dfec325-c338-49e5-983c-43a8e4ca782d', 'user@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'User', '1', '0', '2011-06-19 21:48:53', '2011-07-01 00:17:53');
+INSERT INTO `users` VALUES('4c5b1927-5e14-4379-95d1-3009e4ca782d', 'admin@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'Admin', '1', '0', '0', '2010-08-05 14:03:51', '2011-07-01 15:16:17');
+INSERT INTO `users` VALUES('4dfec325-c338-49e5-983c-43a8e4ca782d', 'user@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'User', '1', '0', '0', '2011-06-19 21:48:53', '2011-07-01 15:16:25');

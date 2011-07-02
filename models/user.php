@@ -111,4 +111,44 @@ class User extends AppModel {
         $data['User']['disabled'] = 0;
         return $this->save($data);
     }
+    
+    /**
+    * Unset Password Request Bit
+    *
+    * This will remove the password request so it is not active
+    *
+    * @param string $id The user id
+    * @return bool
+    * @access public
+    */
+    function unset_password_request($id = null) {
+        if($id == null) {
+            return false;
+        }
+        $data['User']['id'] = $id;
+        $data['User']['password_requested'] = 0;
+        return $this->save($data);
+    }
+    
+    /**
+    * Set Password Request Bit
+    *
+    * This will add the password request so it is not active
+    *
+    * @param string $id The user id
+    * @return bool
+    * @access public
+    */
+    function set_password_request($id = null) {
+        if($id == null) {
+            return false;
+        }
+        $data['User']['id'] = $id;
+        $data['User']['password_requested'] = String::uuid();
+        if(!$this->save($data)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

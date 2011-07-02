@@ -120,6 +120,13 @@ __('To change the content of this page, modify: APP/views/elements/documentation
 	The SUM-Cake package is basically the app directory that you can start building an application in. You can add the
 	config/schema/users_schema.sql to the database, update the config/database.php and start using it. 
 </p><br />
+<p>
+	Default usernames and passwords for the base installation:
+</p><br/>
+<table>
+	<tr><td><b>admin@example.com</b></td><td> password</td></tr>
+	<tr><td><b>user@example.com</b></td><td> password</td>
+</table>
 
 <h4><b><?php __('User Validation'); ?></b></h4>
 <p>
@@ -134,6 +141,15 @@ __('To change the content of this page, modify: APP/views/elements/documentation
 	welcome email at all, you can also disable that in the bootstrap file.
 </p><br />
 
+<h4><b><?php __('Resetting Password'); ?></b></h4>
+<p>
+	A user can request a lost password. This will send the user a link to their email address on file allowing them to
+	create a new password. Once the new password is created, the password reset link becomes invalid. If someone sends a 
+	password reset request for an email address they do not own, the request link will become invalid as soon as the
+	user either: a) resets the password or b) logs in to their account using their existing email / password.
+</p><br />
+
+<h4><b><?php __('System Email'); ?></b></h4>
 <p>
 	If you need to use SMTP for email delivery, there is an option in the bootstrap that will allow you to enable SMTP
 	delivery and set all of the variables required. By setting the required variables and turning smtpEmailOn = true, 
