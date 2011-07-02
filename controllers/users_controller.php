@@ -152,6 +152,7 @@ class UsersController extends AppController {
 	function reset_password($user_id = null, $password_requested = null) {
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {
+			    $this->User->unset_password_request($this->data['User']['id']);
 				$this->Session->setFlash('Password has been updated', 'flash_success');
 				$this->redirect(array('action' => 'login'));
 			} else {
