@@ -25,19 +25,37 @@
 		<?php __('SUM-Cake: simple user management:'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
+	<link href='http://fonts.googleapis.com/css?family=Maven+Pro|Hammersmith+One&v2' rel='stylesheet' type='text/css'>
 	<?php
 		echo $this->Html->meta('icon');
+		echo $this->Html->css('http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css');
 		echo $this->Html->css('cake.generic');
 		echo $this->Html->css('sum-cake');
+		echo $this->Html->css('slide');	// login slider
+			
+		// javascripts
+		echo $this->Javascript->link('https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js');
+		echo $this->Javascript->link('slide.js'); // login slider
 		echo $scripts_for_layout;
 	?>
 </head>
 <body>
+
+<?php 
+	if (Configure::read('login_slider')) {
+		echo $this->element('slider_login'); 
+	}
+?>
+
 	<div id="container">
 		<div id="header">
 			<h1><?php echo $this->Html->link(__('SUM-Cake: simple user management', true), 'https://github.com/cdburgess/SUM-Cake'); ?></h1>
 		</div>
-		<?php echo $this->element('login'); ?>
+		<?php 
+			if (!Configure::read('login_slider')) {
+				echo $this->element('login');
+			}
+		?>
 		<div id="content">
 			<?php echo $this->Session->flash(); ?>
 			<?php echo $content_for_layout; ?>
