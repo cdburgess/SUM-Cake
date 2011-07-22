@@ -50,8 +50,7 @@ Version: 1.0
   	clear: right;
   	height: 42px;
 	width: auto;
-  	font-weight: bold;
-	line-height: 42px;
+  	line-height: 42px;
 	margin: 0;
 	right: 150px;
   	color: white;
@@ -238,10 +237,10 @@ div.slider_left p {
 	text-align: center;
 	cursor: pointer;
 	border: none;
-	font-weight: bold;
 	margin: 10px 0;
 	margin: auto;
 	padding: auto;
+	font-family: Verdana, Geneva, sans-serif;
 }
 
 #slider_panel .slider_content input.slider_bt_login {
@@ -259,7 +258,7 @@ div.slider_left p {
 	display: block;
 	float:left;
 	clear: right;
-	padding: 15px 5px 0;
+	padding: 5px 5px 0;
 	font-size: 0.95em;
 	text-decoration: underline;
 }

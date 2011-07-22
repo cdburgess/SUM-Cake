@@ -20,8 +20,7 @@
 					<?php echo $form->input('password', array('class'=>'slider_field', 'id' => 'slider_pwd', 'size' => 23, 'label' => false, 'div' => false, 'value' => '')); ?>
 	            	<label>&nbsp;</label>
         			<div class="slider_clear"></div>
-					<input type="submit" name="submit" value="Login" class="slider_bt_login" />
-					<a class="slider_lost-pwd" href="/users/password_request">Lost your password?</a>
+					<input type="submit" name="submit" value="Login" class="slider_bt_login" /> <a class="slider_lost-pwd" href="/users/password_request">Lost your password?</a>
 				</form>
 			</div>
 			<div class="slider_left right">			

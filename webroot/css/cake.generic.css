@@ -262,7 +262,7 @@ form div {
 	padding: .5em;
 	vertical-align: text-top;
 }
-form .input {
+div.form form .input {
 	color: #444;
 }
 form .required {
@@ -283,7 +283,7 @@ label {
 	font-size: 110%;
 	margin-bottom:3px;
 }
-input, textarea {
+div.form input, textarea {
 	clear: both;
 	font-size: 140%;
 	font-family: "frutiger linotype", "lucida grande", "verdana", sans-serif;
@@ -302,7 +302,7 @@ option {
 	font-size: 120%;
 	padding: 0 3px;
 }
-input[type=checkbox] {
+div.form input[type=checkbox] {
 	clear: left;
 	float: left;
 	margin: 0px 6px 7px 2px;
@@ -311,7 +311,7 @@ input[type=checkbox] {
 div.checkbox label {
 	display: inline;
 }
-input[type=radio] {
+div.form input[type=radio] {
 	float:left;
 	width:auto;
 	margin: 0 3px 7px 0;
@@ -319,12 +319,12 @@ input[type=radio] {
 div.radio label {
 	margin: 0 0 6px 20px;
 }
-input[type=submit] {
+div.form input[type=submit] {
 	display: inline;
 	font-size: 110%;
 	width: auto;
 }
-form .submit input[type=submit] {
+div.form form .submit input[type=submit] {
 	background:#62af56;
 	background: -webkit-gradient(linear, left top, left bottom, from(#a8ea9c), to(#62af56));
 	background-image: -moz-linear-gradient(top, #a8ea9c, #62af56);
@@ -332,7 +332,7 @@ form .submit input[type=submit] {
 	color: #000;
 	text-shadow: #8cee7c 0px 1px 0px;
 }
-form .submit input[type=submit]:hover {
+div.form form .submit input[type=submit]:hover {
 	background:#4ca83d;
 	background: -webkit-gradient(linear, left top, left bottom, from(#85e573), to(#4ca83d));
 	background-image: -moz-linear-gradient(top, #85e573, #4ca83d);
@@ -403,7 +403,7 @@ div.actions ul li a:hover {
 	text-decoration: underline;
 }
 
-input[type=submit],
+div.form input[type=submit],
 div.actions ul li a,
 td.actions a {
 	font-weight:normal;
@@ -420,7 +420,7 @@ td.actions a {
 	text-shadow: #fff 0px 1px 0px;
 	min-width: 0;
 }
-input[type=submit]:hover,
+div.form input[type=submit]:hover,
 div.actions ul li a:hover,
 td.actions a:hover {
 	background: #f0f09a;
