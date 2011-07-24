@@ -54,7 +54,7 @@
 			<li>Welcome <?php echo $name; ?>!</li>
 			<li class="slider_sep">|</li>
 			<li id="slider_toggle">
-				<?php if(isset($Auth) and $Auth):?>
+				<?php if(isset($Auth) and $Auth): ?>
 					<?php echo $html->link('logout', array('controller' => 'users', 'action' => 'logout')); ?>
 				<? else: ?>
 					<a id="slider_open" class="slider_open" href="#">Log In | Register</a>
