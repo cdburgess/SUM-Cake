@@ -56,7 +56,7 @@
 			<li id="slider_toggle">
 				<?php if(isset($Auth) and $Auth): ?>
 					<?php echo $html->link('logout', array('controller' => 'users', 'action' => 'logout')); ?>
-				<? else: ?>
+				<?php else: ?>
 					<a id="slider_open" class="slider_open" href="#">Log In | Register</a>
 					<a id="slider_close" style="display: none;" class="slider_close" href="#">Close Panel</a>
 				<?php endif; ?>			
