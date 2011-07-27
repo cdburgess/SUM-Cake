@@ -79,6 +79,51 @@ class User extends AppModel {
         'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'
     );
     
+    /**
+     * beforeSave
+     *
+     * Make sure the email-address is converted to all lowercase.
+     *
+     * @return true
+     * @access public
+     */
+    function beforeSave() {
+        if(isset($this->data['User']['email_address'])) {
+            $this->data['User']['email_address'] = strtolower($this->data['User']['email_address']);
+        }
+        return true;
+    }
+    
+    /**
+     * beforeFind
+     *
+     * Convert the email address to lowercase before searching the DB.
+     *
+     * @param array $queryData The query data that is headed to the model
+     * @return array $queryData Pass the updated queryData back to caller
+     * @access public
+     */
+    function beforeFind($queryData) {
+        if($queryData['conditions']['User.email_address']) {
+            $queryData['conditions']['User.email_address'] = strtolower($queryData['conditions']['User.email_address']);
+        }
+        return $queryData;
+    }
+    
+    /**
+     * beforeValidate
+     *
+     * Convert the email_address to lowercase
+     *
+     * @return bool True
+     * @access public
+     */
+    function beforeValidate() {
+        if(isset($this->data['User']['email_address'])) {
+            $this->data['User']['email_address'] = strtolower($this->data['User']['email_address']);
+        }
+        return true;
+    }
     
     /**
      * matchingPasswords
