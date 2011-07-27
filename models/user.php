@@ -88,6 +88,7 @@ class User extends AppModel {
      * @access public
      */
     function beforeSave() {
+        parent::beforeSave();
         if(isset($this->data['User']['email_address'])) {
             $this->data['User']['email_address'] = strtolower($this->data['User']['email_address']);
         }
@@ -104,6 +105,7 @@ class User extends AppModel {
      * @access public
      */
     function beforeFind($queryData) {
+        $queryData = parent::beforeFind($queryData);
         if(isset($queryData['conditions']) and !empty($queryData['conditions']['User.email_address'])) {
             $queryData['conditions']['User.email_address'] = strtolower($queryData['conditions']['User.email_address']);
         }
