@@ -104,7 +104,7 @@ class User extends AppModel {
      * @access public
      */
     function beforeFind($queryData) {
-        if($queryData['conditions']['User.email_address']) {
+        if(isset($queryData['conditions']) and !empty($queryData['conditions']['User.email_address'])) {
             $queryData['conditions']['User.email_address'] = strtolower($queryData['conditions']['User.email_address']);
         }
         return $queryData;

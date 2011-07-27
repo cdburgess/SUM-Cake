@@ -6,9 +6,9 @@
 			<div class="slider_left">
 				<h1>Welcome to <?php echo Configure::read('WebsiteName'); ?></h1>
 				<h2>Sliding login panel Demo with jQuery</h2>		
-				<p class="slider_grey">You can put anything you want in this sliding panel: videos, audio, images, forms... The only limit is your imagination!</p>
-				<h2>Download</h2>
-				<p class="slider_grey">To download this script go back to <a href="http://web-kreation.com/index.php/tutorials/nice-clean-sliding-login-panel-built-with-jquery" title="Download">article &raquo;</a></p>
+				<p class="slider_grey">You can add any information you want here. Just edit views/elements/slider_login.ctp!</p>
+				<h2>Turn it off</h2>
+				<p class="slider_grey">This can be turned off by changing the setting in the bootstrap.</p>
 			</div>
 			<div class="slider_left">
 				<!-- Login Form -->
