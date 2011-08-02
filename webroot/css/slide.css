@@ -166,7 +166,14 @@ div.slider_left h2,
 div.slider_left p {
     background-color: #272727;
 }
-	
+
+table.slider_grey,
+table.slider_grey tr.slider_grey,
+table.slider_grey td.slider_grey {
+    background-color: #272727;
+    color: #999
+}
+
 #slider_panel a {
 	text-decoration: none;
 	color: #15ADFF;

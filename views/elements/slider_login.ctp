@@ -4,13 +4,6 @@
 	<div id="slider_panel">
 		<div class="slider_content clearfix">
 			<div class="slider_left">
-				<h1>Welcome to <?php echo Configure::read('WebsiteName'); ?></h1>
-				<h2>Sliding login panel Demo with jQuery</h2>		
-				<p class="slider_grey">You can add any information you want here. Just edit views/elements/slider_login.ctp!</p>
-				<h2>Turn it off</h2>
-				<p class="slider_grey">This can be turned off by changing the setting in the bootstrap.</p>
-			</div>
-			<div class="slider_left">
 				<!-- Login Form -->
 				<?php echo $form->create('User', array('controller' => 'users', 'action' => 'login'), array('class' => 'slider_clearfix')); ?>
 					<h1>Member Login</h1>
@@ -29,10 +22,28 @@
 					<h1>Not a member yet? Sign Up!</h1>				
 					<label class="slider_grey" for="signup">Email:</label>
 					<?php echo $form->input('email_address', array('class'=>'slider_field', 'id' => 'slider_signup', 'size' => 23, 'label' => false, 'div' => false, 'value' => '')); ?>
-					<label class="slider_grey" for="email">Password:</label>
-					<?php echo $form->input('password', array('class'=>'slider_field', 'id' => 'slider_signup_pwd', 'size' => 23, 'label' => false, 'div' => false, 'value' => '')); ?>
-					<label class="slider_grey" for="email">Confirm Password:</label>
-					<?php echo $form->input('confirm_password', array('class'=>'slider_field', 'id' => 'slider_confirm_pwd', 'size' => 23, 'label' => false, 'div' => false, 'type' => 'password', 'value' => '')); ?>
+					<table class="slider_grey">
+						<tr class="slider_grey">
+							<td class="slider_grey">
+								<label class="slider_grey" for="email">Password:</label>
+								<?php echo $form->input('password', array('class'=>'slider_field', 'id' => 'slider_signup_pwd', 'size' => 23, 'label' => false, 'div' => false, 'value' => '')); ?>
+							</td>
+							<td class="slider_grey">
+								<label class="slider_grey" for="email">Confirm Password:</label>
+								<?php echo $form->input('confirm_password', array('class'=>'slider_field', 'id' => 'slider_confirm_pwd', 'size' => 23, 'label' => false, 'div' => false, 'type' => 'password', 'value' => '')); ?>
+							</td>
+						</tr>
+						<tr class="slider_grey">
+							<td class="slider_grey">
+								<label class="slider_grey" for="first_name">First Name:</label>
+								<?php echo $form->input('first_name', array('class'=>'slider_field', 'id' => 'slider_fname', 'size' => 23, 'label' => false, 'div' => false, 'value' => '')); ?>
+							</td>
+							<td class="slider_grey">
+								<label class="slider_grey" for="last_name">Last Name:</label>
+								<?php echo $form->input('last_name', array('class'=>'slider_field', 'id' => 'slider_lname', 'size' => 23, 'label' => false, 'div' => false, 'value' => '')); ?>
+							</td>
+						</tr>
+					</table>
 					<label>A confirmation will be e-mailed to you.</label>
 					<input type="submit" name="submit" value="Register" class="slider_bt_register" />
 				</form>
