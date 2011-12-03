@@ -23,6 +23,14 @@ class User extends AppModel {
 	* @access public
 	*/
 	var $displayField = 'email_address';
+
+	/**
+	 * Var SearchFields
+	 *
+	 * @var string $searchFields The fields that can be searched by the search box.
+	 * @access public
+	 */
+	var $searchFields = array('User.email_address','User.first_name','User.last_name');
 	
 	/**
 	* Var Validate

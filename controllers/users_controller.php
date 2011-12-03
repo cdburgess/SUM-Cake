@@ -339,12 +339,21 @@ class UsersController extends AppController {
     *
     * Show all users in the system.
     *
+    * @param string $search_string The value of a search submission
     * @return void
     * @access public
     */
-	function admin_index() {
-            $this->User->recursive = 0;
-            $this->set('users', $this->paginate());
+	function admin_index($search_string = null) {
+		$conditions = null;
+		if(!empty($this->data)){
+			$filter = $this->data['User']['search_string'];
+			$conditions = $this->User->build_filter_conditions($filter);
+		}
+		
+
+		$this->User->recursive = 0;
+		$this->set('users', $this->paginate($conditions));
+		$this->set('search_string', $search_string);
 	}
 
     /**

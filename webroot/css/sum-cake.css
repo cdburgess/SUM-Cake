@@ -5,3 +5,7 @@ tr.user_disabled {
 div.flash_succcess {
     clear: both; color: #fff; font-size: 140%; font-weight: bold; margin: 0 0 1em 0; background: green; padding: 5px;
 }
+
+#search_filter {
+	float: right;
+}

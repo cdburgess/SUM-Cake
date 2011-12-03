@@ -19,6 +19,15 @@ class AppModel extends Model {
     */
     var $user_id;
     
+	/**
+	* Filter fields
+	* 
+	* Search fields for filtering model results.
+	* @var array $searchFields
+	* @access public
+	*/
+	var $searchFields = array();
+
     /**
      * beforeFind
      *
@@ -98,4 +107,23 @@ class AppModel extends Model {
         }
         return $options;
     }
+
+	/**
+	* Build Filter Conditions
+	*
+	* Return conditions based on searchable fields and filter for the model to use in the conditions.
+	*
+	* @param string $filter The string to search for.
+	* @return array $conditions The conditions to use in the SQL
+	* @access public
+	*/
+	public function build_filter_conditions($filter = null){
+		$conditions = array();
+		if($filter){
+			foreach($this->searchFields as $field){
+				$conditions['OR']["$field LIKE"] = '%' . $filter . '%';
+			}
+		}
+		return $conditions;
+	}
 }

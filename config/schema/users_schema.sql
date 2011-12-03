@@ -68,7 +68,7 @@ CREATE TABLE `users` (
   KEY `disabled` (`disabled`),
   KEY `active` (`active`),
   KEY `password_requested` (`password_requested`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
