@@ -57,7 +57,7 @@ Configure::write('autoValidate', false);
 Configure::write('welcomeEmail', true);
 
 // system settings
-Configure::write('login_slider', true);
+Configure::write('login_slider', false);
 
 // email system
 Configure::write('smtpEmailOn', false);
