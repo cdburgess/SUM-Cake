@@ -1,5 +1,4 @@
 users.kpf
 
-tmp/logs/debug.log
+tmp/logs/
 
-tmp/logs/error.log
