@@ -34,8 +34,8 @@
 		echo $this->Html->css('slide');	// login slider
 			
 		// javascripts
-		echo $this->Javascript->link('https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js');
-		echo $this->Javascript->link('slide.js'); // login slider
+		echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js');
+		echo $this->Html->script('slide.js'); // login slider
 		echo $scripts_for_layout;
 	?>
 </head>

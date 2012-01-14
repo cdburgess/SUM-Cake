@@ -25,7 +25,7 @@ class AppController extends Controller {
     * @var $helpers
     * @access public
     */
-    var $helpers = array('Session','Html', 'Javascript', 'Form');
+    var $helpers = array('Session','Html', 'Js', 'Form');
     
     /**
     * Var Permitted

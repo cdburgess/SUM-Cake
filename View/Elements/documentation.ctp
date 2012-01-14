@@ -1,8 +1,10 @@
 <?php
 if (Configure::read('debug') == 0):
-	$this->cakeError('error404');
+	throw new NotFoundException();
 endif;
+App::uses('Debugger', 'Utility');
 ?>
+
 <h2><?php echo 'Documentation for SUM-Cake  v'.Configure::read('version'); ?></h2>
 <br>
 <div width="200px">
@@ -15,15 +17,30 @@ if (Configure::read('debug') > 0):
 	Debugger::checkSecurityKeys();
 endif;
 ?>
+
+<p>
+<?php
+	if (version_compare(PHP_VERSION, '5.2.6', '>=')):
+		echo '<span class="notice success">';
+			echo __d('cake_dev', 'Your version of PHP is 5.2.6 or higher.');
+		echo '</span>';
+	else:
+		echo '<span class="notice">';
+			echo __d('cake_dev', 'Your version of PHP is too low. You need PHP 5.2.6 or higher to use CakePHP.');
+		echo '</span>';
+	endif;
+?>
+</p>
+
 <p>
 	<?php
 		if (is_writable(TMP)):
 			echo '<span class="notice success">';
-				__('Your tmp directory is writable.');
+				echo __d('cake_dev', 'Your tmp directory is writable.');
 			echo '</span>';
 		else:
 			echo '<span class="notice">';
-				__('Your tmp directory is NOT writable.');
+				echo __d('cake_dev', 'Your tmp directory is NOT writable.');
 			echo '</span>';
 		endif;
 	?>
@@ -33,11 +50,11 @@ endif;
 		$settings = Cache::settings();
 		if (!empty($settings)):
 			echo '<span class="notice success">';
-					printf(__('The %s is being used for caching. To change the config edit APP/config/core.php '), '<em>'. $settings['engine'] . 'Engine</em>');
+				echo __d('cake_dev', 'The %s is being used for caching. To change the config edit APP/Config/core.php ', '<em>'. $settings['engine'] . 'Engine</em>');
 			echo '</span>';
 		else:
 			echo '<span class="notice">';
-					__('Your cache is NOT working. Please check the settings in APP/config/core.php');
+				echo __d('cake_dev', 'Your cache is NOT working. Please check the settings in APP/Config/core.php');
 			echo '</span>';
 		endif;
 	?>
@@ -45,55 +62,56 @@ endif;
 <p>
 	<?php
 		$filePresent = null;
-		if (file_exists(APP . 'Config' . DS.'database.php')):
+		if (file_exists(APP . 'Config' . DS . 'database.php')):
 			echo '<span class="notice success">';
-				__('Your database configuration file is present.');
+				echo __d('cake_dev', 'Your database configuration file is present.');
 				$filePresent = true;
 			echo '</span>';
 		else:
 			echo '<span class="notice">';
-				__('Your database configuration file is NOT present.');
+				echo __d('cake_dev', 'Your database configuration file is NOT present.');
 				echo '<br/>';
-				__('Rename config/database.php.default to config/database.php');
+				echo __d('cake_dev', 'Rename APP/Config/database.php.default to APP/Config/database.php');
 			echo '</span>';
 		endif;
 	?>
 </p>
 <?php
-	App::import('Core', 'Validation');
-	if (!Validation::alphaNumeric('cakephp')) {
-		echo '<p><span class="notice">';
-		__('PCRE has not been compiled with Unicode support.');
-		echo '<br/>';
-		__('Recompile PCRE with Unicode support by adding <code>--enable-unicode-properties</code> when configuring');
-		echo '</span></p>';
-	}
-?>
-<?php
 if (isset($filePresent)):
-	if (!class_exists('ConnectionManager')) {
-		require CAKE . 'model' . DS . 'connection_manager.php';
+	App::uses('ConnectionManager', 'Model');
+	try {
+		$connected = ConnectionManager::getDataSource('default');
+	} catch (Exception $e) {
+		$connected = false;
 	}
-	$db = ConnectionManager::getInstance();
-	@$connected = $db->getDataSource('default');
 ?>
 <p>
 	<?php
-		if ($connected->isConnected()):
+		if ($connected && $connected->isConnected()):
 			echo '<span class="notice success">';
-	 			__('Cake is able to connect to the database.');
+	 			echo __d('cake_dev', 'Cake is able to connect to the database.');
 			echo '</span>';
 		else:
 			echo '<span class="notice">';
-				__('Cake is NOT able to connect to the database.');
+				echo __d('cake_dev', 'Cake is NOT able to connect to the database.');
 			echo '</span>';
 		endif;
 	?>
 </p>
 <?php endif;?>
-<h3><?php echo __('Editing this Page'); ?></h3>
+<?php
+	App::uses('Validation', 'Utility');
+	if (!Validation::alphaNumeric('cakephp')) {
+		echo '<p><span class="notice">';
+		__d('cake_dev', 'PCRE has not been compiled with Unicode support.');
+		echo '<br/>';
+		__d('cake_dev', 'Recompile PCRE with Unicode support by adding <code>--enable-unicode-properties</code> when configuring');
+		echo '</span></p>';
+	}
+?>
+<h3><?php echo __d('cake_dev', 'Editing this Page'); ?></h3>
 <p>
-<?php echo __('To change the content of this page, modify: APP/views/elements/documentation.ctp.');
+<?php echo __d('cake_dev', 'To change the content of this page, modify: APP/View/Elements/documentation.ctp.');
 ?>
 </p>
 
@@ -110,14 +128,14 @@ if (isset($filePresent)):
 </p><br />
 <p>
 	The code should be an obvious setup. Drop the entire application into cake as the beginning of your app, load
-	the sql (APP/config/schema/users_schema.sql) into your database, configure the database, and point to /users/login
+	the sql (APP/Config/Schema/users_schema.sql) into your database, configure the database, and point to /users/login
 	and you will be off and running. What I want to document here is some of the functionality that may NOT be so
 	obvious.
 </p><br />
 <h4><b><?php echo __('Set Up'); ?></b></h4>
 <p>
 	The SUM-Cake package is basically the app directory that you can start building an application in. You can add the
-	config/schema/users_schema.sql to the database, update the config/database.php and start using it. 
+	Config/Schema/users_schema.sql to the database, update the Config/database.php and start using it. 
 </p><br />
 <p>
 	Default usernames and passwords for the base installation:
@@ -130,8 +148,8 @@ if (isset($filePresent)):
 <h4><b><?php echo __('User Validation'); ?></b></h4>
 <p>
 	Once a user registers, an email will be sent to that user with a validation link. The email content can be modified
-	and is stored in the email directory (APP/views/elements/email/html/welcome.ctp & APP/views/elements/email/text/welcome.ctp).
-	The email will be sent using the SystemEmail and WebsiteName variables from the bootstrap file: APP/config/bootstrap.
+	and is stored in the email directory (APP/View/Emails/html/welcome.ctp & APP/View/Email/text/welcome.ctp).
+	The email will be sent using the SystemEmail and WebsiteName variables from the bootstrap file: APP/Config/bootstrap.
 </p><br />
 <p>
 	Once a user clicks on the validation link in the email, the database is updated and the user is directed to the
