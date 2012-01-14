@@ -16,7 +16,23 @@ class AppController extends Controller {
     * @var $components
     * @access public
     */
-    var $components = array('Security','Auth','Session');
+    var $components = array(
+		'Security',
+		'Auth' => array(
+			'authError' => 'You must have permission to access that.',
+			'authenticate' => array(
+				'Form' => array(
+					'fields' => array('username' => 'email_address')
+				),
+			),
+			'authorize' => 'Controller',
+			'loginRedirect' => '/users',
+			'logoutRedirect' => '/',
+			'autoRedirect' => false,
+			'userScope' => array('User.active' => 1, 'User.disabled' => 0),
+		),
+		'Session',
+	);
     
     /**
     * Var Helpers
@@ -43,7 +59,7 @@ class AppController extends Controller {
     * @access public
     */
     function beforeFilter(){
-        $this->_checkAuthentication();
+		$this->_checkAuthentication();
     }
     
     /**
@@ -55,19 +71,13 @@ class AppController extends Controller {
     * @access private
     */
     private function _checkAuthentication() {
-        $this->Auth->fields = array('username'=>'email_address','password'=>'password');    //Override default fields used by Auth component
-        $this->allowAccess();                                                               //run all generic access
-        $this->Auth->autoRedirect = false;
-        $this->Auth->logoutRedirect = '/';                                                  //Set the default redirect for users who logout
-        $this->Auth->authorize = 'controller';                                              //Extend auth component to include authorisation via isAuthorized action
-        $this->Auth->userScope = array('User.active' => 1, 'User.disabled' => 0);           //User must be active to gain access
-        $this->set('Auth',$this->Auth->user());                                             //Pass auth component data over to view files
+		if(in_array($this->name, $this->permitted)) {
+          $this->Auth->allow('*');
+        }
         if($this->Auth->user('role') !== 'Admin') {
             Configure::write('user_id', $this->Auth->user('id'));
-            $this->Auth->loginRedirect = ('/users');
-        } else {
-            $this->Auth->loginRedirect = ('/admin/users');
         }
+		$this->set('Auth', $this->Auth->user());
     }
     
     /**
@@ -79,7 +89,7 @@ class AppController extends Controller {
     * @access public
     */
     function isAuthorized(){
-        $controller_name = $this->name;                                                     // name of the controller being accessed
+        $controller_name = $this->name;
         if(!empty($this->request->params['plugin'])) {                                               // is this a plugin?
             $controller_name = Inflector::camelize($this->request->params['plugin']).'.'.$controller_name;   // prepend the name of the plugin
         }
@@ -95,18 +105,6 @@ class AppController extends Controller {
             return true;                                                                    // allow access
         } else {
             return false;                                                                   // reject access
-        }
-    }
-
-    /**
-    * Allow Access
-    *
-    * @return void
-    * @access private
-    */
-    private function allowAccess() {
-        if(in_array($this->name, $this->permitted)) {
-          $this->Auth->allow('*');
         }
     }
     
@@ -125,6 +123,7 @@ class AppController extends Controller {
         $permissionList = $this->Permission->find('list', array(
                             'conditions' => array('Permission.role' => $this->Auth->user('role')),
                             'fields' => array('Permission.name'),
+							'recursive' => -1,
                             )
                         );
         foreach ($permissionList as $permissionId => $permissionName) {                     // process each permission

@@ -43,17 +43,14 @@ class UsersController extends AppController {
     * @access public
     */
 	function login() { 
-	    if(!empty($this->request->data['User']) && $this->Auth->login($this->request->data)) {
+		if(!empty($this->request->data['User']) && $this->Auth->login()) {
 	        $this->User->unset_password_request($this->Auth->user('id'));
-	        if($this->Session->read('Auth.redirect')) {
-	            $this->redirect($this->Session->read('Auth.redirect'));
-            } else {
-	            if($this->Auth->user('role') == 'Admin') {
-        	        $this->redirect('/admin/users/');
-                } elseif ($this->Auth->user('role') == 'User') {
-                    $this->redirect(array('controller' => 'users', 'action' => 'index'));
-                }
-            }
+			if($this->Auth->user('role') == 'Admin') {
+				if ($this->Auth->redirect() == '/users') {
+					$this->Session->write('Auth.redirect', '/admin/users');
+				}
+			}
+			$this->redirect($this->Auth->redirect());
         }        
 	}
 	
@@ -66,17 +63,14 @@ class UsersController extends AppController {
     * @access public
     */
 	function admin_login() { 
-	    if(!empty($this->request->data['User']) && $this->Auth->login($this->request->data)) {
-	        $this->User->unset_password_request($this->Auth->user('id'));
-	        if($this->Session->read('Auth.redirect')) {
-	            $this->redirect($this->Session->read('Auth.redirect'));
-            } else {
-	            if($this->Auth->user('role') == 'Admin') {
-        	        $this->redirect('/admin/users/');
-                } elseif ($this->Auth->user('role') == 'User') {
-                    $this->redirect(array('controller' => 'users', 'action' => 'index'));
-                }
-            }
+	    if(!empty($this->request->data['User']) && $this->Auth->login()) {
+			$this->User->unset_password_request($this->Auth->user('id'));
+	        if($this->Auth->user('role') == 'Admin') {
+				if ($this->Auth->redirect() == '/users') {
+					$this->Session->write('Auth.redirect', '/admin/users');
+				}
+			}
+			$this->redirect($this->Auth->redirect());
         }
 	}
 	

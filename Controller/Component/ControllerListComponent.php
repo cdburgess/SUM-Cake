@@ -17,7 +17,7 @@ class ControllerListComponent extends Component {
     * @access public
     */
 	function initialize(&$controller) {
-		$this->controller =& $controller;
+		$this->controller = $controller;
 	}
 
 	/**
