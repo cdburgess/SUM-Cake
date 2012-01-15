@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 15, 2012 at 12:07 AM
+-- Generation Time: Jan 15, 2012 at 01:00 AM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.6
 
@@ -29,7 +29,7 @@ CREATE TABLE `permissions` (
   PRIMARY KEY (`id`),
   KEY `role` (`role`),
   KEY `copied_from` (`copied_from`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `permissions`
@@ -65,11 +65,11 @@ CREATE TABLE `users` (
   KEY `disabled` (`disabled`),
   KEY `active` (`active`),
   KEY `password_requested` (`password_requested`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email_address`, `password`, `first_name`, `last_name`, `role`, `active`, `disabled`, `password_requested`, `created`, `modified`) VALUES('4c5b1927-5e14-4379-95d1-3009e4ca782d', 'admin@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'Admin', 'User', 'Admin', '1', '0', '0', '2010-08-05 14:03:51', '2012-01-15 00:00:34');
-INSERT INTO `users` (`id`, `email_address`, `password`, `first_name`, `last_name`, `role`, `active`, `disabled`, `password_requested`, `created`, `modified`) VALUES('4dfec325-c338-49e5-983c-43a8e4ca782d', 'user@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'Example', 'User', 'User', '1', '0', '0', '2011-06-19 21:48:53', '2012-01-14 16:40:47');
+INSERT INTO `users` (`id`, `email_address`, `password`, `first_name`, `last_name`, `role`, `active`, `disabled`, `password_requested`, `created`, `modified`) VALUES('4c5b1927-5e14-4379-95d1-3009e4ca782d', 'admin@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'Admin', 'User', 'Admin', '1', '0', '0', '2010-08-05 14:03:51', '2012-01-15 00:56:08');
+INSERT INTO `users` (`id`, `email_address`, `password`, `first_name`, `last_name`, `role`, `active`, `disabled`, `password_requested`, `created`, `modified`) VALUES('4dfec325-c338-49e5-983c-43a8e4ca782d', 'user@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'Example', 'User', 'User', '1', '0', '0', '2011-06-19 21:48:53', '2012-01-15 00:27:44');
