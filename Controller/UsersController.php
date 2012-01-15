@@ -120,7 +120,7 @@ class UsersController extends AppController {
 		    $this->User->set('id', $id);
 		    $this->User->set('active', 1);
 		    if ($this->User->save('', false)) {
-    		    $this->Session->setFlash('You have been activated successfully.', 'flash_success');
+    		    $this->Session->setFlash(__('You have been activated successfully.'), 'flash_success');
     		    $this->redirect(array('action' => 'login'));
     		} else {
     		    $this->Session->setFlash(__('Sorry, this user could not be activated.'));
@@ -148,7 +148,7 @@ class UsersController extends AppController {
 			$this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
 			if ($this->User->save($this->request->data)) {
 			    $this->User->unset_password_request($this->request->data['User']['id']);
-				$this->Session->setFlash('Password has been updated', 'flash_success');
+				$this->Session->setFlash(__('Password has been updated'), 'flash_success');
 				$this->redirect(array('action' => 'login'));
 			} else {
 			    $this->Session->setFlash(__('Sorry! User information could not be saved.'));
@@ -209,7 +209,7 @@ class UsersController extends AppController {
 					->viewVars(array('site' => $site, 'link' => $link))
         			->send();
 			}
-			$this->Session->setFlash('Reset email has been sent.', 'flash_success');
+			$this->Session->setFlash(__('Reset email has been sent.'), 'flash_success');
 			$this->redirect(array('action' => 'login'));
 		}
 	}
@@ -262,7 +262,7 @@ class UsersController extends AppController {
 					
 		        }
 				
-        		$this->Session->setFlash('You have been registered!', 'flash_success');
+        		$this->Session->setFlash(__('You have been registered successfully.'), 'flash_success');
         		
 				if (Configure::read('autoValidate') !== false) {
 					$this->isAuthorized();
@@ -304,10 +304,10 @@ class UsersController extends AppController {
 		if (!empty($this->request->data)) {
 			$this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash('Your password has been changed', 'flash_success');
+				$this->Session->setFlash(__('Your password was updated'), 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The user could not be saved.'));
 			}
 		}
 		if (empty($this->request->data)) {
@@ -327,7 +327,7 @@ class UsersController extends AppController {
 		if (!empty($this->request->data)) {
 			if ($this->User->save($this->request->data)) {
 				$this->_update_session();
-				$this->Session->setFlash('Your information has been updated', 'flash_success');
+				$this->Session->setFlash(__('Your information has been updated'), 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
@@ -393,7 +393,7 @@ class UsersController extends AppController {
 		if (!empty($this->request->data)) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash('The user has been saved', 'flash_success');
+				$this->Session->setFlash(__('The user has been saved'), 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
@@ -419,7 +419,7 @@ class UsersController extends AppController {
 		}
 		if (!empty($this->request->data)) {
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash('The user has been saved', 'flash_success');
+				$this->Session->setFlash(__('The user has been saved'), 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
@@ -466,7 +466,7 @@ class UsersController extends AppController {
 			
     		$this->User->set_password_request($user['User']['id']);
 		}
-		$this->Session->setFlash('Password reset email has been sent.', 'flash_success');
+		$this->Session->setFlash(__('Password reset email has been sent.'), 'flash_success');
 		$this->redirect(array('action' => 'index'));
    	}
 
@@ -485,7 +485,7 @@ class UsersController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->User->delete($id)) {
-			$this->Session->setFlash('User deleted', 'flash_success');
+			$this->Session->setFlash(__('User deleted'), 'flash_success');
 			$this->redirect(array('action'=>'index'));
 		}
 		$this->Session->setFlash(__('User was not deleted'));
@@ -508,7 +508,7 @@ class UsersController extends AppController {
 		}
 		
 		if ($this->User->disable($id)) {
-			$this->Session->setFlash('The user has been disabled', 'flash_success');
+			$this->Session->setFlash(__('The user has been disabled'), 'flash_success');
 		} else {
 		    $this->Session->setFlash(__('The user could not be updated. Please, try again.'));
 		}
@@ -531,7 +531,7 @@ class UsersController extends AppController {
 		}
 		
 		if ($this->User->enable($id)) {
-			$this->Session->setFlash('The user has been enabled', 'flash_success');
+			$this->Session->setFlash(__('The user has been enabled'), 'flash_success');
 		} else {
 		    $this->Session->setFlash(__('The user could not be updated. Please, try again.'));
 		}

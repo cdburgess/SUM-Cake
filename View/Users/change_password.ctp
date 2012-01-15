@@ -4,8 +4,8 @@
  		<legend><?php echo __('Change Password'); ?></legend>
 	<?php
 		echo $this->Form->input('id', array('type' => 'hidden'));
-		echo $this->Form->input('password');
-		echo $this->Form->input('confirm_password', array('type' => 'password'));
+		echo $this->Form->input('password', array('label' => __('Password')));
+		echo $this->Form->input('confirm_password', array('type' => 'password', 'label' => __('Confirm Password')));
 	?>
 	</fieldset>	
 	

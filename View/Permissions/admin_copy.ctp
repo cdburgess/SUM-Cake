@@ -13,6 +13,6 @@
 		<li><?php echo $this->Html->link(__('List Permissions'), array('action' => 'index'));?></li>
 	</ul>
 	<br><br>
-	<h3>Copying</h3>
-	<p>A quick easy method for updating permissions. </p>
+	<h3><?php echo __('Copying'); ?></h3>
+	<p><?php echo __('A quick easy method for updating permissions.'); ?></p>
 </div>

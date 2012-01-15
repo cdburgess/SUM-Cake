@@ -1,5 +1,5 @@
 <div class="users view">
-	<h2><?php echo __('Credentials');?></h2>
+	<h2><?php echo __('My Account Information');?></h2>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Email Address'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>

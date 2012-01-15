@@ -65,7 +65,7 @@ class PermissionsController extends AppController {
 		if (!empty($this->request->data)) {
 			$this->Permission->create();
 			if ($this->Permission->save($this->request->data)) {
-				$this->Session->setFlash('The permission has been saved', 'flash_success');
+				$this->Session->setFlash(__('The permission has been saved'), 'flash_success');
 				$this->redirect(array('action' => 'admin_index'));
 			} else {
 				$this->Session->setFlash(__('The permission could not be saved. Please, try again.'));
@@ -94,7 +94,7 @@ class PermissionsController extends AppController {
 		}
 		if (!empty($this->request->data)) {
 			if ($this->Permission->save($this->request->data)) {
-				$this->Session->setFlash('The permission has been saved', 'flash_success');
+				$this->Session->setFlash(__('The permission has been saved'), 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The permission could not be saved. Please, try again.'));
@@ -124,7 +124,7 @@ class PermissionsController extends AppController {
 			$this->redirect(array('action'=>'admin_index'));
 		}
 		if ($this->Permission->delete($id)) {
-			$this->Session->setFlash('Permission deleted', 'flash_success');
+			$this->Session->setFlash(__('Permission deleted'), 'flash_success');
 			$this->redirect(array('action'=>'admin_index'));
 		}
 		$this->Session->setFlash(__('Permission was not deleted'));
@@ -147,7 +147,7 @@ class PermissionsController extends AppController {
 	            $this->Session->setFlash(__('The roles cannot match. Please, try again.'));
 	        } else {
 	            if ($this->Permission->copy($this->request->data['Permission']['copy_from'], $this->request->data['Permission']['copy_to'])) {
-    				$this->Session->setFlash('The permissions have been updated', 'flash_success');
+    				$this->Session->setFlash(__('The permissions have been updated'), 'flash_success');
     				$this->redirect(array('action' => 'index'));
     			} else {
     				$this->Session->setFlash(__('The copied permissions could not be saved. Please, try again.'));
@@ -172,7 +172,7 @@ class PermissionsController extends AppController {
 	            $this->Session->setFlash(__('The roles cannot match. Please, try again.'));
 	        } else {
 	            if ($this->Permission->delete_copy($this->request->data['Permission']['copy_from'], $this->request->data['Permission']['copy_to'])) {
-    				$this->Session->setFlash('The copied permissions have been deleted', 'flash_success');
+    				$this->Session->setFlash(__('The copied permissions have been deleted'), 'flash_success');
     				$this->redirect(array('action' => 'index'));
     			} else {
     				$this->Session->setFlash(__('The copied permission could not be removed. Please, try again.'));

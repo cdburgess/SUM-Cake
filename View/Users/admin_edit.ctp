@@ -3,12 +3,12 @@
 	<fieldset>
  		<legend><?php echo __('Admin Edit User'); ?></legend>
 	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('email_address');
-		echo $this->Form->input('first_name');
-		echo $this->Form->input('last_name');
-		echo $this->Form->input('role', array('type' => 'select', 'options' => $role));
-		echo $this->Form->input('active', array('type' => 'select', 'options' => $active));
+		echo $this->Form->input('id', array('type' => 'hidden'));
+		echo $this->Form->input('email_address', array('label' => __('Email Address')));
+		echo $this->Form->input('first_name', array('label' => __('First Name')));
+		echo $this->Form->input('last_name', array('label' => __('Last Name')));
+		echo $this->Form->input('role', array('type' => 'select', 'options' => $role, 'label' => __('Role')));
+		echo $this->Form->input('active', array('type' => 'select', 'options' => $active, 'label' => __('Active')));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>

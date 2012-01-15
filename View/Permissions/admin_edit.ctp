@@ -3,8 +3,8 @@
 	<fieldset>
  		<legend><?php echo __('Admin Edit Permission'); ?></legend>
 	<?php
-		echo $this->Form->input('name', array('type' => 'select', 'options' => $controllerList));
-		echo $this->Form->input('role', array('type' => 'select', 'options' => $role));
+		echo $this->Form->input('name', array('type' => 'select', 'options' => $controllerList, 'label' => __('Name')));
+		echo $this->Form->input('role', array('type' => 'select', 'options' => $role, 'label' => __('Role')));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>
