@@ -145,6 +145,7 @@ class UsersController extends AppController {
 	 */
 	function reset_password($user_id = null, $password_requested = null) {
 		if (!empty($this->request->data)) {
+			$this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
 			if ($this->User->save($this->request->data)) {
 			    $this->User->unset_password_request($this->request->data['User']['id']);
 				$this->Session->setFlash('Password has been updated', 'flash_success');
@@ -194,8 +195,8 @@ class UsersController extends AppController {
 			
 			if (!empty($user['User']['email_address'])) {
 				$system_email = Configure::read('SystemEmail');
-				$this->set('site', FULL_BASE_URL . $this->request->base);
-        		$this->set('link', FULL_BASE_URL . $this->request->base . '/users/reset_password/'.$user['User']['id'].'/'.$user['User']['password_requested']);
+				$site = FULL_BASE_URL . $this->request->base;
+        		$link = FULL_BASE_URL . $this->request->base . '/users/reset_password/'.$user['User']['id'].'/'.$user['User']['password_requested'];
 				
 				App::uses('CakeEmail', 'Network/Email');
 				$email = new CakeEmail(Configure::read('emailConfig'));
@@ -205,6 +206,7 @@ class UsersController extends AppController {
         			->from($system_email)
         			->template('password_reset') 
         			->emailFormat('both') 							//Send as 'html', 'text' or 'both' (default is 'text')
+					->viewVars(array('site' => $site, 'link' => $link))
         			->send();
 			}
 			$this->Session->setFlash('Reset email has been sent.', 'flash_success');
@@ -218,7 +220,8 @@ class UsersController extends AppController {
 	* Allows users to register. This will send a welcome email (if enabled) allowing them to activate
 	* their account from a link in an email. This provides a "double opt-in" security measure so people
 	* cannot be given access on an email account they do not own. If autoValidate is set to true, the
-	* account will be activated automatically.
+	* account will be activated automatically and the user will be logged in to their account right after
+	* registration.
 	*
 	* @return void
 	* @access public
@@ -231,31 +234,42 @@ class UsersController extends AppController {
 		        $this->request->data['User']['active'] = 0;
 		    }
         	$this->User->create();
+			$this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
         	if ($this->User->save($this->request->data)) {
-	    
+	    		$id = $this->User->id;
+				
 	            if(Configure::read('welcomeEmail') == true) {
-        		    $company_name = Configure::read('WebsiteName');
+        		    $WebsiteName = Configure::read('WebsiteName');
             		$system_email = Configure::read('SystemEmail');
-            		if(Configure::read('autoValidate') == false) {
-            		    $this->set('site', FULL_BASE_URL . $this->request->base);
-                		$this->set('link', FULL_BASE_URL . $this->request->base . '/users/confirm/' . $this->User->id);
+					$email_vars['WebsiteName'] = $WebsiteName;
+					$email_vars['site'] = FULL_BASE_URL . $this->request->base;
+					$template = 'welcome_auto';
+					if(Configure::read('autoValidate') == false) {
+						$template = 'welcome';
+                		$email_vars['link'] = FULL_BASE_URL . $this->request->base . '/users/confirm/' . $this->User->id;
             		}
-            		$this->set('company_name', $company_name);
 					
 					App::uses('CakeEmail', 'Network/Email');
 					$email = new CakeEmail(Configure::read('emailConfig'));
 			        $email->to($this->request->data['User']['email_address'])
-	        			->subject('Welcome to '.$company_name)
+	        			->subject('Welcome to '.$WebsiteName)
 	        			->replyTo($system_email)
 	        			->from($system_email)
-	        			->template('welcome') 
+	        			->template($template) 
 	        			->emailFormat('both') 							//Send as 'html', 'text' or 'both' (default is 'text')
+						->viewVars($email_vars)
 	        			->send();
 					
 		        }
+				
         		$this->Session->setFlash('You have been registered!', 'flash_success');
-        		if (Configure::read('autoValidate') == true) {
-        		    $this->redirect(array('action' => 'login'));
+        		
+				if (Configure::read('autoValidate') !== false) {
+					$this->isAuthorized();
+        		    $this->request->data['User'] = array_merge($this->request->data["User"], array('id' => $id, 'role' => 'User'));
+					$this->Auth->login($this->request->data['User']);
+					$this->buildPermissions();
+					$this->redirect(array('controller' => 'users', 'action' => 'index'));
         		} else {
         		    $this->render('register_success');
     		    }
@@ -288,6 +302,7 @@ class UsersController extends AppController {
     */
 	function change_password() {
 		if (!empty($this->request->data)) {
+			$this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash('Your password has been changed', 'flash_success');
 				$this->redirect(array('action' => 'index'));
@@ -435,8 +450,8 @@ class UsersController extends AppController {
    		$password_request_id = $this->User->set_password_request($user['User']['id']);
 		if (!empty($user['User']['email_address'])) {
 	        $system_email = Configure::read('SystemEmail');
-    		$this->set('site', FULL_BASE_URL . $this->request->base);
-	    	$this->set('link', FULL_BASE_URL . $this->request->base . '/users/reset_password/'.$user['User']['id'].'/'.$password_request_id);
+    		$site = FULL_BASE_URL . $this->request->base;
+	    	$link = FULL_BASE_URL . $this->request->base . '/users/reset_password/'.$user['User']['id'].'/'.$password_request_id;
 			
 			App::uses('CakeEmail', 'Network/Email');
 			$email = new CakeEmail(Configure::read('emailConfig'));
@@ -446,6 +461,7 @@ class UsersController extends AppController {
     			->from($system_email)
     			->template('password_reset') 
     			->emailFormat('both') 							//Send as 'html', 'text' or 'both' (default is 'text')
+				->viewVars(array('site' => $site, 'link' => $link))
     			->send();
 			
     		$this->User->set_password_request($user['User']['id']);

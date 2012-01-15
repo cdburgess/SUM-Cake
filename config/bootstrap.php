@@ -74,6 +74,3 @@ Configure::write('autoValidate', false);
 Configure::write('welcomeEmail', true);
 Configure::write('emailConfig', 'default');
 
-// system settings
-Configure::write('login_slider', false);
-

@@ -31,11 +31,9 @@
 		echo $this->Html->css('http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css');
 		echo $this->Html->css('cake.generic');
 		echo $this->Html->css('sum-cake');
-		echo $this->Html->css('slide');	// login slider
 			
 		// javascripts
-		echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js');
-		echo $this->Html->script('slide.js'); // login slider
+		// echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js');
 		echo $scripts_for_layout;
 	?>
 </head>

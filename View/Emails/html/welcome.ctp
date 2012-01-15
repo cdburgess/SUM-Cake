@@ -1,4 +1,4 @@
-<h2>Welcome to <?php echo $company_name; ?>!</h2>
+<h2>Welcome to <?php echo $WebsiteName; ?>!</h2>
 
 <p>Thank you for your registration. You are almost ready to login. I just need to confirm that you are the one making the request.</p>
 

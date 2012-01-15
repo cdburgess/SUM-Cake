@@ -95,7 +95,7 @@ class User extends AppModel {
      * @return true
      * @access public
      */
-    function beforeSave() {
+    function beforeSave($options = array()) {
         parent::beforeSave();
         if(isset($this->data['User']['email_address'])) {
             $this->data['User']['email_address'] = strtolower($this->data['User']['email_address']);
@@ -145,7 +145,7 @@ class User extends AppModel {
      */
     function matchingPasswords() {
         $passed = true;
-        if ($this->data['User']['password'] !== Security::hash($this->data['User']['confirm_password'], null, true)){
+        if ($this->data['User']['password'] !== AuthComponent::password($this->data['User']['confirm_password'])){
             $passed = false;
             $this->invalidate('checkpassword');
         }

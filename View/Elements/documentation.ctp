@@ -141,9 +141,10 @@ if (isset($filePresent)):
 	Default usernames and passwords for the base installation:
 </p><br/>
 <table>
-	<tr><td><b>admin@example.com</b></td><td> password</td></tr>
-	<tr><td><b>user@example.com</b></td><td> password</td>
-</table>
+	<tr><th><b>Username</b></th><th><b>Password</b></th></tr>
+	<tr><td>admin@example.com</td><td> password</td></tr>
+	<tr><td>user@example.com</td><td> password</td>
+</table><br/>
 
 <h4><b><?php echo __('User Validation'); ?></b></h4>
 <p>
@@ -153,9 +154,15 @@ if (isset($filePresent)):
 </p><br />
 <p>
 	Once a user clicks on the validation link in the email, the database is updated and the user is directed to the
-	login page. They will now be able to login to the site. To auto enable logins so the user does NOT have to be
-	validated through a validation link, set autoValidate to true in the bootstrap file. If you do not want to send a
-	welcome email at all, you can also disable that in the bootstrap file.
+	login page. They will now be able to login to the site. 
+</p><br />
+
+<h4><b><?php echo __('User Validation: Auto Login'); ?></b></h4>
+<p>	
+	To auto enable logins so the user does NOT have to be validated through a validation link, set autoValidate to true in 
+	the bootstrap file. Once the user is logged in, they will be sent a welcome email and automatically logged in. The email 
+	content can be modified and is stored in the email directory (APP/View/Emails/html/welcome_auto.ctp & APP/View/Email/text/welcome_auto.ctp).
+	If you do not want to send a welcome email at all, you can also disable that in the bootstrap file.
 </p><br />
 
 <h4><b><?php echo __('Resetting Password'); ?></b></h4>
@@ -168,9 +175,11 @@ if (isset($filePresent)):
 
 <h4><b><?php echo __('System Email'); ?></b></h4>
 <p>
-	If you need to use SMTP for email delivery, there is an option in the bootstrap that will allow you to enable SMTP
-	delivery and set all of the variables required. By setting the required variables and turning smtpEmailOn = true, 
-	the system will send the emails via SMTP instead of SENDMAIL.
+	With CakePHP 2.x, email configuration is a breeze. You can configure the email sending the way you want. All you need
+	to do is configure the email you want to use in APP/Config/email.php and then set the emailConfig variable in the
+	APP/Config/bootstrap.php file. Then everywhere email is sent, it will your your configuration. 
+
+	By setting the required variables and turning smtpEmailOn = true, the system will send the emails as you define.
 </p><br />
 
 <h4><b><?php echo __('Permissions'); ?></b></h4>

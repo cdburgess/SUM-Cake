@@ -114,9 +114,9 @@ class AppController extends Controller {
     * Get the list of permissions from the database and build an access array
     *
     * @return void
-    * @access private
+    * @access public
     */
-    private function buildPermissions() {
+    public function buildPermissions() {
         $permissions = array();
         $permissions['Users'][] = 'logout';                                                 // everyone gets access to logout
         $this->loadModel('Permission');                                                     // load the Permission model
