@@ -116,7 +116,7 @@ if (isset($filePresent)):
 </p>
 
 <br />
-<h3><?php echo __('Documentation'); ?></h3>
+<h3>Documentation</h3>
 <p>
 	This project is to help you get your site up and running quickly with user registration. It is not intended to
 	be a package that contains all of the bells and whistles. It will be kept simple enough that it will be a good
@@ -132,7 +132,7 @@ if (isset($filePresent)):
 	and you will be off and running. What I want to document here is some of the functionality that may NOT be so
 	obvious.
 </p><br />
-<h4><b><?php echo __('Set Up'); ?></b></h4>
+<h4><b>Set Up</b></h4>
 <p>
 	The SUM-Cake package is basically the app directory that you can start building an application in. You can add the
 	Config/Schema/users_schema.sql to the database, update the Config/database.php and start using it. 
@@ -146,7 +146,7 @@ if (isset($filePresent)):
 	<tr><td>user@example.com</td><td> password</td>
 </table><br/>
 
-<h4><b><?php echo __('User Validation'); ?></b></h4>
+<h4><b>User Validation</b></h4>
 <p>
 	Once a user registers, an email will be sent to that user with a validation link. The email content can be modified
 	and is stored in the email directory (APP/View/Emails/html/welcome.ctp & APP/View/Email/text/welcome.ctp).
@@ -157,7 +157,7 @@ if (isset($filePresent)):
 	login page. They will now be able to login to the site. 
 </p><br />
 
-<h4><b><?php echo __('User Validation: Auto Login'); ?></b></h4>
+<h4><b>User Validation: Auto Login</b></h4>
 <p>	
 	To auto enable logins so the user does NOT have to be validated through a validation link, set autoValidate to true in 
 	the bootstrap file. Once the user is logged in, they will be sent a welcome email and automatically logged in. The email 
@@ -165,7 +165,7 @@ if (isset($filePresent)):
 	If you do not want to send a welcome email at all, you can also disable that in the bootstrap file.
 </p><br />
 
-<h4><b><?php echo __('Resetting Password'); ?></b></h4>
+<h4><b>Resetting Password</b></h4>
 <p>
 	A user can request a lost password. This will send the user a link to their email address on file allowing them to
 	create a new password. Once the new password is created, the password reset link becomes invalid. If someone sends a 
@@ -173,7 +173,7 @@ if (isset($filePresent)):
 	user either: a) resets the password or b) logs in to their account using their existing email / password.
 </p><br />
 
-<h4><b><?php echo __('System Email'); ?></b></h4>
+<h4><b>System Email</b></h4>
 <p>
 	With CakePHP 2.x, email configuration is a breeze. You can configure the email sending the way you want. All you need
 	to do is configure the email you want to use in APP/Config/email.php and then set the emailConfig variable in the
@@ -182,7 +182,7 @@ if (isset($filePresent)):
 	By setting the required variables and turning smtpEmailOn = true, the system will send the emails as you define.
 </p><br />
 
-<h4><b><?php echo __('Permissions'); ?></b></h4>
+<h4><b>Permissions</b></h4>
 <p>
 	As you start adding controllers and methods to your application, you will need to give the users permissions if they
 	are going to access them. All controllers will be available in the permissions list. This includes controllers found
@@ -207,16 +207,16 @@ if (isset($filePresent)):
 	(http://SEM-Cake/admin/permissions)
 </p><br />
 
-<h3><?php echo __('More about Me'); ?></h3>
+<h3>More about Me</h3>
 <p>
-<?php echo __('I enjoy writing code. It is my passion. I learn more every day.'); ?>
+I enjoy writing code. It is my passion. I learn more every day.
 </p>
 
 <ul>
-	<li><a href="http://blogchuck.com/"><?php echo __('My Blog'); ?> </a>
-	<ul><li><?php echo __('My ramblings about stuff'); ?></li></ul></li>
-	<li><a href="http://github.com/cdburgess"><?php echo __('My GitHub'); ?> </a>
-	<ul><li><?php echo __('The code I have posted for public use'); ?></li></ul></li>
-	<li><a href="http://code.google.com/p/blogchuck/"><?php echo __('My Google Code'); ?> </a>
-	<ul><li><?php echo __('More code I have posted for public use'); ?></li></ul></li>
+	<li><a href="http://blogchuck.com/">My Blog</a>
+	<ul><li>My ramblings about stuff</li></ul></li>
+	<li><a href="http://github.com/cdburgess">My GitHub</a>
+	<ul><li>The code I have posted for public use</li></ul></li>
+	<li><a href="http://code.google.com/p/blogchuck/">My Google Code</a>
+	<ul><li>More code I have posted for public use</li></ul></li>
 </ul>
