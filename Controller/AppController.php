@@ -7,6 +7,7 @@
 * @subpackage app
 * @license http://creativecommons.org/licenses/by-sa/3.0/
 */
+App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
     /**

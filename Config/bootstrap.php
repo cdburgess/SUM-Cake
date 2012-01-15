@@ -74,3 +74,5 @@ Configure::write('autoValidate', false);
 Configure::write('welcomeEmail', true);
 Configure::write('emailConfig', 'default');
 
+// default language setting
+Configure::write('Config.language', 'eng');

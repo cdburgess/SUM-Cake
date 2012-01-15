@@ -1,0 +1,676 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SUM-Cake\n"
+"POT-Creation-Date: 2012-01-15 02:17-0700\n"
+"PO-Revision-Date: 2012-01-15 02:18-0700\n"
+"Last-Translator: Chuck Burgess <cdburgess@gmail.com>\n"
+"Language-Team: SimpleNet <cdburgess@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: MEXICO\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: Controller/PermissionsController.php:50;92
+msgid "Invalid permission"
+msgstr "Permiso inválido"
+
+#: Controller/PermissionsController.php:68;97
+msgid "The permission has been saved"
+msgstr "Se ha ahorrado el permiso"
+
+#: Controller/PermissionsController.php:71;100
+msgid "The permission could not be saved. Please, try again."
+msgstr "El permiso no podía ser ahorrado. Por favor, intente otra vez."
+
+#: Controller/PermissionsController.php:123
+msgid "Invalid id for permission"
+msgstr "Identificación inválida para el permiso"
+
+#: Controller/PermissionsController.php:127
+msgid "Permission deleted"
+msgstr "El permiso suprimió"
+
+#: Controller/PermissionsController.php:130
+msgid "Permission was not deleted"
+msgstr "El permiso no fue suprimido"
+
+#: Controller/PermissionsController.php:147;172
+msgid "The roles cannot match. Please, try again."
+msgstr "Los papeles no pueden emparejar. Por favor, intente otra vez."
+
+#: Controller/PermissionsController.php:150
+msgid "The permissions have been updated"
+msgstr "Se han puesto al día los permisos"
+
+#: Controller/PermissionsController.php:153
+msgid "The copied permissions could not be saved. Please, try again."
+msgstr "Los permisos copiados no podían ser ahorrados. Por favor, intente otra vez."
+
+#: Controller/PermissionsController.php:175
+msgid "The copied permissions have been deleted"
+msgstr "Se han suprimido los permisos copiados"
+
+#: Controller/PermissionsController.php:178
+msgid "The copied permission could not be removed. Please, try again."
+msgstr "El permiso copiado no podía ser quitado. Por favor, intente otra vez."
+
+#: Controller/UsersController.php:116;126
+msgid "Sorry, this user could not be activated."
+msgstr "Apesadumbrado, este usuario no podría ser activado."
+
+#: Controller/UsersController.php:123
+msgid "You have been activated successfully."
+msgstr "Le han activado con éxito."
+
+#: Controller/UsersController.php:151
+msgid "Password has been updated"
+msgstr "Se ha puesto al día la contraseña"
+
+#: Controller/UsersController.php:154
+msgid "Sorry! User information could not be saved."
+msgstr "¡Apesadumbrado! La información de usuario no podía ser ahorrada."
+
+#: Controller/UsersController.php:159
+msgid "Sorry! You request cannot be granted."
+msgstr "¡Apesadumbrado! Usted pide no puede ser concedido."
+
+#: Controller/UsersController.php:164
+msgid "The password reset request was deactivated."
+msgstr "La petición del reajuste de la contraseña fue desactivada."
+
+#: Controller/UsersController.php:168
+msgid "Sorry! User information did not match."
+msgstr "¡Apesadumbrado! La información de usuario no emparejó."
+
+#: Controller/UsersController.php:192
+msgid "Password could not be reset. Please, try again."
+msgstr "La contraseña no podía ser reajustada. Por favor, intente otra vez."
+
+#: Controller/UsersController.php:212
+msgid "Reset email has been sent."
+msgstr "Se ha enviado el email del reajuste."
+
+#: Controller/UsersController.php:265
+msgid "You have been registered successfully."
+msgstr "Le han colocado con éxito."
+
+#: Controller/UsersController.php:277
+msgid "You could not be registered. Please, try again."
+msgstr "Usted no podría ser colocado. Por favor, intente otra vez."
+
+#: Controller/UsersController.php:307
+msgid "Your password was updated"
+msgstr "Su contraseña era actualizada"
+
+#: Controller/UsersController.php:310
+msgid "The user could not be saved."
+msgstr "El usuario no podría ser ahorrado."
+
+#: Controller/UsersController.php:330
+msgid "Your information has been updated"
+msgstr "Se ha puesto al día su información"
+
+#: Controller/UsersController.php:333;399;425
+msgid "The user could not be saved. Please, try again."
+msgstr "El usuario no podría ser ahorrado. Por favor, intente otra vez."
+
+#: Controller/UsersController.php:378;417;506;529
+msgid "Invalid user"
+msgstr "Usuario inválido"
+
+#: Controller/UsersController.php:396;422
+msgid "The user has been saved"
+msgstr "Han ahorrado al usuario"
+
+#: Controller/UsersController.php:446
+msgid "The user is not valid. Please, try again."
+msgstr "El usuario es inválido. Por favor, intente otra vez."
+
+#: Controller/UsersController.php:469
+msgid "Password reset email has been sent."
+msgstr "Se ha enviado el email del reajuste de la contraseña."
+
+#: Controller/UsersController.php:484
+msgid "Invalid id for user"
+msgstr "Identificación inválida para el usuario"
+
+#: Controller/UsersController.php:488
+msgid "User deleted"
+msgstr "El usuario suprimió"
+
+#: Controller/UsersController.php:491
+msgid "User was not deleted"
+msgstr "No suprimieron al usuario"
+
+#: Controller/UsersController.php:511
+msgid "The user has been disabled"
+msgstr "Han inhabilitado al usuario"
+
+#: Controller/UsersController.php:513;536
+msgid "The user could not be updated. Please, try again."
+msgstr "El usuario no podría ser actualizado. Por favor, intente otra vez."
+
+#: Controller/UsersController.php:534
+msgid "The user has been enabled"
+msgstr "Han permitido al usuario"
+
+#: View/Elements/login.ctp:5
+msgid "logout"
+msgstr "término conexión "
+
+#: View/Elements/login.ctp:7
+msgid "login"
+msgstr "conexión "
+
+#: View/Elements/model_search.ctp:9
+msgid "Search"
+msgstr "Búsqueda "
+
+#: View/Elements/users.ctp:1;3
+msgid "My Account"
+msgstr "Mi cuenta "
+
+#: View/Elements/users.ctp:4
+msgid "Edit Account"
+msgstr "Corrija la cuenta "
+
+#: View/Elements/users.ctp:5
+#: View/Users/change_password.ctp:4
+msgid "Change Password"
+msgstr "Cambie la contraseña "
+
+#: View/Layouts/default.ctp:6
+msgid "SUM-Cake: simple user management:"
+msgstr "SUM-Cake: gerencia simple del usuario:"
+
+#: View/Layouts/default.ctp:25
+msgid "SUM-Cake: simple user management"
+msgstr "SUM-Cake: gerencia simple del usuario"
+
+#: View/Layouts/default.ctp:34
+msgid "Creative Commons License"
+msgstr "Creative Commons License"
+
+#: View/Layouts/default.ctp:40
+msgid "CakePHP: the rapid development php framework"
+msgstr "CakePHP: the rapid development php framework"
+
+#: View/Permissions/admin_add.ctp:4
+msgid "Add Permission"
+msgstr "Agregue el permiso "
+
+#: View/Permissions/admin_add.ctp:6
+#: View/Permissions/admin_edit.ctp:6
+#: View/Permissions/admin_view.ctp:9
+#: View/Users/index.ctp:9
+msgid "Name"
+msgstr "Nombre"
+
+#: View/Permissions/admin_add.ctp:7
+#: View/Permissions/admin_edit.ctp:7
+#: View/Permissions/admin_view.ctp:14
+#: View/Users/admin_add.ctp:9
+#: View/Users/admin_edit.ctp:10
+#: View/Users/admin_view.ctp:24
+msgid "Role"
+msgstr "Papel "
+
+#: View/Permissions/admin_add.ctp:10
+#: View/Permissions/admin_copy.ctp:8
+#: View/Permissions/admin_delete_copy.ctp:8
+#: View/Permissions/admin_edit.ctp:10
+#: View/Users/admin_add.ctp:13
+#: View/Users/admin_edit.ctp:14
+#: View/Users/change_password.ctp:12
+#: View/Users/edit.ctp:12
+#: View/Users/password_request.ctp:12
+#: View/Users/register.ctp:13
+#: View/Users/reset_password.ctp:15
+msgid "Submit"
+msgstr "Someta "
+
+#: View/Permissions/admin_add.ctp:13
+#: View/Permissions/admin_copy.ctp:11
+#: View/Permissions/admin_delete_copy.ctp:11
+#: View/Permissions/admin_edit.ctp:13
+#: View/Permissions/admin_index.ctp:9;46
+#: View/Permissions/admin_view.ctp:32
+#: View/Users/admin_add.ctp:16
+#: View/Users/admin_edit.ctp:17
+#: View/Users/admin_index.ctp:10;59
+#: View/Users/admin_view.ctp:47
+msgid "Actions"
+msgstr "Acciones "
+
+#: View/Permissions/admin_add.ctp:15
+#: View/Permissions/admin_copy.ctp:13
+#: View/Permissions/admin_delete_copy.ctp:13
+#: View/Permissions/admin_edit.ctp:17
+#: View/Permissions/admin_view.ctp:36
+#: View/Users/admin_index.ctp:62
+msgid "List Permissions"
+msgstr "La lista de los permisos "
+
+#: View/Permissions/admin_add.ctp:18
+msgid "Adding Permissions"
+msgstr "Adición de permisos "
+
+#: View/Permissions/admin_add.ctp:19
+msgid "The name is created by putting ControllerName:Action and then selecting the Role that has access."
+msgstr "El nombre es creado poniendo ControllerName: Acción y después selección del papel que tiene acceso. "
+
+#: View/Permissions/admin_copy.ctp:4
+#: View/Permissions/admin_index.ctp:49
+msgid "Copy Permissions"
+msgstr "Copie los permisos "
+
+#: View/Permissions/admin_copy.ctp:16
+msgid "Copying"
+msgstr "Copiado "
+
+#: View/Permissions/admin_copy.ctp:17
+msgid "A quick easy method for updating permissions."
+msgstr "Un método fácil rápido para poner al día permisos. "
+
+#: View/Permissions/admin_delete_copy.ctp:4
+msgid "Delete Copied Permissions"
+msgstr "Permisos copiados cancelación "
+
+#: View/Permissions/admin_delete_copy.ctp:5
+msgid "Delete the permissions added from this role"
+msgstr "Quite los permisos agregados de este papel "
+
+#: View/Permissions/admin_delete_copy.ctp:6
+msgid "to this role"
+msgstr "a este papel "
+
+#: View/Permissions/admin_delete_copy.ctp:16
+#: View/Permissions/admin_index.ctp:50
+msgid "Delete Copies"
+msgstr "Quite las copias "
+
+#: View/Permissions/admin_delete_copy.ctp:17
+msgid "A quick easy method for removing copied permissions."
+msgstr "Un método fácil rápido para quitar permisos copiados. "
+
+#: View/Permissions/admin_edit.ctp:4
+msgid "Admin Edit Permission"
+msgstr "Los Admin corrigen el permiso "
+
+#: View/Permissions/admin_edit.ctp:16
+#: View/Permissions/admin_index.ctp:26
+#: View/Users/admin_edit.ctp:20
+#: View/Users/admin_index.ctp:39
+msgid "Delete"
+msgstr "Quite "
+
+#: View/Permissions/admin_edit.ctp:16
+#: View/Permissions/admin_index.ctp:26
+#: View/Permissions/admin_view.ctp:35
+#: View/Users/admin_edit.ctp:20
+#: View/Users/admin_index.ctp:39
+#: View/Users/admin_view.ctp:50
+msgid "Are you sure you want to delete # %s?"
+msgstr "Está usted positivo que usted quiere quitar esto # %s?"
+
+#: View/Permissions/admin_index.ctp:2
+msgid "Permissions"
+msgstr "Permisos "
+
+#: View/Permissions/admin_index.ctp:24
+#: View/Users/admin_index.ctp:29
+msgid "View"
+msgstr "Visión "
+
+#: View/Permissions/admin_index.ctp:25
+#: View/Users/admin_index.ctp:30
+msgid "Edit"
+msgstr "Corrija "
+
+#: View/Permissions/admin_index.ctp:34
+#: View/Users/admin_index.ctp:47
+msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
+msgstr "Pagine el %page% del %pages%, demostrando expedientes del %current% fuera del total del %count%, comenzando en el expediente el %start%, terminando en el %end% "
+
+#: View/Permissions/admin_index.ctp:39
+#: View/Users/admin_index.ctp:52
+msgid "previous"
+msgstr "anterior "
+
+#: View/Permissions/admin_index.ctp:42
+#: View/Users/admin_index.ctp:55
+msgid "next"
+msgstr "siguiente"
+
+#: View/Permissions/admin_index.ctp:48
+#: View/Permissions/admin_view.ctp:37
+msgid "New Permission"
+msgstr "Nuevo permiso "
+
+#: View/Permissions/admin_index.ctp:51
+#: View/Users/admin_add.ctp:18
+#: View/Users/admin_edit.ctp:21
+#: View/Users/admin_view.ctp:51
+msgid "List Users"
+msgstr "Demuestre a los usuarios "
+
+#: View/Permissions/admin_index.ctp:52
+#: View/Users/admin_index.ctp:63
+msgid "Logout"
+msgstr "término conexión "
+
+#: View/Permissions/admin_view.ctp:2
+msgid "Permission"
+msgstr "Permiso "
+
+#: View/Permissions/admin_view.ctp:4
+#: View/Users/admin_view.ctp:4
+msgid "Id"
+msgstr "Id"
+
+#: View/Permissions/admin_view.ctp:19
+#: View/Users/admin_view.ctp:34
+msgid "Created"
+msgstr "Creado "
+
+#: View/Permissions/admin_view.ctp:24
+#: View/Users/admin_view.ctp:39
+msgid "Modified"
+msgstr "Modificado"
+
+#: View/Permissions/admin_view.ctp:34
+msgid "Edit Permission"
+msgstr "Corrija el permiso "
+
+#: View/Permissions/admin_view.ctp:35
+msgid "Delete Permission"
+msgstr "Quite el permiso "
+
+#: View/Users/admin_add.ctp:4
+msgid "Admin Add User"
+msgstr "Nuevo usuario del Admin "
+
+#: View/Users/admin_add.ctp:6
+#: View/Users/admin_edit.ctp:7
+#: View/Users/admin_login.ctp:14
+#: View/Users/admin_view.ctp:14
+#: View/Users/edit.ctp:7
+#: View/Users/index.ctp:4
+#: View/Users/login.ctp:14
+#: View/Users/password_request.ctp:11
+#: View/Users/register.ctp:6
+#: View/Users/reset_password.ctp:12
+msgid "Email Address"
+msgstr "Email Address"
+
+#: View/Users/admin_add.ctp:7
+#: View/Users/admin_login.ctp:15
+#: View/Users/admin_view.ctp:19
+#: View/Users/change_password.ctp:7
+#: View/Users/login.ctp:15
+#: View/Users/register.ctp:7
+#: View/Users/reset_password.ctp:13
+msgid "Password"
+msgstr "Contraseña "
+
+#: View/Users/admin_add.ctp:8
+#: View/Users/change_password.ctp:8
+#: View/Users/register.ctp:8
+#: View/Users/reset_password.ctp:14
+msgid "Confirm Password"
+msgstr "Confirme la contraseña "
+
+#: View/Users/admin_add.ctp:10
+#: View/Users/admin_edit.ctp:11
+#: View/Users/admin_view.ctp:29
+msgid "Active"
+msgstr "Activo"
+
+#: View/Users/admin_edit.ctp:4
+msgid "Admin Edit User"
+msgstr "Los Admin corrigen al usuario "
+
+#: View/Users/admin_edit.ctp:8
+#: View/Users/edit.ctp:8
+#: View/Users/register.ctp:9
+msgid "First Name"
+msgstr "Nombre "
+
+#: View/Users/admin_edit.ctp:9
+#: View/Users/edit.ctp:9
+#: View/Users/register.ctp:10
+msgid "Last Name"
+msgstr "Apellido "
+
+#: View/Users/admin_index.ctp:3
+msgid "Users"
+msgstr "Usuarios "
+
+#: View/Users/admin_index.ctp:33
+msgid "Enable"
+msgstr "Permita "
+
+#: View/Users/admin_index.ctp:35
+msgid "Disable"
+msgstr "Neutralización "
+
+#: View/Users/admin_index.ctp:38
+msgid "Send Password"
+msgstr "Envíe la contraseña "
+
+#: View/Users/admin_index.ctp:61
+#: View/Users/admin_view.ctp:52
+#: View/Users/register.ctp:4
+msgid "New User"
+msgstr "Nuevo usuario "
+
+#: View/Users/admin_login.ctp:2
+#: View/Users/login.ctp:2
+msgid "Not a subscriber?"
+msgstr "¿No un suscriptor? "
+
+#: View/Users/admin_login.ctp:3;6
+#: View/Users/login.ctp:3;6
+msgid "Click here"
+msgstr "Chasque aquí"
+
+#: View/Users/admin_login.ctp:3
+#: View/Users/login.ctp:3
+msgid "to register."
+msgstr "para colocarse. "
+
+#: View/Users/admin_login.ctp:5
+#: View/Users/login.ctp:5
+#: View/Users/password_request.ctp:2
+msgid "Forgot your password?"
+msgstr "¿Olvidó su contraseña? "
+
+#: View/Users/admin_login.ctp:6
+#: View/Users/login.ctp:6
+msgid "to reset your password."
+msgstr "para reajustar su contraseña. "
+
+#: View/Users/admin_login.ctp:11
+#: View/Users/login.ctp:11
+msgid "Login"
+msgstr "conexión"
+
+#: View/Users/admin_login.ctp:16
+#: View/Users/login.ctp:16
+msgid "Sign In"
+msgstr "Conexión "
+
+#: View/Users/admin_view.ctp:2
+msgid "User"
+msgstr "Usuario "
+
+#: View/Users/admin_view.ctp:9
+msgid "Full Name"
+msgstr "Nombre completo"
+
+#: View/Users/admin_view.ctp:49
+msgid "Edit User"
+msgstr "Corrija al usuario "
+
+#: View/Users/admin_view.ctp:50
+msgid "Delete User"
+msgstr "Quite al usuario "
+
+#: View/Users/edit.ctp:4
+msgid "Account Information"
+msgstr "Información de cuenta "
+
+#: View/Users/index.ctp:2
+msgid "My Account Information"
+msgstr "Mi información de cuenta "
+
+#: View/Users/password_request.ctp:3
+msgid "No problem. Enter your email address and we will send you a link that will allow you to reset your password."
+msgstr "Ningún problema. Incorpore su email address y le enviaremos un acoplamiento que permita que usted reajuste su contraseña."
+
+#: View/Users/password_request.ctp:8
+msgid "Reset Password Request"
+msgstr "Reajuste la petición de la contraseña "
+
+#: View/Users/register.ctp:16
+#: View/Users/register_success.ctp:11
+msgid "Register"
+msgstr "Registro "
+
+#: View/Users/register.ctp:17
+#: View/Users/register_success.ctp:12
+msgid "You will receive an email so you can confirm your registration."
+msgstr "Usted recibirá un email así que usted puede confirmar su registro. "
+
+#: View/Users/register_success.ctp:3
+msgid "Success!"
+msgstr "¡Éxito! "
+
+#: View/Users/register_success.ctp:4
+msgid ""
+"Your registration has be received successfully. Now we just need to make sure you are the \n"
+"\t\towner of the email address you registered."
+msgstr "Su registro tiene ser recibido con éxito. Ahora apenas necesitamos cerciorarnos de que usted sea el dueño del email address que usted se colocó. "
+
+#: View/Users/register_success.ctp:6
+msgid ""
+"Please check your email for our welcome letter and your custom link to confirm your account.\n"
+"\t\tOnce you click on the link, your account will be unlocked and you will be redirected to the login\n"
+"\t\tscreen."
+msgstr "Compruebe por favor su email para saber si hay nuestra letra agradable y su acoplamiento de encargo para confirmar su cuenta. Una vez que usted chasca encendido el acoplamiento, su cuenta será abierta y le volverán a dirigir a la pantalla de conexión. "
+
+#: View/Users/reset_password.ctp:2
+msgid "Notice"
+msgstr "Aviso"
+
+#: View/Users/reset_password.ctp:3
+msgid "Enter your new password and it will be reset."
+msgstr "Incorpore su nueva contraseña y será reajustada. "
+
+#: View/Users/reset_password.ctp:8
+msgid "Reset Password"
+msgstr "Reajuste la contraseña "
+
+#: Model/User.php:validation
+#: for field email_address
+msgid "This must be a valid email address."
+msgstr "Esto debe ser un email address válido. "
+
+#: Model/User.php:validation
+#: for field email_address
+msgid "This email address already exists"
+msgstr "Este email address existe ya "
+
+#: Model/User.php:validation
+#: for field password;validation confirm_password
+msgid "Your password cannot be empty."
+msgstr "Su contraseña no puede ser vacía. "
+
+#: Model/User.php:validation
+#: for field password
+msgid "Passwords must match."
+msgstr "Las contraseñas deben emparejar. "
+
+#: Model/User.php:validation
+#: for field first_name
+msgid "Please enter your first name."
+msgstr "Incorpore por favor su nombre. "
+
+#: Model/User.php:validation
+#: for field last_name
+msgid "Please enter your last name."
+msgstr "Incorpore por favor su apellido. "
+
+#: View/Elements/documentation.ctp:25
+msgid "Your version of PHP is 5.2.6 or higher."
+msgstr ""
+
+#: View/Elements/documentation.ctp:29
+msgid "Your version of PHP is too low. You need PHP 5.2.6 or higher to use CakePHP."
+msgstr ""
+
+#: View/Elements/documentation.ctp:39
+msgid "Your tmp directory is writable."
+msgstr ""
+
+#: View/Elements/documentation.ctp:43
+msgid "Your tmp directory is NOT writable."
+msgstr ""
+
+#: View/Elements/documentation.ctp:53
+msgid "The %s is being used for caching. To change the config edit APP/Config/core.php "
+msgstr ""
+
+#: View/Elements/documentation.ctp:57
+msgid "Your cache is NOT working. Please check the settings in APP/Config/core.php"
+msgstr ""
+
+#: View/Elements/documentation.ctp:67
+msgid "Your database configuration file is present."
+msgstr ""
+
+#: View/Elements/documentation.ctp:72
+msgid "Your database configuration file is NOT present."
+msgstr ""
+
+#: View/Elements/documentation.ctp:74
+msgid "Rename APP/Config/database.php.default to APP/Config/database.php"
+msgstr ""
+
+#: View/Elements/documentation.ctp:92
+msgid "Cake is able to connect to the database."
+msgstr ""
+
+#: View/Elements/documentation.ctp:96
+msgid "Cake is NOT able to connect to the database."
+msgstr ""
+
+#: View/Elements/documentation.ctp:106
+msgid "PCRE has not been compiled with Unicode support."
+msgstr ""
+
+#: View/Elements/documentation.ctp:108
+msgid "Recompile PCRE with Unicode support by adding <code>--enable-unicode-properties</code> when configuring"
+msgstr ""
+
+#: View/Elements/documentation.ctp:112
+msgid "Editing this Page"
+msgstr ""
+
+#: View/Elements/documentation.ctp:114
+msgid "To change the content of this page, modify: APP/View/Elements/documentation.ctp."
+msgstr ""
+
+#: webroot/test.php:87
+msgid "Debug setting does not allow access to this url."
+msgstr ""
+
+#, fuzzy
+#~ msgid "Forgot password?"
+#~ msgstr "¿Olvidó su contraseña? "

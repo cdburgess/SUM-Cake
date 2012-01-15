@@ -2,13 +2,13 @@
     <h3><?php echo __('Not a subscriber?'); ?></h3>
     <p><a href="/users/register"><?php echo __('Click here'); ?></a> <?php echo __('to register.'); ?></p>
     <br><br>
-    <h3>Forgot password?</h3>
+    <h3><?php echo __('Forgot your password?'); ?></h3>
     <p><a href="/users/password_request"><?php echo __('Click here'); ?></a> <?php echo __('to reset your password.'); ?></p>
 </div>
 
 <div class="login form">
     <?php echo $this->Session->flash('auth'); ?>
-    <h2>Login</h2>
+    <h2><?php echo __('Login'); ?></h2>
     <?php
     echo $this->Form->create('User', array('action' => 'login'));
     echo $this->Form->input('email_address',array('between'=>'<br>','class'=>'text', 'label' => __('Email Address')));

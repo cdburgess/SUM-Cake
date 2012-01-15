@@ -1,0 +1,660 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-01-15 02:17-0700\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/PermissionsController.php:50;92
+msgid "Invalid permission"
+msgstr ""
+
+#: Controller/PermissionsController.php:68;97
+msgid "The permission has been saved"
+msgstr ""
+
+#: Controller/PermissionsController.php:71;100
+msgid "The permission could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/PermissionsController.php:123
+msgid "Invalid id for permission"
+msgstr ""
+
+#: Controller/PermissionsController.php:127
+msgid "Permission deleted"
+msgstr ""
+
+#: Controller/PermissionsController.php:130
+msgid "Permission was not deleted"
+msgstr ""
+
+#: Controller/PermissionsController.php:147;172
+msgid "The roles cannot match. Please, try again."
+msgstr ""
+
+#: Controller/PermissionsController.php:150
+msgid "The permissions have been updated"
+msgstr ""
+
+#: Controller/PermissionsController.php:153
+msgid "The copied permissions could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/PermissionsController.php:175
+msgid "The copied permissions have been deleted"
+msgstr ""
+
+#: Controller/PermissionsController.php:178
+msgid "The copied permission could not be removed. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:116;126
+msgid "Sorry, this user could not be activated."
+msgstr ""
+
+#: Controller/UsersController.php:123
+msgid "You have been activated successfully."
+msgstr ""
+
+#: Controller/UsersController.php:151
+msgid "Password has been updated"
+msgstr ""
+
+#: Controller/UsersController.php:154
+msgid "Sorry! User information could not be saved."
+msgstr ""
+
+#: Controller/UsersController.php:159
+msgid "Sorry! You request cannot be granted."
+msgstr ""
+
+#: Controller/UsersController.php:164
+msgid "The password reset request was deactivated."
+msgstr ""
+
+#: Controller/UsersController.php:168
+msgid "Sorry! User information did not match."
+msgstr ""
+
+#: Controller/UsersController.php:192
+msgid "Password could not be reset. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:212
+msgid "Reset email has been sent."
+msgstr ""
+
+#: Controller/UsersController.php:265
+msgid "You have been registered successfully."
+msgstr ""
+
+#: Controller/UsersController.php:277
+msgid "You could not be registered. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:307
+msgid "Your password was updated"
+msgstr ""
+
+#: Controller/UsersController.php:310
+msgid "The user could not be saved."
+msgstr ""
+
+#: Controller/UsersController.php:330
+msgid "Your information has been updated"
+msgstr ""
+
+#: Controller/UsersController.php:333;399;425
+msgid "The user could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:378;417;506;529
+msgid "Invalid user"
+msgstr ""
+
+#: Controller/UsersController.php:396;422
+msgid "The user has been saved"
+msgstr ""
+
+#: Controller/UsersController.php:446
+msgid "The user is not valid. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:469
+msgid "Password reset email has been sent."
+msgstr ""
+
+#: Controller/UsersController.php:484
+msgid "Invalid id for user"
+msgstr ""
+
+#: Controller/UsersController.php:488
+msgid "User deleted"
+msgstr ""
+
+#: Controller/UsersController.php:491
+msgid "User was not deleted"
+msgstr ""
+
+#: Controller/UsersController.php:511
+msgid "The user has been disabled"
+msgstr ""
+
+#: Controller/UsersController.php:513;536
+msgid "The user could not be updated. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:534
+msgid "The user has been enabled"
+msgstr ""
+
+#: View/Elements/login.ctp:5
+msgid "logout"
+msgstr ""
+
+#: View/Elements/login.ctp:7
+msgid "login"
+msgstr ""
+
+#: View/Elements/model_search.ctp:9
+msgid "Search"
+msgstr ""
+
+#: View/Elements/users.ctp:1;3
+msgid "My Account"
+msgstr ""
+
+#: View/Elements/users.ctp:4
+msgid "Edit Account"
+msgstr ""
+
+#: View/Elements/users.ctp:5
+#: View/Users/change_password.ctp:4
+msgid "Change Password"
+msgstr ""
+
+#: View/Layouts/default.ctp:6
+msgid "SUM-Cake: simple user management:"
+msgstr ""
+
+#: View/Layouts/default.ctp:25
+msgid "SUM-Cake: simple user management"
+msgstr ""
+
+#: View/Layouts/default.ctp:34
+msgid "Creative Commons License"
+msgstr ""
+
+#: View/Layouts/default.ctp:40
+msgid "CakePHP: the rapid development php framework"
+msgstr ""
+
+#: View/Permissions/admin_add.ctp:4
+msgid "Add Permission"
+msgstr ""
+
+#: View/Permissions/admin_add.ctp:6
+#: View/Permissions/admin_edit.ctp:6
+#: View/Permissions/admin_view.ctp:9
+#: View/Users/index.ctp:9
+msgid "Name"
+msgstr ""
+
+#: View/Permissions/admin_add.ctp:7
+#: View/Permissions/admin_edit.ctp:7
+#: View/Permissions/admin_view.ctp:14
+#: View/Users/admin_add.ctp:9
+#: View/Users/admin_edit.ctp:10
+#: View/Users/admin_view.ctp:24
+msgid "Role"
+msgstr ""
+
+#: View/Permissions/admin_add.ctp:10
+#: View/Permissions/admin_copy.ctp:8
+#: View/Permissions/admin_delete_copy.ctp:8
+#: View/Permissions/admin_edit.ctp:10
+#: View/Users/admin_add.ctp:13
+#: View/Users/admin_edit.ctp:14
+#: View/Users/change_password.ctp:12
+#: View/Users/edit.ctp:12
+#: View/Users/password_request.ctp:12
+#: View/Users/register.ctp:13
+#: View/Users/reset_password.ctp:15
+msgid "Submit"
+msgstr ""
+
+#: View/Permissions/admin_add.ctp:13
+#: View/Permissions/admin_copy.ctp:11
+#: View/Permissions/admin_delete_copy.ctp:11
+#: View/Permissions/admin_edit.ctp:13
+#: View/Permissions/admin_index.ctp:9;46
+#: View/Permissions/admin_view.ctp:32
+#: View/Users/admin_add.ctp:16
+#: View/Users/admin_edit.ctp:17
+#: View/Users/admin_index.ctp:10;59
+#: View/Users/admin_view.ctp:47
+msgid "Actions"
+msgstr ""
+
+#: View/Permissions/admin_add.ctp:15
+#: View/Permissions/admin_copy.ctp:13
+#: View/Permissions/admin_delete_copy.ctp:13
+#: View/Permissions/admin_edit.ctp:17
+#: View/Permissions/admin_view.ctp:36
+#: View/Users/admin_index.ctp:62
+msgid "List Permissions"
+msgstr ""
+
+#: View/Permissions/admin_add.ctp:18
+msgid "Adding Permissions"
+msgstr ""
+
+#: View/Permissions/admin_add.ctp:19
+msgid "The name is created by putting ControllerName:Action and then selecting the Role that has access."
+msgstr ""
+
+#: View/Permissions/admin_copy.ctp:4
+#: View/Permissions/admin_index.ctp:49
+msgid "Copy Permissions"
+msgstr ""
+
+#: View/Permissions/admin_copy.ctp:16
+msgid "Copying"
+msgstr ""
+
+#: View/Permissions/admin_copy.ctp:17
+msgid "A quick easy method for updating permissions."
+msgstr ""
+
+#: View/Permissions/admin_delete_copy.ctp:4
+msgid "Delete Copied Permissions"
+msgstr ""
+
+#: View/Permissions/admin_delete_copy.ctp:5
+msgid "Delete the permissions added from this role"
+msgstr ""
+
+#: View/Permissions/admin_delete_copy.ctp:6
+msgid "to this role"
+msgstr ""
+
+#: View/Permissions/admin_delete_copy.ctp:16
+#: View/Permissions/admin_index.ctp:50
+msgid "Delete Copies"
+msgstr ""
+
+#: View/Permissions/admin_delete_copy.ctp:17
+msgid "A quick easy method for removing copied permissions."
+msgstr ""
+
+#: View/Permissions/admin_edit.ctp:4
+msgid "Admin Edit Permission"
+msgstr ""
+
+#: View/Permissions/admin_edit.ctp:16
+#: View/Permissions/admin_index.ctp:26
+#: View/Users/admin_edit.ctp:20
+#: View/Users/admin_index.ctp:39
+msgid "Delete"
+msgstr ""
+
+#: View/Permissions/admin_edit.ctp:16
+#: View/Permissions/admin_index.ctp:26
+#: View/Permissions/admin_view.ctp:35
+#: View/Users/admin_edit.ctp:20
+#: View/Users/admin_index.ctp:39
+#: View/Users/admin_view.ctp:50
+msgid "Are you sure you want to delete # %s?"
+msgstr ""
+
+#: View/Permissions/admin_index.ctp:2
+msgid "Permissions"
+msgstr ""
+
+#: View/Permissions/admin_index.ctp:24
+#: View/Users/admin_index.ctp:29
+msgid "View"
+msgstr ""
+
+#: View/Permissions/admin_index.ctp:25
+#: View/Users/admin_index.ctp:30
+msgid "Edit"
+msgstr ""
+
+#: View/Permissions/admin_index.ctp:34
+#: View/Users/admin_index.ctp:47
+msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
+msgstr ""
+
+#: View/Permissions/admin_index.ctp:39
+#: View/Users/admin_index.ctp:52
+msgid "previous"
+msgstr ""
+
+#: View/Permissions/admin_index.ctp:42
+#: View/Users/admin_index.ctp:55
+msgid "next"
+msgstr ""
+
+#: View/Permissions/admin_index.ctp:48
+#: View/Permissions/admin_view.ctp:37
+msgid "New Permission"
+msgstr ""
+
+#: View/Permissions/admin_index.ctp:51
+#: View/Users/admin_add.ctp:18
+#: View/Users/admin_edit.ctp:21
+#: View/Users/admin_view.ctp:51
+msgid "List Users"
+msgstr ""
+
+#: View/Permissions/admin_index.ctp:52
+#: View/Users/admin_index.ctp:63
+msgid "Logout"
+msgstr ""
+
+#: View/Permissions/admin_view.ctp:2
+msgid "Permission"
+msgstr ""
+
+#: View/Permissions/admin_view.ctp:4
+#: View/Users/admin_view.ctp:4
+msgid "Id"
+msgstr ""
+
+#: View/Permissions/admin_view.ctp:19
+#: View/Users/admin_view.ctp:34
+msgid "Created"
+msgstr ""
+
+#: View/Permissions/admin_view.ctp:24
+#: View/Users/admin_view.ctp:39
+msgid "Modified"
+msgstr ""
+
+#: View/Permissions/admin_view.ctp:34
+msgid "Edit Permission"
+msgstr ""
+
+#: View/Permissions/admin_view.ctp:35
+msgid "Delete Permission"
+msgstr ""
+
+#: View/Users/admin_add.ctp:4
+msgid "Admin Add User"
+msgstr ""
+
+#: View/Users/admin_add.ctp:6
+#: View/Users/admin_edit.ctp:7
+#: View/Users/admin_login.ctp:14
+#: View/Users/admin_view.ctp:14
+#: View/Users/edit.ctp:7
+#: View/Users/index.ctp:4
+#: View/Users/login.ctp:14
+#: View/Users/password_request.ctp:11
+#: View/Users/register.ctp:6
+#: View/Users/reset_password.ctp:12
+msgid "Email Address"
+msgstr ""
+
+#: View/Users/admin_add.ctp:7
+#: View/Users/admin_login.ctp:15
+#: View/Users/admin_view.ctp:19
+#: View/Users/change_password.ctp:7
+#: View/Users/login.ctp:15
+#: View/Users/register.ctp:7
+#: View/Users/reset_password.ctp:13
+msgid "Password"
+msgstr ""
+
+#: View/Users/admin_add.ctp:8
+#: View/Users/change_password.ctp:8
+#: View/Users/register.ctp:8
+#: View/Users/reset_password.ctp:14
+msgid "Confirm Password"
+msgstr ""
+
+#: View/Users/admin_add.ctp:10
+#: View/Users/admin_edit.ctp:11
+#: View/Users/admin_view.ctp:29
+msgid "Active"
+msgstr ""
+
+#: View/Users/admin_edit.ctp:4
+msgid "Admin Edit User"
+msgstr ""
+
+#: View/Users/admin_edit.ctp:8
+#: View/Users/edit.ctp:8
+#: View/Users/register.ctp:9
+msgid "First Name"
+msgstr ""
+
+#: View/Users/admin_edit.ctp:9
+#: View/Users/edit.ctp:9
+#: View/Users/register.ctp:10
+msgid "Last Name"
+msgstr ""
+
+#: View/Users/admin_index.ctp:3
+msgid "Users"
+msgstr ""
+
+#: View/Users/admin_index.ctp:33
+msgid "Enable"
+msgstr ""
+
+#: View/Users/admin_index.ctp:35
+msgid "Disable"
+msgstr ""
+
+#: View/Users/admin_index.ctp:38
+msgid "Send Password"
+msgstr ""
+
+#: View/Users/admin_index.ctp:61
+#: View/Users/admin_view.ctp:52
+#: View/Users/register.ctp:4
+msgid "New User"
+msgstr ""
+
+#: View/Users/admin_login.ctp:2
+#: View/Users/login.ctp:2
+msgid "Not a subscriber?"
+msgstr ""
+
+#: View/Users/admin_login.ctp:3;6
+#: View/Users/login.ctp:3;6
+msgid "Click here"
+msgstr ""
+
+#: View/Users/admin_login.ctp:3
+#: View/Users/login.ctp:3
+msgid "to register."
+msgstr ""
+
+#: View/Users/admin_login.ctp:5
+#: View/Users/login.ctp:5
+#: View/Users/password_request.ctp:2
+msgid "Forgot your password?"
+msgstr ""
+
+#: View/Users/admin_login.ctp:6
+#: View/Users/login.ctp:6
+msgid "to reset your password."
+msgstr ""
+
+#: View/Users/admin_login.ctp:11
+#: View/Users/login.ctp:11
+msgid "Login"
+msgstr ""
+
+#: View/Users/admin_login.ctp:16
+#: View/Users/login.ctp:16
+msgid "Sign In"
+msgstr ""
+
+#: View/Users/admin_view.ctp:2
+msgid "User"
+msgstr ""
+
+#: View/Users/admin_view.ctp:9
+msgid "Full Name"
+msgstr ""
+
+#: View/Users/admin_view.ctp:49
+msgid "Edit User"
+msgstr ""
+
+#: View/Users/admin_view.ctp:50
+msgid "Delete User"
+msgstr ""
+
+#: View/Users/edit.ctp:4
+msgid "Account Information"
+msgstr ""
+
+#: View/Users/index.ctp:2
+msgid "My Account Information"
+msgstr ""
+
+#: View/Users/password_request.ctp:3
+msgid "No problem. Enter your email address and we will send you a link that will allow you to reset your password."
+msgstr ""
+
+#: View/Users/password_request.ctp:8
+msgid "Reset Password Request"
+msgstr ""
+
+#: View/Users/register.ctp:16
+#: View/Users/register_success.ctp:11
+msgid "Register"
+msgstr ""
+
+#: View/Users/register.ctp:17
+#: View/Users/register_success.ctp:12
+msgid "You will receive an email so you can confirm your registration."
+msgstr ""
+
+#: View/Users/register_success.ctp:3
+msgid "Success!"
+msgstr ""
+
+#: View/Users/register_success.ctp:4
+msgid "Your registration has be received successfully. Now we just need to make sure you are the \n\t\towner of the email address you registered."
+msgstr ""
+
+#: View/Users/register_success.ctp:6
+msgid "Please check your email for our welcome letter and your custom link to confirm your account.\n\t\tOnce you click on the link, your account will be unlocked and you will be redirected to the login\n\t\tscreen."
+msgstr ""
+
+#: View/Users/reset_password.ctp:2
+msgid "Notice"
+msgstr ""
+
+#: View/Users/reset_password.ctp:3
+msgid "Enter your new password and it will be reset."
+msgstr ""
+
+#: View/Users/reset_password.ctp:8
+msgid "Reset Password"
+msgstr ""
+
+#: Model/User.php:validation for field email_address
+msgid "This must be a valid email address."
+msgstr ""
+
+#: Model/User.php:validation for field email_address
+msgid "This email address already exists"
+msgstr ""
+
+#: Model/User.php:validation for field password;validation for field confirm_password
+msgid "Your password cannot be empty."
+msgstr ""
+
+#: Model/User.php:validation for field password
+msgid "Passwords must match."
+msgstr ""
+
+#: Model/User.php:validation for field first_name
+msgid "Please enter your first name."
+msgstr ""
+
+#: Model/User.php:validation for field last_name
+msgid "Please enter your last name."
+msgstr ""
+
+#: View/Elements/documentation.ctp:25
+msgid "Your version of PHP is 5.2.6 or higher."
+msgstr ""
+
+#: View/Elements/documentation.ctp:29
+msgid "Your version of PHP is too low. You need PHP 5.2.6 or higher to use CakePHP."
+msgstr ""
+
+#: View/Elements/documentation.ctp:39
+msgid "Your tmp directory is writable."
+msgstr ""
+
+#: View/Elements/documentation.ctp:43
+msgid "Your tmp directory is NOT writable."
+msgstr ""
+
+#: View/Elements/documentation.ctp:53
+msgid "The %s is being used for caching. To change the config edit APP/Config/core.php "
+msgstr ""
+
+#: View/Elements/documentation.ctp:57
+msgid "Your cache is NOT working. Please check the settings in APP/Config/core.php"
+msgstr ""
+
+#: View/Elements/documentation.ctp:67
+msgid "Your database configuration file is present."
+msgstr ""
+
+#: View/Elements/documentation.ctp:72
+msgid "Your database configuration file is NOT present."
+msgstr ""
+
+#: View/Elements/documentation.ctp:74
+msgid "Rename APP/Config/database.php.default to APP/Config/database.php"
+msgstr ""
+
+#: View/Elements/documentation.ctp:92
+msgid "Cake is able to connect to the database."
+msgstr ""
+
+#: View/Elements/documentation.ctp:96
+msgid "Cake is NOT able to connect to the database."
+msgstr ""
+
+#: View/Elements/documentation.ctp:106
+msgid "PCRE has not been compiled with Unicode support."
+msgstr ""
+
+#: View/Elements/documentation.ctp:108
+msgid "Recompile PCRE with Unicode support by adding <code>--enable-unicode-properties</code> when configuring"
+msgstr ""
+
+#: View/Elements/documentation.ctp:112
+msgid "Editing this Page"
+msgstr ""
+
+#: View/Elements/documentation.ctp:114
+msgid "To change the content of this page, modify: APP/View/Elements/documentation.ctp."
+msgstr ""
+
+#: webroot/test.php:87
+msgid "Debug setting does not allow access to this url."
+msgstr ""
+
