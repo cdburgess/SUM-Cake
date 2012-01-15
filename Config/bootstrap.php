@@ -65,7 +65,7 @@ Cache::config('default', array('engine' => 'File'));
  */
 
 // SUM Cake Version
-Configure::write('version', '2.0.0');
+Configure::write('version', '2.0.1');
 
 // email settings
 Configure::write('SystemEmail', 'email@example.com');
