@@ -1,16 +1,16 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.5
+-- version 3.3.9.2
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2011 at 06:57 PM
--- Server version: 5.1.44
--- PHP Version: 5.2.13
+-- Generation Time: Jan 15, 2012 at 12:07 AM
+-- Server version: 5.5.9
+-- PHP Version: 5.3.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
--- Database: `sum-cake`
+-- Database: `sum-cake2`
 --
 
 -- --------------------------------------------------------
@@ -37,9 +37,6 @@ CREATE TABLE `permissions` (
 
 INSERT INTO `permissions` (`id`, `name`, `role`, `copied_from`, `created`, `modified`) VALUES('4c5b18b3-1774-41ad-b46d-3007e4ca782d', '*', 'Admin', NULL, '2010-08-05 14:01:55', '2010-08-05 14:21:32');
 INSERT INTO `permissions` (`id`, `name`, `role`, `copied_from`, `created`, `modified`) VALUES('4c5e4476-8260-4c6e-a790-45cde4ca782d', 'Users:login', 'User', NULL, '2010-08-07 23:45:26', '2010-08-07 23:45:26');
-INSERT INTO `permissions` (`id`, `name`, `role`, `copied_from`, `created`, `modified`) VALUES('4c67450e-5ea8-415b-8c0b-119de4ca782d', 'Users:reset_password', 'User', NULL, '2010-08-14 19:38:22', '2010-08-14 19:38:22');
-INSERT INTO `permissions` (`id`, `name`, `role`, `copied_from`, `created`, `modified`) VALUES('4c674516-0b8c-4dc4-b5bc-119de4ca782d', 'Users:password_request', 'User', NULL, '2010-08-14 19:38:30', '2010-08-14 19:38:30');
-INSERT INTO `permissions` (`id`, `name`, `role`, `copied_from`, `created`, `modified`) VALUES('4c674521-7120-4458-9fb0-119de4ca782d', 'Users:register', 'User', NULL, '2010-08-14 19:38:41', '2010-08-14 19:38:41');
 INSERT INTO `permissions` (`id`, `name`, `role`, `copied_from`, `created`, `modified`) VALUES('4c67452c-715c-4b73-968f-119de4ca782d', 'Users:index', 'User', NULL, '2010-08-14 19:38:52', '2010-08-14 19:38:52');
 INSERT INTO `permissions` (`id`, `name`, `role`, `copied_from`, `created`, `modified`) VALUES('4c674534-e200-4b6b-843f-119de4ca782d', 'Users:view', 'User', NULL, '2010-08-14 19:39:00', '2010-08-14 19:39:00');
 INSERT INTO `permissions` (`id`, `name`, `role`, `copied_from`, `created`, `modified`) VALUES('4c67453b-684c-4530-b5b8-119de4ca782d', 'Users:edit', 'User', NULL, '2010-08-14 19:39:07', '2010-08-14 19:39:07');
@@ -74,5 +71,5 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` VALUES('4c5b1927-5e14-4379-95d1-3009e4ca782d', 'admin@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'Admin', 'User', 'Admin', '1', '0', '0', '2010-08-05 14:03:51', '2011-07-02 09:46:42');
-INSERT INTO `users` VALUES('4dfec325-c338-49e5-983c-43a8e4ca782d', 'user@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'Example', 'User', 'User', '1', '0', '0', '2011-06-19 21:48:53', '2011-07-02 09:43:53');
+INSERT INTO `users` (`id`, `email_address`, `password`, `first_name`, `last_name`, `role`, `active`, `disabled`, `password_requested`, `created`, `modified`) VALUES('4c5b1927-5e14-4379-95d1-3009e4ca782d', 'admin@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'Admin', 'User', 'Admin', '1', '0', '0', '2010-08-05 14:03:51', '2012-01-15 00:00:34');
+INSERT INTO `users` (`id`, `email_address`, `password`, `first_name`, `last_name`, `role`, `active`, `disabled`, `password_requested`, `created`, `modified`) VALUES('4dfec325-c338-49e5-983c-43a8e4ca782d', 'user@example.com', '5cca727f3f7ee0c868a1980cdf9252415fd7a1d1', 'Example', 'User', 'User', '1', '0', '0', '2011-06-19 21:48:53', '2012-01-14 16:40:47');
