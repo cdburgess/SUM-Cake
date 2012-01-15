@@ -21,7 +21,7 @@ class UsersController extends AppController {
 	* @var string Components
 	* @access public
 	*/
-	var $components = array('Email');
+	var $components = array();
 	
 	/**
 	* Before Filer
@@ -193,19 +193,19 @@ class UsersController extends AppController {
 			}
 			
 			if (!empty($user['User']['email_address'])) {
-		        $system_email = Configure::read('SystemEmail');
-        		$this->Email->to = $user['User']['email_address'];
-        		$this->Email->subject = 'Password Reset Request';
-        		$this->Email->replyTo = $system_email;
-        		$this->Email->from = $system_email;
-        		$this->Email->template = 'password_reset'; 
-        		$this->Email->sendAs = 'both'; //Send as 'html', 'text' or 'both' (default is 'text')
-        		$this->set('site', FULL_BASE_URL . $this->request->base);
+				$system_email = Configure::read('SystemEmail');
+				$this->set('site', FULL_BASE_URL . $this->request->base);
         		$this->set('link', FULL_BASE_URL . $this->request->base . '/users/reset_password/'.$user['User']['id'].'/'.$user['User']['password_requested']);
-        		if(Configure::read('smtpEmailOn') == true) {
-        		    $this->useSmtp();
-        		}
-        		$this->Email->send();
+				
+				App::uses('CakeEmail', 'Network/Email');
+				$email = new CakeEmail(Configure::read('emailConfig'));
+		        $email->to($user['User']['email_address'])
+        			->subject('Password Reset Request')
+        			->replyTo($system_email)
+        			->from($system_email)
+        			->template('password_reset') 
+        			->emailFormat('both') 							//Send as 'html', 'text' or 'both' (default is 'text')
+        			->send();
 			}
 			$this->Session->setFlash('Reset email has been sent.', 'flash_success');
 			$this->redirect(array('action' => 'login'));
@@ -236,23 +236,22 @@ class UsersController extends AppController {
 	            if(Configure::read('welcomeEmail') == true) {
         		    $company_name = Configure::read('WebsiteName');
             		$system_email = Configure::read('SystemEmail');
-		
-            		// send welcome email with confirmation link
-            		$this->Email->to = $this->request->data['User']['email_address'];
-            		$this->Email->subject = 'Welcome to '.$company_name;
-            		$this->Email->replyTo = $system_email;
-            		$this->Email->from = $system_email;
-            		$this->Email->template = 'welcome'; 
-            		$this->Email->sendAs = 'both'; //Send as 'html', 'text' or 'both' (default is 'text')
             		if(Configure::read('autoValidate') == false) {
             		    $this->set('site', FULL_BASE_URL . $this->request->base);
                 		$this->set('link', FULL_BASE_URL . $this->request->base . '/users/confirm/' . $this->User->id);
             		}
             		$this->set('company_name', $company_name);
-            		if(Configure::read('smtpEmailOn') == true) {
-            		    $this->useSmtp(); // load the smpt values from app_controller.php
-            		}
-            		$this->Email->send();
+					
+					App::uses('CakeEmail', 'Network/Email');
+					$email = new CakeEmail(Configure::read('emailConfig'));
+			        $email->to($this->request->data['User']['email_address'])
+	        			->subject('Welcome to '.$company_name)
+	        			->replyTo($system_email)
+	        			->from($system_email)
+	        			->template('welcome') 
+	        			->emailFormat('both') 							//Send as 'html', 'text' or 'both' (default is 'text')
+	        			->send();
+					
 		        }
         		$this->Session->setFlash('You have been registered!', 'flash_success');
         		if (Configure::read('autoValidate') == true) {
@@ -436,18 +435,19 @@ class UsersController extends AppController {
    		$password_request_id = $this->User->set_password_request($user['User']['id']);
 		if (!empty($user['User']['email_address'])) {
 	        $system_email = Configure::read('SystemEmail');
-    		$this->Email->to = $user['User']['email_address'];
-    		$this->Email->subject = 'Password Reset Request';
-    		$this->Email->replyTo = $system_email;
-    		$this->Email->from = $system_email;
-    		$this->Email->template = 'password_reset'; 
-    		$this->Email->sendAs = 'both'; //Send as 'html', 'text' or 'both' (default is 'text')
     		$this->set('site', FULL_BASE_URL . $this->request->base);
-    		$this->set('link', FULL_BASE_URL . $this->request->base . '/users/reset_password/'.$user['User']['id'].'/'.$password_request_id);
-    		if(Configure::read('smtpEmailOn') == true) {
-    		    $this->useSmtp();
-    		}
-    		$this->Email->send();
+	    	$this->set('link', FULL_BASE_URL . $this->request->base . '/users/reset_password/'.$user['User']['id'].'/'.$password_request_id);
+			
+			App::uses('CakeEmail', 'Network/Email');
+			$email = new CakeEmail(Configure::read('emailConfig'));
+	        $email->to($user['User']['email_address'])
+    			->subject('Password Reset Request')
+    			->replyTo($system_email)
+    			->from($system_email)
+    			->template('password_reset') 
+    			->emailFormat('both') 							//Send as 'html', 'text' or 'both' (default is 'text')
+    			->send();
+			
     		$this->User->set_password_request($user['User']['id']);
 		}
 		$this->Session->setFlash('Password reset email has been sent.', 'flash_success');

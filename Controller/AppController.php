@@ -137,25 +137,4 @@ class AppController extends Controller {
         }
         $this->Session->write('Permissions',$permissions);                                  // write the permissions to the users session
     }
-    
-    /**
-    * Use SMPT
-    *
-    * Set the email component to allow for SMPT connections. Settings are in the Bootstrap file.
-    *
-    * @return true
-    * @access protected
-    */
-    protected function useSmtp() {
-        $this->Email->smtpOptions = array(
-            'port' => Configure::read('smtpPort'),
-            'timeout' => Configure::read('smtpTimeOut'),
-            'host' => Configure::read('smtpHost'),
-            'username' => Configure::read('smtpUsername'),
-            'password' => Configure::read('smtpPassword'),
-         );
-        $this->Email->delivery = 'smtp';
-        return true;
-    }
-
 }
