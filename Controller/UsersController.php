@@ -259,7 +259,6 @@ class UsersController extends AppController {
 	        			->emailFormat('both') 							//Send as 'html', 'text' or 'both' (default is 'text')
 						->viewVars($email_vars)
 	        			->send();
-					
 		        }
 				
         		$this->Session->setFlash(__('You have been registered successfully.'), 'flash_success');
@@ -276,6 +275,8 @@ class UsersController extends AppController {
         	} else {
         		$this->Session->setFlash(__('You could not be registered. Please, try again.'));
         	}
+			unset($this->request->data['User']['password']);
+			unset($this->request->data['User']['confirm_password']);
 		}
 	}
     
@@ -392,6 +393,8 @@ class UsersController extends AppController {
 	function admin_add() {
 		if (!empty($this->request->data)) {
 			$this->User->create();
+			$this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
+			
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved'), 'flash_success');
 				$this->redirect(array('action' => 'index'));
@@ -399,8 +402,10 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
 			}
 		}
+		unset($this->request->data['User']['password']);
+		unset($this->request->data['User']['confirm_password']);
 		$this->set('role', $this->User->getEnumValues('role'));
-                $this->set('active', $this->User->getEnumValues('active'));
+        $this->set('active', $this->User->getEnumValues('active'));
 	}
     
     /**
@@ -427,6 +432,9 @@ class UsersController extends AppController {
 		}
 		if (empty($this->request->data)) {
 			$this->request->data = $this->User->read(null, $id);
+		} else {
+			unset($this->request->data['User']['password']);
+			unset($this->request->data['User']['confirm_password']);
 		}
 		$this->set('role', $this->User->getEnumValues('role'));
         $this->set('active', $this->User->getEnumValues('active'));

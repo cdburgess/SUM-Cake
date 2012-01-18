@@ -17,6 +17,21 @@ class Permission extends AppModel {
     */
     var $name = 'Permission';
     
+	/**
+    * Var Acts As
+    *
+    * @var string $actsAs 'Enum'
+    * @access public
+    */
+	var $actsAs = array(
+		'Enum' => array(
+			'fields' => array(
+				'role' => array('Admin' => 'Admin', 'User' => 'User'),
+				'copied_from' => array('Admin' => 'Admin', 'User' => 'User'),
+			),
+		),
+	);
+
     /**
     * Copy
     *

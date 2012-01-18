@@ -22,6 +22,7 @@
  * @since         CakePHP(tm) v 0.10.8.2117
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
+date_default_timezone_set('UTC');
 
 // Setup a 'default' cache configuration for use in the application.
 Cache::config('default', array('engine' => 'File'));
@@ -65,7 +66,7 @@ Cache::config('default', array('engine' => 'File'));
  */
 
 // SUM Cake Version
-Configure::write('version', '2.0.1');
+Configure::write('version', '2.0.2');
 
 // email settings
 Configure::write('SystemEmail', 'email@example.com');

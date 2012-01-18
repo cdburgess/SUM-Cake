@@ -6,6 +6,8 @@
 		echo $this->Form->input('email_address', array('label' => __('Email Address')));
 		echo $this->Form->input('password', array('label' => __('Password')));
 		echo $this->Form->input('confirm_password', array('type' => 'password', 'label' => __('Confirm Password')));
+		echo $this->Form->input('first_name', array('label' => __('First Name')));
+		echo $this->Form->input('last_name', array('label' => __('Last Name')));
 		echo $this->Form->input('role', array('type' => 'select', 'options' => $role, 'label' => __('Role')));
 		echo $this->Form->input('active', array('type' => 'select', 'options' => $active, 'label' => __('Active')));
 	?>

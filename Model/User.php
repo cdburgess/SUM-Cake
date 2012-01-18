@@ -18,6 +18,22 @@ class User extends AppModel {
 	var $name = 'User';
 	
 	/**
+    * Var Acts As
+    *
+    * @var string $actsAs 'Enum'
+    * @access public
+    */
+	var $actsAs = array(
+		'Enum' => array(
+			'fields' => array(
+				'role' => array('Admin' => 'Admin', 'User' => 'User'),
+				'active' => array(0, 1),
+				'disabled' => array(0, 1),
+			),
+		),
+	);
+	
+	/**
 	* Var DisplayField
 	* @var string $displayField 'email_address'
 	* @access public
