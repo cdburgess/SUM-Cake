@@ -64,7 +64,8 @@ class AppModel extends Model {
      * @access public
      */
     function beforeSave() {
-        if($this->user_id = Configure::read('user_id')) {
+		$this->user_id = Configure::read('user_id');
+        if($this->user_id) {
             if(isset($this->_schema['user_id'])) {
                 $this->data[$this->name]['user_id'] = $this->user_id;
             }
