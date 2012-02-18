@@ -39,7 +39,8 @@ class AppModel extends Model {
      * @access public
      */
     function beforeFind($queryData) {
-        if($this->user_id = Configure::read('user_id')) {
+		$this->user_id = Configure::read('user_id');
+    	if($this->user_id) {
             // all records associated to a user use user_id as the foreign key
             if(isset($this->_schema['user_id'])) {
                 if(isset($this->user_id)) {
