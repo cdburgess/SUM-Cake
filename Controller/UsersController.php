@@ -43,15 +43,16 @@ class UsersController extends AppController {
     * @access public
     */
 	function login() { 
-		if(!empty($this->request->data['User']) && $this->Auth->login()) {
+		if (!empty($this->request->data['User']) && $this->Auth->login()) {
 	        $this->User->unset_password_request($this->Auth->user('id'));
-			if($this->Auth->user('role') == 'Admin') {
+			if ($this->Auth->user('role') == 'Admin') {
 				if ($this->Auth->redirect() == '/users') {
 					$this->Session->write('Auth.redirect', '/admin/users');
 				}
 			}
+			$this->User->saveField('last_login', date('Y-m-d G:i:s', time()));
 			$this->redirect($this->Auth->redirect());
-        }        
+        }
 	}
 	
 	/**
@@ -63,13 +64,14 @@ class UsersController extends AppController {
     * @access public
     */
 	function admin_login() { 
-	    if(!empty($this->request->data['User']) && $this->Auth->login()) {
+	    if (!empty($this->request->data['User']) && $this->Auth->login()) {
 			$this->User->unset_password_request($this->Auth->user('id'));
-	        if($this->Auth->user('role') == 'Admin') {
+	        if ($this->Auth->user('role') == 'Admin') {
 				if ($this->Auth->redirect() == '/users') {
 					$this->Session->write('Auth.redirect', '/admin/users');
 				}
 			}
+			$this->User->saveField('last_login', date('Y-m-d G:i:s', time()));
 			$this->redirect($this->Auth->redirect());
         }
 	}
