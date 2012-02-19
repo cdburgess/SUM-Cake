@@ -45,5 +45,6 @@
 		</div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
+	<?php pr($this->Session->read()); ?>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <div class="actions">
     <h3><?php echo __('Not a subscriber?'); ?></h3>
-    <p><a href="/users/register"><?php echo __('Click here'); ?></a> <?php echo __('to register.'); ?></p>
+    <p><a href="/users/register" class="text"><?php echo __('Click here'); ?></a> <?php echo __('to register.'); ?></p>
     <br><br>
     <h3><?php echo __('Forgot your password?'); ?></h3>
-    <p><a href="/users/password_request"><?php echo __('Click here'); ?></a> <?php echo __('to reset your password.'); ?></p>
+    <p><a href="/users/password_request" class="text"><?php echo __('Click here'); ?></a> <?php echo __('to reset your password.'); ?></p>
 </div>
 
 <div class="login form">

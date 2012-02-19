@@ -229,7 +229,7 @@ class UsersController extends AppController {
 	* @access public
 	*/
 	function register() {
-		if (!empty($this->request->data)) {
+		if ($this->request->is('post')) {
 		    if(Configure::read('autoValidate') == true) {
 		        $this->request->data['User']['active'] = 1;
 		    } else {
@@ -304,7 +304,7 @@ class UsersController extends AppController {
     * @access public
     */
 	function change_password() {
-		if (!empty($this->request->data)) {
+		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('Your password was updated'), 'flash_success');
@@ -313,9 +313,8 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('The user could not be saved.'));
 			}
 		}
-		if (empty($this->request->data)) {
-			$this->request->data = $this->User->find();
-		}
+		unset($this->request->data['User']);
+		$this->request->data['User']['id'] = $this->Session->read('Auth.User.id');
 	}
 	
 	/**
@@ -327,7 +326,7 @@ class UsersController extends AppController {
 	* @access public
 	*/
 	function edit() {
-		if (!empty($this->request->data)) {
+		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->User->save($this->request->data)) {
 				$this->_update_session();
 				$this->Session->setFlash(__('Your information has been updated'), 'flash_success');
@@ -335,8 +334,7 @@ class UsersController extends AppController {
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
 			}
-		}
-		if (empty($this->request->data)) {
+		} else {
 			$this->request->data = $this->User->find();
 		}
 	}
@@ -393,7 +391,7 @@ class UsersController extends AppController {
     * @access public
     */
 	function admin_add() {
-		if (!empty($this->request->data)) {
+		if ($this->request->is('post')) {
 			$this->User->create();
 			$this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
 			
@@ -424,20 +422,20 @@ class UsersController extends AppController {
 			$this->Session->setFlash(__('Invalid user'));
 			$this->redirect(array('action' => 'index'));
 		}
-		if (!empty($this->request->data)) {
+		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved'), 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
 			}
-		}
-		if (empty($this->request->data)) {
-			$this->request->data = $this->User->read(null, $id);
 		} else {
-			unset($this->request->data['User']['password']);
-			unset($this->request->data['User']['confirm_password']);
+			$this->request->data = $this->User->read(null, $id);
 		}
+		
+		unset($this->request->data['User']['password']);
+		unset($this->request->data['User']['confirm_password']);
+		
 		$this->set('role', $this->User->getEnumValues('role'));
         $this->set('active', $this->User->getEnumValues('active'));
 	}
