@@ -18,6 +18,19 @@ class Permission extends AppModel {
     var $name = 'Permission';
     
 	/**
+	 * Var Validate
+	 *
+	 * @var string $validate
+	 * @access public
+	 */
+	var $validate = array(
+		'name' => array(
+			'rule' => array('checkNameRoleUnique'),
+			'message' => 'A record already exists for this permission.',
+		),
+	);
+	
+	/**
     * Var Acts As
     *
     * @var string $actsAs 'Enum'
@@ -31,6 +44,24 @@ class Permission extends AppModel {
 			),
 		),
 	);
+	
+	/**
+	 * Check Name Role Unique
+	 *
+	 * The permissions are set to eliminate duplicates by keeping the name/role fields combination
+	 * unique. This will validate the column pair combination to make sure they are unique before
+	 * adding the record to the database.
+	 *
+	 * @return void
+	 * @author Chuck Burgess
+	 */
+	private function checkNameRoleUnique() {
+		if ($this->isUnique(array('name','role'), false)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
     /**
     * Copy

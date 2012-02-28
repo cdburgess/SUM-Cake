@@ -41,7 +41,7 @@ class UsersControllerTest extends CakeTestCase {
    } 
    
    function testIndexPostFixturized() { 
-     $data = array('Article' => array('user_id' => 1, 'published' 
+     $data = array('Article' => array('' => 1, 'published' 
           => 1, 'slug'=>'new-article', 'title' => 'New Article', 'body' => 'New Body')); 
      $result = $this->testAction('/articles/index', 
      array('fixturize' => true, 'data' => $data, 'method' => 'post')); 

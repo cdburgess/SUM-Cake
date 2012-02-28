@@ -61,8 +61,13 @@ class AppController extends Controller {
     */
     function beforeFilter(){
 		$this->_checkAuthentication();
+		$locale = Configure::read('Config.language');
+	    if ($locale && file_exists($locale . DS . $this->viewPath)) {
+	        // e.g. use /app/View/fre/Pages/tos.ctp instead of /app/View/Pages/tos.ctp
+	        $this->viewPath = $locale . DS . $this->viewPath;
+	    }
     }
-    
+
     /**
     * Check Authentication
     *

@@ -10,6 +10,7 @@
 	<?php
 		echo $this->Html->meta('icon');
 		echo $this->Html->css('http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css');
+		echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
 		echo $this->Html->css('cake.generic');
 		echo $this->Html->css('sum-cake');
 			
@@ -45,6 +46,6 @@
 		</div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
-	<?php pr($this->Session->read()); ?>
+	<?php pr($this->Session->read('Auth.User')); ?>
 </body>
 </html>

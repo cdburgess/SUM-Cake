@@ -77,18 +77,18 @@ Configure::write('emailConfig', 'smtp');
 // default language setting
 Configure::write('Config.language', 'eng');
 Configure::write('Config.supported_languages', array(
-	'en-US' => 'eng',
-    'en' => 'eng',
-	'es-ES' => 'esp',
-    'es' => 'esp',
+    'en',
+	'es-MX',
+    'es',
 ));
 
 $supported_languages = Configure::read('Config.supported_languages');
 $accepted_languages = split(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 foreach ($accepted_languages as $language) {
     $language_data = split(';', $language);
-    if (in_array($language_data[0], array_keys($supported_languages))) {
-        Configure::write('Config.language', $supported_languages[$language_data[0]]);
+    if (in_array($language_data[0], $supported_languages)) {
+        Configure::write('Config.language', $language_data[0]);
+		setlocale(LC_ALL, $language_data[0]);
         break;
     }
 }

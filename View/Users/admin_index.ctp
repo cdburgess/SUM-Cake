@@ -47,13 +47,15 @@
 	'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%')
 	));
 	?>	</p>
-
+	
+	<?php if ($this->Paginator->counter(array('format' => '%pages%')) > 1): ?>
 	<div class="paging">
 		<?php echo $this->Paginator->prev('<< ' . __('previous'), array(), null, array('class'=>'disabled'));?>
 	 | 	<?php echo $this->Paginator->numbers();?>
- |
-		<?php echo $this->Paginator->next(__('next') . ' >>', array(), null, array('class' => 'disabled'));?>
+ 	 |	<?php echo $this->Paginator->next(__('next') . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
+	<?php endif; ?>
+	
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

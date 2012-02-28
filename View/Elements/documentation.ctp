@@ -1,10 +1,3 @@
-<?php
-if (Configure::read('debug') == 0):
-	throw new NotFoundException();
-endif;
-App::uses('Debugger', 'Utility');
-?>
-
 <h2><?php echo 'Documentation for SUM-Cake  v'.Configure::read('version'); ?></h2>
 <br>
 <div width="200px">
