@@ -392,7 +392,6 @@ class UsersController extends AppController {
 		unset($this->request->data['User']['password']);
 		unset($this->request->data['User']['confirm_password']);
 		$this->set('role', $this->User->getEnumValues('role'));
-		$this->set('active', $this->User->getEnumValues('active'));
 	}
 
 /**
@@ -422,7 +421,6 @@ class UsersController extends AppController {
 		unset($this->request->data['User']['password']);
 		unset($this->request->data['User']['confirm_password']);
 		$this->set('role', $this->User->getEnumValues('role'));
-		$this->set('active', $this->User->getEnumValues('active'));
 	}
 
 /**

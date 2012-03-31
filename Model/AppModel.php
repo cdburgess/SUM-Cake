@@ -83,7 +83,7 @@ class AppModel extends Model {
      * @example $this->set('name', $this->Model->getEnumValues('db_enum_field_name'));
      * @access public
      */ 
-    function getEnumValues($columnName = null) {
+    public function getEnumValues($columnName = null) {
 		return $this->actsAs['Enum']['fields'][$columnName];
     }
 
