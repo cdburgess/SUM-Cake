@@ -7,12 +7,12 @@
  * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       app.Config
  * @since         CakePHP(tm) v 2.0.0
@@ -37,6 +37,7 @@
  * where 'Your' is the name of the transport.
  *
  * from =>
+ *
  * The origin email. See CakeEmail::from() about the valid values
  *
  */
@@ -48,15 +49,15 @@ class EmailConfig {
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
 	);
-	
+
 	public $gmail = array(
-        'host' => 'ssl://smtp.gmail.com',
-        'port' => 465,
+		'host' => 'ssl://smtp.gmail.com',
+		'port' => 465,
 		'timeout' => 30,
-        'username' => 'my@gmail.com',
-        'password' => 'secret',
-        'transport' => 'Smtp'
-    );
+		'username' => 'my@gmail.com',
+		'password' => 'secret',
+		'transport' => 'Smtp'
+	);
 
 	public $smtp = array(
 		'transport' => 'Smtp',

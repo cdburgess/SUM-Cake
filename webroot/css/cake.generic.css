@@ -4,12 +4,12 @@
  * Generic CSS for CakePHP
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       app.webroot.css
  * @since         CakePHP(tm)
@@ -647,6 +647,22 @@ pre {
 	overflow: auto;
 	text-shadow: none;
 }
+.cake-stack-trace li {
+	padding: 10px 5px 0px;
+	margin: 0 0 4px 0;
+	font-family: monospace;
+	border: 1px solid #bbb;
+	-moz-border-radius: 4px;
+	-wekbkit-border-radius: 4px;
+	border-radius: 4px;
+	background: #dcdcdc;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fefefe), to(#dcdcdc));
+	background-image: -webkit-linear-gradient(top, #fefefe, #dcdcdc);
+	background-image: -moz-linear-gradient(top, #fefefe, #dcdcdc);
+	background-image: -ms-linear-gradient(top, #fefefe, #dcdcdc);
+	background-image: -o-linear-gradient(top, #fefefe, #dcdcdc);
+	background-image: linear-gradient(top, #fefefe, #dcdcdc);
+}
 /* excerpt */
 .cake-code-dump pre,
 .cake-code-dump pre code {
@@ -720,62 +736,4 @@ pre {
 /** Elements **/
 #url-rewriting-warning {
 	display:none;
-}
-
-/**  Menu / Navigation  **/
-div.nav ul {
-	margin: 0;
-	padding: 0;
-	float: right;
-}
-div.nav li {
-	margin:0 0 0.5em 0;
-	list-style-type: none;
-	white-space: nowrap;
-	padding: 0 5px;
-	float: left;
-	width: 150px;
-	text-align: center;
-}
-div.nav ul li a {
-	font-weight: normal;
-	display: block;
-	clear: both;
-}
-div.nav ul li a:hover {
-	text-decoration: underline;
-}
-
-div.nav ul li a{
-	font-weight:normal;
-	padding: 4px 8px;
-	background:#e6e49f;
-	background: -webkit-gradient(linear, left top, left bottom, from(#f1f1d4), to(#e6e49f));
-	background-image: -moz-linear-gradient(top, #f1f1d4, #e6e49f);
-	color:#333;
-	border:1px solid #aaac62;
-	-webkit-border-radius:8px;
-	-moz-border-radius:8px;
-	border-radius:8px;
-	text-decoration:none;
-	text-shadow: #fff 0px 1px 0px;
-	min-width: 0;
-}
-
-div.nav ul li a:hover{
-	background: #f0f09a;
-	background: -webkit-gradient(linear, left top, left bottom, from(#f7f7e1), to(#eeeca9));
-}
-
-/** User Permissions Div **/
-div.link_content {
-	background: #fff;
-	clear: both;
-	color: #333;
-	overflow: auto;
-	width: 100%;
-}
-div.user_permissions {
-	float: right;
-	padding: 10px;
 }

@@ -34,4 +34,3 @@ CREATE TABLE `users` (
 	KEY `password_requested` (`password_requested`))	DEFAULT CHARSET=utf8,
 	COLLATE=utf8_general_ci,
 	ENGINE=MyISAM;
-

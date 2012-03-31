@@ -9,7 +9,7 @@
 		echo $this->Form->input('first_name', array('label' => __('First Name')));
 		echo $this->Form->input('last_name', array('label' => __('Last Name')));
 		echo $this->Form->input('role', array('type' => 'select', 'options' => $role, 'label' => __('Role')));
-		echo $this->Form->input('active', array('type' => 'select', 'options' => $active, 'label' => __('Active')));
+		echo $this->Form->input('active', array('label' => __('Active')));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>
