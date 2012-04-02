@@ -23,13 +23,21 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $cakeDescription ?>:
+ 		<?php echo __('SUM-Cake: simple user management:'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
+  <link href='http://fonts.googleapis.com/css?family=Maven+Pro|Hammersmith+One&v2' rel='stylesheet' type='text/css'>
 	<?php
 		echo $this->Html->meta('icon');
-
+		echo $this->Html->css('http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css');
+		echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
+			
 		echo $this->Html->css('cake.generic');
+		echo $this->Html->css('sum-cake');
+		
+		// javascripts	  	
+	    echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js');
+	    echo $scripts_for_layout;
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -39,12 +47,13 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
+			<h1><?php echo $this->Html->link(__('SUM-Cake: simple user management'), 'https://github.com/cdburgess/SUM-Cake'); ?></h1>
 		</div>
+		 
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>
-
+<?php echo $this->element('login'); ?>
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
@@ -57,5 +66,6 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		</div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
+	<?php pr($this->Session->read('Auth.User')); ?>
 </body>
 </html>

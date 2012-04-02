@@ -1,0 +1,25 @@
+tr.user_disabled {
+  color: #E2B1B1;
+}
+
+div.flash_succcess {
+    clear: both; color: #fff; font-size: 140%; font-weight: bold; margin: 0 0 1em 0; background: green; padding: 5px;
+}
+
+#search_filter {
+	float: right;
+}
+
+.aligned { vertical-align: middle;}
+
+div.actions a.text { 
+	color: #003d4c;
+	text-decoration: underline;
+	font-weight: bold;
+	background: none;
+	background-image: none;
+	border:none;
+	text-shadow: none;
+	box-shadow:none;
+	padding: 0px;
+}
