@@ -1,3 +1,4 @@
+<?php echo $this->element('login'); ?>
 <h2><?php echo 'Documentation for SUM-Cake  v'.Configure::read('version'); ?></h2>
 <br>
 <div width="200px">
