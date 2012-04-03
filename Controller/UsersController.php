@@ -52,6 +52,8 @@ class UsersController extends AppController {
 			}
 			$this->User->saveField('last_login', date('Y-m-d G:i:s', time()));
 			$this->redirect($this->Auth->redirect());
+		} else {
+			$this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
 		}
 	}
 
@@ -73,6 +75,8 @@ class UsersController extends AppController {
 			}
 			$this->User->saveField('last_login', date('Y-m-d G:i:s', time()));
 			$this->redirect($this->Auth->redirect());
+		} else {
+			$this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
 		}
 	}
 

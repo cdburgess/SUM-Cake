@@ -7,7 +7,6 @@
 </div>
 
 <div class="login form">
-    <?php echo $this->Session->flash('auth'); ?>
     <h2><?php echo __('Login'); ?></h2>
     <?php
     echo $this->Form->create('User', array('action' => 'login'));
