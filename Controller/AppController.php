@@ -17,7 +17,9 @@ class AppController extends Controller {
  * @access public
  */
     public $components = array(
-		'Security',
+		'Security' => array(
+			'csrfUseOnce' => false,
+		),
 		'Auth' => array(
 			'authError' => 'You must have permission to access that.',
 			'authenticate' => array(
@@ -94,6 +96,9 @@ class AppController extends Controller {
  * @access public
  */
 	public function isAuthorized() {
+		if ($this->Auth->user('disabled')) {
+			return false;
+		}
 		$controller_name = $this->name;
 		if (!empty($this->request->params['plugin'])) {
 			$controller_name = Inflector::camelize($this->request->params['plugin']).'.'.$controller_name;
