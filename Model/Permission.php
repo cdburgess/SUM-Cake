@@ -29,20 +29,6 @@ class Permission extends AppModel {
 	);
 
 /**
- * Model Acts As Fields
- *
- * @access public
- */
-	public $actsAs = array(
-		'Enum' => array(
-			'fields' => array(
-				'role' => array('Admin' => 'Admin', 'User' => 'User'),
-				'copied_from' => array('Admin' => 'Admin', 'User' => 'User'),
-			),
-		),
-	);
-
-/**
  * Check Name Role Unique
  *
  * The permissions are set to eliminate duplicates by keeping the name/role fields combination

@@ -71,7 +71,8 @@ class PermissionsController extends AppController {
 				$this->Session->setFlash(__('The permission could not be saved. Please, try again.'));
 			}
 		}
-		$this->set('role', $this->Permission->getEnumValues('role'));
+		$this->loadModel('Role');
+		$this->set('role', $this->Role->formOptions());
         $controllerList = $this->ControllerList->methods();
         array_unshift($controllerList, array('*' => '*'));
 		$this->set('controllerList', $controllerList);
@@ -102,7 +103,8 @@ class PermissionsController extends AppController {
 		if (empty($this->request->data)) {
 			$this->request->data = $this->Permission->read(null, $id);
 		}
-		$this->set('role', $this->Permission->getEnumValues('role'));
+		$this->loadModel('Role');
+		$this->set('role', $this->Role->formOptions());
         $controllerList = $this->ControllerList->methods();
         array_unshift($controllerList, array('*' => '*'));
 		$this->set('controllerList', $controllerList);
@@ -153,7 +155,8 @@ class PermissionsController extends AppController {
 				}
 			}
 		}
-		$this->set('role', $this->Permission->getEnumValues('role'));
+		$this->loadModel('Role');
+		$this->set('role', $this->Role->formOptions());
 	}
 
 /**
@@ -177,6 +180,7 @@ class PermissionsController extends AppController {
 				}
 			}
 		}
-		$this->set('role', $this->Permission->getEnumValues('role'));
+		$this->loadModel('Role');
+		$this->set('role', $this->Role->formOptions());
 	}
 }

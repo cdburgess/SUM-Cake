@@ -51,6 +51,7 @@
 		<li><?php echo $this->Html->link(__('Copy Permissions'), array('action' => 'copy')); ?></li>
 		<li><?php echo $this->Html->link(__('Delete Copies'), array('action' => 'delete_copy')); ?></li>
 		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'admin_index')); ?></li>
+		<li><?php echo $this->Html->link(__('List Roles'), array('controller' => 'roles', 'action' => 'admin_index')); ?> </li>
 		<li><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'admin_logout')); ?></li>
 	</ul>
 </div>

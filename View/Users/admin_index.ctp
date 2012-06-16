@@ -61,6 +61,7 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New User'), array('action' => 'admin_add')); ?></li>
+		<li><?php echo $this->Html->link(__('List Roles'), array('controller' => 'roles', 'action' => 'admin_index')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Permissions'), array('controller' => 'permissions', 'action' => 'admin_index')); ?></li>
 		<li><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'admin_logout')); ?></li>
 	</ul>

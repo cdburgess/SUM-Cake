@@ -17,19 +17,6 @@ class User extends AppModel {
 	public $name = 'User';
 
 /**
- * Model Acts As Fields
- *
- * @access public
- */
-	public $actsAs = array(
-		'Enum' => array(
-			'fields' => array(
-				'role' => array('Admin' => 'Admin', 'User' => 'User'),
-			),
-		),
-	);
-
-/**
  * DisplayField
  * 
  * @access public
