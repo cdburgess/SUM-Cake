@@ -22,11 +22,6 @@ class AppController extends Controller {
 		),
 		'Auth' => array(
 			'authError' => 'You must have permission to access that.',
-			'authenticate' => array(
-				'Form' => array(
-					'fields' => array('username' => 'email_address')
-				),
-			),
 			'authorize' => 'Controller',
 			'loginRedirect' => '/users',
 			'logoutRedirect' => '/',
