@@ -441,16 +441,24 @@ class UsersController extends AppController {
  * @access public
  */
 	public function admin_reset_password($id = null) {
-		if ($id == null) {
+		$user = $this->User->find('first', array('conditions' => array('User.id' => $id)));
+		
+		if ($id == null || empty($user)) {
 			$this->Session->setFlash(__('The user is not valid. Please, try again.'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$user = $this->User->find('first', array('conditions' => array('id' => $id)));
-		$password_request_id = $this->User->set_password_request($user['User']['id']);
+				
+		if ($this->User->set_password_request($user['User']['id'])) {
+			    $user = $this->User->find('first', array('conditions' => array('User.id' => $user['User']['id'])));
+		} else {
+		    $this->Session->setFlash(__('Password could not be reset. Please, try again.'));
+    		$this->redirect(array('action' => 'index'));
+		}
+		
 		if (!empty($user['User']['email_address'])) {
 			$system_email = Configure::read('SystemEmail');
 			$site = FULL_BASE_URL . $this->request->base;
-			$link = FULL_BASE_URL . $this->request->base . '/users/reset_password/'.$user['User']['id'].'/'.$password_request_id;
+			$link = FULL_BASE_URL . $this->request->base . '/users/reset_password/'.$user['User']['id'].'/'.$user['User']['password_requested'];
 
 			App::uses('CakeEmail', 'Network/Email');
 			$email = new CakeEmail(Configure::read('emailConfig'));
@@ -463,9 +471,12 @@ class UsersController extends AppController {
 				->viewVars(array('site' => $site, 'link' => $link))
 				->send();
 
-			$this->User->set_password_request($user['User']['id']);
+			$this->Session->setFlash(__('Password reset email has been sent.'), 'flash_success');
 		}
-		$this->Session->setFlash(__('Password reset email has been sent.'), 'flash_success');
+		else{
+			$this->Session->setFlash(__('Password reset but email has not been sent.'));
+		}
+		
 		$this->redirect(array('action' => 'index'));
 	}
 
