@@ -43,20 +43,19 @@ class UsersController extends AppController {
  * @access public
  */
 	public function login() {
-		if (!empty($this->request->data['User'])) {
-			if ($this->Auth->login()) {
-				$this->User->unset_password_request($this->Auth->user('id'));
-				if ($this->Auth->user('role') == 'Admin') {
-					if ($this->Auth->redirect() == '/users') {
-						$this->Session->write('Auth.redirect', '/admin/users');
-					}
-				}
-				$this->User->saveField('last_login', date('Y-m-d G:i:s', time()));
-				$this->redirect($this->Auth->redirect());
-			} else {
-				$this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
-			}
-		}
+	  if($this->request->is('post')) {
+		App::Import('Utility', 'Validation');
+	    if(isset($this->data['User']['username']) && Validation::email($this->data['User']['username'])) {
+	      $this->request->data['User']['email_address'] = $this->data['User']['username'];
+	      $this->Auth->authenticate['Form'] = array('fields' => array('username' => 'email_address'));
+	    }
+	    if(!$this->Auth->login()) {
+	      $this->Session->setFlash(__('Invalid username or password, try again'));
+	    } else {
+		  $this->Session->setFlash(__('You are now logged in!'));
+	      $this->redirect($this->Auth->redirect());
+	    }
+	  }
 	}
 
 /**
