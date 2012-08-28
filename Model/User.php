@@ -18,7 +18,7 @@ class User extends AppModel {
 
 /**
  * DisplayField
- * 
+ *
  * @access public
  */
 	public $displayField = 'email_address';
@@ -32,7 +32,7 @@ class User extends AppModel {
 
 /**
  * Validation
- * 
+ *
  * @access public
  */
 	public $validate = array(
@@ -78,7 +78,7 @@ class User extends AppModel {
 
 /**
  * VirtualFields
- * 
+ *
  * @access public
  */
     public $virtualFields = array(
