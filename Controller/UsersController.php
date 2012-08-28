@@ -31,7 +31,7 @@ class UsersController extends AppController {
  */
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('login', 'logout', 'register', 'password_request', 'reset_password', 'confirm');
+		$this->Auth->allow('login', 'logout', 'register', 'password_request', 'reset_password', 'confirm', 'token_login');
 	}
 
 /**
@@ -45,14 +45,10 @@ class UsersController extends AppController {
 	public function login() {
 		if (!empty($this->request->data['User'])) {
 			if ($this->Auth->login()) {
-				$this->User->unset_password_request($this->Auth->user('id'));
-				if ($this->Auth->user('role') == 'Admin') {
-					if ($this->Auth->redirect() == '/users') {
-						$this->Session->write('Auth.redirect', '/admin/users');
-					}
+				if ($this->Auth->user('token_enabled')) {
+					$this->_prepareToken();
 				}
-				$this->User->saveField('last_login', date('Y-m-d G:i:s', time()));
-				$this->redirect($this->Auth->redirect());
+				$this->_finishLogin();
 			} else {
 				$this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
 			}
@@ -69,16 +65,76 @@ class UsersController extends AppController {
  */
 	public function admin_login() {
 		if (!empty($this->request->data['User']) && $this->Auth->login()) {
-			$this->User->unset_password_request($this->Auth->user('id'));
-			if ($this->Auth->user('role') == 'Admin') {
-				if ($this->Auth->redirect() == '/users') {
-					$this->Session->write('Auth.redirect', '/admin/users');
-				}
+			if ($this->Auth->user('token_enabled')) {
+				$this->_prepareToken();
 			}
-			$this->User->saveField('last_login', date('Y-m-d G:i:s', time()));
-			$this->redirect($this->Auth->redirect());
+			$this->_finishLogin();
 		} else {
 			$this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
+		}
+	}
+
+/**
+ * _tokenLogin
+ *
+ * Prepare the session, remove the authentication / permissions, and request the token to authenticate
+ * the second part of the login.
+ *
+ * @return void
+ * @access protected
+ **/
+	protected function _prepareToken() {
+		$this->Session->write('AuthTemp', $this->Session->read('Auth'));
+		$this->Session->delete('Permissions');
+		$this->Auth->logout();
+		return $this->redirect(array('controller' => 'users', 'action' => 'token_login'));
+	}
+
+/**
+ * _finishLogin
+ *
+ * The global function to finish the login process. This will remove duplication of code by keeping
+ * it in a single function that login, admin_login, and token_login can all call.
+ *
+ * @return void
+ * @access protected
+ **/
+	protected function _finishLogin() {
+		$this->User->unset_password_request($this->Auth->user('id'));
+		if ($this->Auth->user('role') == 'Admin') {
+			if ($this->Auth->redirect() == '/users') {
+				$this->Session->write('Auth.redirect', '/admin/users');
+			}
+		}
+		$this->User->saveField('last_login', date('Y-m-d G:i:s', time()));
+		$this->redirect($this->Auth->redirect());
+	}
+
+/**
+ * token
+ *
+ * Check the token for the user. If the token matches, reactivate the authentication giving the user
+ * access to the permissions they are allowed. Load the token authentication screen and ask for input.
+ *
+ * @return void
+ * @access public
+ **/
+	public function token_login() {
+		if ($this->request->is('post')) {
+			$this->request->data['User'] = $this->Session->read('AuthTemp.User');
+			App::uses('GAuth', 'GAuth');
+			$googleAutheticator = new GAuth();
+			if ($googleAutheticator->verify($this->request->data['Token']['passcode'], $this->request->data['User']['authenticator_key'])) {
+				if ($this->Auth->login($this->request->data['User'])) {
+					$this->Session->delete('AuthTemp');
+					$this->_finishLogin();
+				} else {
+					$this->Session->setFlash(__('Username or password is incorrect'));
+					$this->redirect(array('controller' => 'users', 'action' => 'login'));
+				}
+			}
+			unset($this->request->data);
+			$this->Session->setFlash(__('Passcode could not be validated'));
 		}
 	}
 
@@ -95,7 +151,7 @@ class UsersController extends AppController {
 		$this->redirect($this->Auth->logout());
 	}
 
-/** 
+/**
  * Admin Logout
  *
  * Administrators logout.
@@ -295,6 +351,39 @@ class UsersController extends AppController {
 	}
 
 /**
+ * enable_token
+ *
+ * Enable Time-based One-time Password with Google Authenticator. This will allow the user to
+ * user Google Authenticator with their account.
+ *
+ * @return void
+ * @access public
+ **/
+public function enable_token() {
+	App::uses('GAuth', 'GAuth');
+	$googleAutheticator = new GAuth();
+	if ($this->request->is('post')) {
+		if ($googleAutheticator->verify($this->request->data['User']['passcode'], $this->request->data['User']['authenticator_key'])) {
+			$this->request->data['User']['token_enabled'] = true;
+			$this->request->data['User']['id'] = $this->Auth->user('id');
+			if ($this->User->save($this->request->data['User'])) {
+				$this->Session->setFlash(__('Multifactor authentication enabled'), 'flash_success');
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('Multifactor authentication was not enabled'));
+				$this->redirect(array('action' => 'enable_token'));
+			}
+		} else {
+			$this->Session->setFlash(__('Passcode could not be validated'));
+			$this->redirect(array('action' => 'enable_token'));
+		}
+	}
+	$authenticator_key = $googleAutheticator->getKey();
+	$this->set('authenticator_key', $authenticator_key);
+	$this->set('qrcode', $googleAutheticator->QRCode($this->Auth->user('username') . '@' . urlencode(Configure::read('WebsiteName')), $authenticator_key));
+}
+
+/**
  * Change Password
  *
  * This function allows the user to change their password.
@@ -377,7 +466,7 @@ class UsersController extends AppController {
 
 /**
  * Admin Add
- * 
+ *
  * Add a new user to the system.
  *
  * @return void
@@ -442,19 +531,19 @@ class UsersController extends AppController {
  */
 	public function admin_reset_password($id = null) {
 		$user = $this->User->find('first', array('conditions' => array('User.id' => $id)));
-		
+
 		if ($id == null || empty($user)) {
 			$this->Session->setFlash(__('The user is not valid. Please, try again.'));
 			$this->redirect(array('action' => 'index'));
 		}
-				
+
 		if ($this->User->set_password_request($user['User']['id'])) {
 			    $user = $this->User->find('first', array('conditions' => array('User.id' => $user['User']['id'])));
 		} else {
 		    $this->Session->setFlash(__('Password could not be reset. Please, try again.'));
     		$this->redirect(array('action' => 'index'));
 		}
-		
+
 		if (!empty($user['User']['email_address'])) {
 			$system_email = Configure::read('SystemEmail');
 			$site = FULL_BASE_URL . $this->request->base;
@@ -476,7 +565,7 @@ class UsersController extends AppController {
 		else{
 			$this->Session->setFlash(__('Password reset but email has not been sent.'));
 		}
-		
+
 		$this->redirect(array('action' => 'index'));
 	}
 
