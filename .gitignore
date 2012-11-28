@@ -2,3 +2,13 @@ users.kpf
 
 tmp/logs/
 
+tmp/cache/models/myapp_cake_model_default_sum-cake2_list
+tmp/cache/models/myapp_cake_model_default_sum-cake2_permissions
+tmp/cache/models/myapp_cake_model_default_sum-cake2_roles
+tmp/cache/models/myapp_cake_model_default_sum-cake2_users
+tmp/cache/persistent/myapp_cake_core_cake_console_eng
+tmp/cache/persistent/myapp_cake_core_cake_dev_eng
+tmp/cache/persistent/myapp_cake_core_cake_eng
+tmp/cache/persistent/myapp_cake_core_default_eng
+tmp/cache/persistent/myapp_cake_core_file_map
+tmp/cache/persistent/myapp_cake_core_method_cache
