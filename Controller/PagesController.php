@@ -53,6 +53,17 @@ class PagesController extends AppController {
 	public $uses = array();
 
 /**
+ * Before Filer
+ *
+ * @return void
+ * @access public
+ */
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('display');
+	}
+
+/**
  * Displays a view
  *
  * @param mixed What page to display
