@@ -17,6 +17,9 @@
 		if ($i++ % 2 == 0) {
 			$class = ' class="altrow"';
 		}
+		if ($user['User']['active'] != 1) {
+			$class = ' class="user_not_confirmed"';
+		}
 		if ($user['User']['disabled'] == 1) {
 			$class = ' class="user_disabled"';
 		}
