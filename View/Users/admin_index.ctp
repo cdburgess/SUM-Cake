@@ -7,6 +7,7 @@
 			<th><?php echo $this->Paginator->sort('email_address');?></th>
 			<th><?php echo $this->Paginator->sort('role');?></th>
 			<th><?php echo $this->Paginator->sort('active');?></th>
+			<th><?php echo $this->Paginator->sort('created');?></th>
 			<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
 	<?php
@@ -25,6 +26,7 @@
 		<td><?php echo $user['User']['email_address']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['role']; ?>&nbsp;</td>
 		<td><?php echo $user['User']['active']; ?>&nbsp;</td>
+		<td><?php echo date ( 'd.m.Y - H:i', strtotime($user['User']['created'])); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id'])); ?>
@@ -50,9 +52,11 @@
 	
 	<?php if ($this->Paginator->counter(array('format' => '%pages%')) > 1): ?>
 	<div class="paging">
-		<?php echo $this->Paginator->prev('<< ' . __('previous'), array(), null, array('class'=>'disabled'));?>
-	 | 	<?php echo $this->Paginator->numbers();?>
- 	 |	<?php echo $this->Paginator->next(__('next') . ' >>', array(), null, array('class' => 'disabled'));?>
+		<?php 
+			echo $this->Paginator->prev('<< ' . __('previous'), array(), null, array('class'=>'prev disabled'));
+			echo $this->Paginator->numbers(array('separator' => ''));
+ 			echo $this->Paginator->next(__('next') . ' >>', array(), null, array('class' => 'next disabled'));
+ 		?>
 	</div>
 	<?php endif; ?>
 	
@@ -61,8 +65,8 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New User'), array('action' => 'admin_add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Roles'), array('controller' => 'roles', 'action' => 'admin_index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Permissions'), array('controller' => 'permissions', 'action' => 'admin_index')); ?></li>
+		<li><?php echo $this->Html->link(__('List Roles'), array('controller' => 'roles', 'action' => 'admin_index'), array('style' => 'color:red')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Permissions'), array('controller' => 'permissions', 'action' => 'admin_index'), array('style' => 'color:red')); ?></li>
 		<li><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'admin_logout')); ?></li>
 	</ul>
 </div>
