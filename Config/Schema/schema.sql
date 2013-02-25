@@ -2,6 +2,7 @@
 
 DROP TABLE IF EXISTS `permissions`;
 DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `roles`;
 
 
 CREATE TABLE `permissions` (
@@ -24,7 +25,7 @@ CREATE TABLE `roles` (
 
 
 CREATE TABLE `users` (
-  `id` varchar(36) NOT NULL,
+  `id` char(36) NOT NULL,
   `username` varchar(48) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -40,7 +41,7 @@ CREATE TABLE `users` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `emial` (`email_address`),
+  UNIQUE KEY `email` (`email_address`),
   UNIQUE KEY `username` (`username`),
   KEY `disabled` (`disabled`),
   KEY `active` (`active`),
