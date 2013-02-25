@@ -8,6 +8,8 @@
  * @license http://creativecommons.org/licenses/by-sa/3.0/
  */
 class User extends AppModel {
+	
+	var $primaryKey = 'id';
 
 /**
  * Model Name

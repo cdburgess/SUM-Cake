@@ -26,6 +26,7 @@ CREATE TABLE `roles` (
 
 CREATE TABLE `users` (
   `id` char(36) NOT NULL,
+  `client_id` int(7) NOT NULL AUTO_INCREMENT,
   `username` varchar(48) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -40,9 +41,10 @@ CREATE TABLE `users` (
   `last_login` datetime NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`client_id`),
   UNIQUE KEY `email` (`email_address`),
   UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `id` (`id`),
   KEY `disabled` (`disabled`),
   KEY `active` (`active`),
   KEY `password_requested` (`password_requested`)
