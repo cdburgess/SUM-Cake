@@ -43,7 +43,6 @@ CREATE TABLE `users` (
   `modified` datetime NOT NULL,
   PRIMARY KEY (`client_id`),
   UNIQUE KEY `email` (`email_address`),
-  UNIQUE KEY `username` (`username`),
   UNIQUE KEY `id` (`id`),
   KEY `disabled` (`disabled`),
   KEY `active` (`active`),
