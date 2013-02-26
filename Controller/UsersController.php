@@ -678,3 +678,5 @@ public function enable_token() {
 		}
 	}
 }
+
+?>

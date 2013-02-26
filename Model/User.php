@@ -18,6 +18,24 @@ class User extends AppModel {
  */
 	public $name = 'User';
 
+
+/**
+ * hasOne associations
+ *
+ * @var array
+ */
+	public $hasOne = array(
+		'UserDetail' => array(
+			'className' => 'UserDetail',
+			'foreignKey' => 'user_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		
+	);
+
+
 /**
  * DisplayField
  *

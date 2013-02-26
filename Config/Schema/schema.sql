@@ -1,4 +1,4 @@
-#SUMCake sql generated on: 2012-01-18 03:24:16 : 1326857056
+#SUMCake sql generated on: 2013-02-26 03:24:16 : 1326857056
 
 DROP TABLE IF EXISTS `permissions`;
 DROP TABLE IF EXISTS `users`;
@@ -48,3 +48,13 @@ CREATE TABLE `users` (
   KEY `active` (`active`),
   KEY `password_requested` (`password_requested`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `user_details` (
+  `id` int(7) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` char(36) NOT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
