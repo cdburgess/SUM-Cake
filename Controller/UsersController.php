@@ -294,6 +294,13 @@ class UsersController extends AppController {
 			} else {
 				$this->request->data['User']['active'] = 0;
 			}
+			
+			if (Configure::read('usersApproval') == true) {
+				$this->request->data['User']['disabled'] = 1;
+			} else {
+				$this->request->data['User']['disabled'] = 0;
+			}
+			
 			$this->User->create();
 			$this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
 			if ($this->User->save($this->request->data)) {
@@ -360,6 +367,11 @@ class UsersController extends AppController {
  * @access public
  **/
 public function enable_token() {
+	if (Configure::read('enableGAuth') == false) {
+		$this->Session->setFlash(__('Multifactor authentication is not enabled'));
+		$this->redirect(array('action' => 'enable_token'));
+	}
+	
 	App::uses('GAuth', 'GAuth');
 	$googleAutheticator = new GAuth();
 	if ($this->request->is('post')) {

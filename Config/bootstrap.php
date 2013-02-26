@@ -129,9 +129,13 @@ Configure::write('version', '2.1.0');
 // email settings
 Configure::write('SystemEmail', 'me@example.com');
 Configure::write('WebsiteName', 'My Website');
-Configure::write('autoValidate', false);
 Configure::write('welcomeEmail', true);
 Configure::write('emailConfig', 'smtp');
+
+// Registration and login options
+Configure::write('autoValidate', false);
+Configure::write('usersApproval', false);
+Configure::write('enableGAuth', true);
 
 // default language setting
 Configure::write('Config.language', 'eng');
@@ -151,3 +155,4 @@ foreach ($accepted_languages as $language) {
 		break;
 	}
 }
+
