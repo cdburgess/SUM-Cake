@@ -45,6 +45,19 @@ class UsersController extends AppController {
 	public function login() {
 		if (!empty($this->request->data['User'])) {
 			if ($this->Auth->login()) {
+				
+				// Check if user is activated
+				$results = $this->User->find('first', array(
+                    'conditions' => array('User.email_address' => $this->request->data['User']['email_address']),
+                    'fields' => array('User.active')
+                ));
+				if ($results['User']['active'] != 1) {
+                    // User has not confirmed account
+                    $this->Session->setFlash('Your account has not been activated. Please check your email.');
+                    $this->Auth->logout();
+                    $this->redirect(array('action'=>'login'));
+                }
+				
 				if ($this->Auth->user('token_enabled')) {
 					$this->_prepareToken();
 				}
