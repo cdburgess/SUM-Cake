@@ -10,7 +10,15 @@
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $user['User']['full_name']; ?>
 			&nbsp;
-		</dd>	
+		</dd>
+		<?php /*
+		 * // Uncomment to activate the Additional Field
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Phone'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $user['UserDetail']['phone']; ?>
+			&nbsp;
+		</dd> */ ?>
+	</dl>
 </div>
 <div class="actions">
 	<?php echo $this->element('users'); ?>

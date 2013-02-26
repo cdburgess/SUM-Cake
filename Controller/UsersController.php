@@ -53,6 +53,8 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
 			}
 		}
+		
+		//$this->set('title_for_layout', __('Users Login')); 
 	}
 
 /**
@@ -222,7 +224,7 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('Sorry! You request cannot be granted.'));
 				$this->redirect(array('action' => 'login'));
 			}
-			$user = $this->User->find('first', array('conditions' => array('id' => $user_id)));
+			$user = $this->User->find('first', array('conditions' => array('User.id' => $user_id)));
 			if ($user['User']['password_requested'] == 0) {
 				$this->Session->setFlash(__('The password reset request was deactivated.'));
 				$this->redirect(array('action' => 'login'));
@@ -234,7 +236,11 @@ class UsersController extends AppController {
 		}
 		$this->set('id', $user_id);
 		$this->set('email_address', $user['User']['email_address']);
+		
+		//$this->set('title_for_layout', __('Change Password'));
 	}
+		
+		 
 
 /**
  * Password Request
@@ -250,7 +256,7 @@ class UsersController extends AppController {
 		    $user = '';
 			$my_user = $this->User->find('first', array('conditions' => array('email_address' => $this->request->data['User']['email_address'])));
 			if ($this->User->set_password_request($my_user['User']['id'])) {
-			    $user = $this->User->find('first', array('conditions' => array('id' => $my_user['User']['id'])));
+			    $user = $this->User->find('first', array('conditions' => array('User.id' => $my_user['User']['id'])));
 			} else {
 			    $this->Session->setFlash(__('Password could not be reset. Please, try again.'));
     			$this->redirect(array('action' => 'login'));
@@ -272,8 +278,9 @@ class UsersController extends AppController {
 			}
 			$this->Session->setFlash(__('Reset email has been sent.'), 'flash_success');
 			$this->redirect(array('action' => 'login'));
-		}
-	}
+		
+			//$this->set('title_for_layout', __('Change Password'));
+		}	}
 
 /**
  * Register
@@ -303,7 +310,7 @@ class UsersController extends AppController {
 			
 			$this->User->create();
 			$this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
-			if ($this->User->save($this->request->data)) {
+			if ($this->User->saveAll($this->request->data)) {
 				$id = $this->User->id;
 				if (Configure::read('welcomeEmail') == true) {
 					$WebsiteName = Configure::read('WebsiteName');
@@ -342,6 +349,8 @@ class UsersController extends AppController {
 			unset($this->request->data['User']['password']);
 			unset($this->request->data['User']['confirm_password']);
 		}
+		
+		//$this->set('title_for_layout', __('Registration'));
 	}
 
 /**
@@ -354,7 +363,11 @@ class UsersController extends AppController {
  * @access public
  */
 	public function index() {
-		$this->set('user', $this->User->find());
+		//$this->set('user', $this->User->find());
+		$user_id = $this->Session->read('Auth.User.id');
+		$this->set('user', $this->User->find('first', array('conditions' => array( 'User.id' => $user_id ))));
+		
+		//$this->set('title_for_layout', __('My Account'));
 	}
 
 /**
@@ -369,7 +382,7 @@ class UsersController extends AppController {
 public function enable_token() {
 	if (Configure::read('enableGAuth') == false) {
 		$this->Session->setFlash(__('Multifactor authentication is not enabled'));
-		$this->redirect(array('action' => 'enable_token'));
+		$this->redirect(array('action' => 'index'));
 	}
 	
 	App::uses('GAuth', 'GAuth');
@@ -415,6 +428,8 @@ public function enable_token() {
 		}
 		unset($this->request->data['User']);
 		$this->request->data['User']['id'] = $this->Session->read('Auth.User.id');
+		
+		//$this->set('title_for_layout', __('Change password'));
 	}
 
 /**
@@ -427,7 +442,7 @@ public function enable_token() {
  */
 	public function edit() {
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->User->save($this->request->data)) {
+			if ($this->User->saveAll($this->request->data)) {
 				$this->_update_session();
 				$this->Session->setFlash(__('Your information has been updated'), 'flash_success');
 				$this->redirect(array('action' => 'index'));
@@ -435,8 +450,11 @@ public function enable_token() {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
 			}
 		} else {
-			$this->request->data = $this->User->find();
+			$user_id = $this->Session->read('Auth.User.id');
+			$this->request->data = $this->User->find('first', array('conditions' => array( 'User.id' => $user_id )));
 		}
+		
+		//$this->set('title_for_layout', __('Account Edit'));
 	}
 
 /**
@@ -454,7 +472,7 @@ public function enable_token() {
 			$filter = $this->request->data['User']['search_string'];
 			$conditions = $this->User->build_filter_conditions($filter);
 		}
-		$this->User->recursive = 0;
+		$this->User->recursive = 1;
 		$this->set('users', $this->paginate($conditions));
 		$this->set('search_string', $search_string);
 	}
@@ -489,7 +507,7 @@ public function enable_token() {
 			$this->User->create();
 			$this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
 
-			if ($this->User->save($this->request->data)) {
+			if ($this->User->saveAll($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved'), 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -517,7 +535,7 @@ public function enable_token() {
 			$this->redirect(array('action' => 'index'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->User->save($this->request->data)) {
+			if ($this->User->saveAll($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved'), 'flash_success');
 				$this->redirect(array('action' => 'index'));
 			} else {

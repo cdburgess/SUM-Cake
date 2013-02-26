@@ -1,3 +1,4 @@
+<h1><?php echo __('Registration'); ?></h1>
 <div class="users form">
 <?php echo $this->Form->create('User');?>
 	<fieldset>
@@ -7,6 +8,8 @@
 		echo $this->Form->input('password', array('value' => '', 'label' => __('Password')));
 		echo $this->Form->input('confirm_password', array('type' => 'password', 'value' => '', 'label' => __('Confirm Password')));
 		echo $this->Form->input('first_name', array('label' => __('First Name')));
+		// Uncomment to activate the Additional Field
+		// echo $this->Form->input('UserDetail.phone');
 		echo $this->Form->input('last_name', array('label' => __('Last Name')));
 	?>
 	</fieldset>
