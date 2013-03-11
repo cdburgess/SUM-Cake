@@ -19,6 +19,8 @@
 	<tr<?php echo $class;?>>
 		<td><?php echo $permission['Permission']['name']; ?>&nbsp;</td>
 		<td><?php echo $permission['Permission']['role']; ?>&nbsp;</td>
+		<td><?php echo $permission['Permission']['created']; ?>&nbsp;</td>
+		<td><?php echo $permission['Permission']['modified']; ?>&nbsp;</td>
 
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $permission['Permission']['id'])); ?>

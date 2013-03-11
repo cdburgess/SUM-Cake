@@ -1,0 +1,6 @@
+table tr.user_not_confirmed{
+	background-color:#eeeeaa;
+}
+table tr.user_disabled{
+	background-color:#eecccc;
+}

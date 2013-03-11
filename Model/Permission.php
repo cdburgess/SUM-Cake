@@ -38,7 +38,7 @@ class Permission extends AppModel {
  * @return void
  * @access protected
  */
-	protected function _checkNameRoleUnique() {
+	public function _checkNameRoleUnique() {
 		if ($this->isUnique(array('name', 'role'), false)) {
 			return true;
 		} else {

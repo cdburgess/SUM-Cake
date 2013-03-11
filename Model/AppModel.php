@@ -63,7 +63,7 @@ class AppModel extends Model {
      * @return true
      * @access public
      */
-    function beforeSave() {
+    function beforeSave($options = array()) {
 		$this->user_id = Configure::read('user_id');
         if($this->user_id) {
             if(isset($this->_schema['user_id'])) {

@@ -45,6 +45,19 @@ class UsersController extends AppController {
 	public function login() {
 		if (!empty($this->request->data['User'])) {
 			if ($this->Auth->login()) {
+				
+				// Check if user is activated
+				$results = $this->User->find('first', array(
+                    'conditions' => array('User.email_address' => $this->request->data['User']['email_address']),
+                    'fields' => array('User.active')
+                ));
+				if ($results['User']['active'] != 1) {
+                    // User has not confirmed account
+                    $this->Session->setFlash('Your account has not been activated. Please check your email.');
+                    $this->Auth->logout();
+                    $this->redirect(array('action'=>'login'));
+                }
+				
 				if ($this->Auth->user('token_enabled')) {
 					$this->_prepareToken();
 				}
@@ -294,6 +307,13 @@ class UsersController extends AppController {
 			} else {
 				$this->request->data['User']['active'] = 0;
 			}
+			
+			if (Configure::read('usersApproval') == true) {
+				$this->request->data['User']['disabled'] = 1;
+			} else {
+				$this->request->data['User']['disabled'] = 0;
+			}
+			
 			$this->User->create();
 			$this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
 			if ($this->User->save($this->request->data)) {
@@ -360,6 +380,11 @@ class UsersController extends AppController {
  * @access public
  **/
 public function enable_token() {
+	if (Configure::read('enableGAuth') == false) {
+		$this->Session->setFlash(__('Multifactor authentication is not enabled'));
+		$this->redirect(array('action' => 'enable_token'));
+	}
+	
 	App::uses('GAuth', 'GAuth');
 	$googleAutheticator = new GAuth();
 	if ($this->request->is('post')) {
@@ -653,3 +678,5 @@ public function enable_token() {
 		}
 	}
 }
+
+?>

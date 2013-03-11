@@ -8,6 +8,8 @@
  * @license http://creativecommons.org/licenses/by-sa/3.0/
  */
 class User extends AppModel {
+	
+	var $primaryKey = 'id';
 
 /**
  * Model Name
@@ -15,6 +17,24 @@ class User extends AppModel {
  * @access public
  */
 	public $name = 'User';
+
+
+/**
+ * hasOne associations
+ *
+ * @var array
+ */
+	public $hasOne = array(
+		'UserDetail' => array(
+			'className' => 'UserDetail',
+			'foreignKey' => 'user_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		
+	);
+
 
 /**
  * DisplayField
@@ -126,7 +146,7 @@ class User extends AppModel {
  * @return bool True
  * @access public
  */
-	public function beforeValidate() {
+	public function beforeValidate($options = array()) {
 		if (isset($this->data['User']['email_address'])) {
 			$this->data['User']['email_address'] = strtolower($this->data['User']['email_address']);
 		}

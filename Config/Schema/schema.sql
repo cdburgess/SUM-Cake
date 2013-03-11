@@ -1,7 +1,8 @@
-#SUMCake sql generated on: 2012-01-18 03:24:16 : 1326857056
+#SUMCake sql generated on: 2013-02-26 03:24:16 : 1326857056
 
 DROP TABLE IF EXISTS `permissions`;
 DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `roles`;
 
 
 CREATE TABLE `permissions` (
@@ -24,7 +25,8 @@ CREATE TABLE `roles` (
 
 
 CREATE TABLE `users` (
-  `id` varchar(36) NOT NULL,
+  `id` char(36) NOT NULL,
+  `client_id` int(7) NOT NULL AUTO_INCREMENT,
   `username` varchar(48) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -39,10 +41,20 @@ CREATE TABLE `users` (
   `last_login` datetime NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `emial` (`email_address`),
-  UNIQUE KEY `username` (`username`),
+  PRIMARY KEY (`client_id`),
+  UNIQUE KEY `email` (`email_address`),
+  UNIQUE KEY `id` (`id`),
   KEY `disabled` (`disabled`),
   KEY `active` (`active`),
   KEY `password_requested` (`password_requested`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `user_details` (
+  `id` int(7) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` char(36) NOT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;

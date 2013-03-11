@@ -15,7 +15,7 @@
     echo $authenticator_key;
     ?>
     <div>Next, enter the 6-digit passcode and click submit to activate:</div>
-    <?
+    <?php
     echo $this->Form->input('passcode', array('label' => __('6 Digit Passcode'), 'max_width' => 6));
     echo $this->Form->end(__('Submit'));
     ?>
