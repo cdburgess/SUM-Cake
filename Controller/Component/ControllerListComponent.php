@@ -95,7 +95,7 @@ class ControllerListComponent extends Component {
 		$controllers = array();
 		foreach ($controllerList as $controller) {
 			if ($controller !== 'AppController') {
-				$controllerName = rtrim($controller,'Controller');
+				$controllerName = preg_replace('/Controller$/', '',  $controller);
 				$controllers[$controllerName] = $this->getControllerMethods($controller);
 			}
 		}

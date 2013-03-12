@@ -3,43 +3,45 @@
 	<table cellpadding="0" cellspacing="0">
 
 	<?php foreach($controllerList as $controller => $methods): ?>
-		<tr>
-			<th><?php echo $controller;?></th>
-		<?php foreach($allRoles as $role): ?>
+		<tr class="controller-row">
+			<th><div class="controller expand"><?php echo $controller;?></div></th>
+			<?php foreach ($allRoles as $role): ?>
 			<th><?php echo $role;?></th>
-		<?php endforeach; ?>
+			<?php endforeach; ?>
 		</tr>
 
 		<?php foreach($methods as $method): ?>
-			<tr>
+			<tr class="hidden controller-<?php echo $controller;?>">
 				<td><?php echo $method; ?>&nbsp;</td>
 
-			<?php foreach($allRoles as $role): ?>
+			<?php foreach ($allRoles as $role): ?>
 				<td>
-				<?php if ($role == 'Admin'): ?>
-					<?php echo $this->Html->image('tick_disabled.png'); ?>
-				<?php elseif (isset($permissions[$controller . ':' . $method][$role])): ?>
+					<?php if ($role == 'Admin'): ?>
+						<?php echo $this->Html->image('tick_disabled.png'); ?>
+					<?php elseif (isset($permissions[$controller . ':' . $method][$role])): ?>
 						<?php
-							echo $this->Html->link(
-								$this->Html->image('tick.png'),
-								array('action' => 'admin_delete', $permissions[$controller . ':' . $method][$role]),
-								array('escape' => false,),
-								sprintf(__('Are you sure you want to delete # %s?'), $permissions[$controller . ':' . $method][$role])
-							);
-						?>
-						&nbsp;
-				<?php else: ?>
-					<?php
-							echo $this->Html->link(
-								$this->Html->image('cross.png'),
-								array('action' => 'admin_add', 'name' => $controller . ':' . $method, 'role' => $role ),
+							echo $this->Html->image(
+								'tick.png',
 								array(
-									'escape' => false,
+									'class' => 'permission-toggle',
+									'data-id' => $permissions[$controller . ':' . $method][$role],
 								)
 							);
 						?>
 						&nbsp;
-				<?php endif; ?>
+					<?php else: ?>
+						<?php
+							echo $this->Html->image(
+								'cross.png',
+								array(
+									'class' => 'permission-toggle',
+									'data-perm' => $controller . '.' . $method,
+									'data-role' => $role,
+								)
+							);
+						?>
+						&nbsp;
+					<?php endif; ?>
 				</td>
 			<?php endforeach; ?>
 
@@ -58,3 +60,5 @@
 		<li><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'admin_logout')); ?></li>
 	</ul>
 </div>
+
+<?php echo $this->Html->script('/js/permissions.js'); ?>
