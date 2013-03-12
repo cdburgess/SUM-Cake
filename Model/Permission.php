@@ -23,7 +23,7 @@ class Permission extends AppModel {
  */
 	public $validate = array(
 		'name' => array(
-			'rule' => array('_checkNameRoleUnique'),
+			'rule' => array('checkNameRoleUnique'),
 			'message' => 'A record already exists for this permission.',
 		),
 	);
@@ -38,7 +38,7 @@ class Permission extends AppModel {
  * @return void
  * @access protected
  */
-	protected function _checkNameRoleUnique() {
+	public function checkNameRoleUnique() {
 		if ($this->isUnique(array('name', 'role'), false)) {
 			return true;
 		} else {

@@ -51,7 +51,7 @@ class ControllerListComponent extends Component {
  * @access public
  */
     public function get() {
-        return $this->_getControllers();
+        return $this->getControllers();
     }
 
 /**
@@ -88,15 +88,15 @@ class ControllerListComponent extends Component {
  * Get a list of controllers as objects
  *
  * @return array $controllers List of all controllers in this system
- * @access protected
+ * @access public
  */
-	protected function _getControllers() {
+	public function getControllers() {
 		$controllerList = App::objects('controller', App::path('controllers'), false);  // clear and rebuild the cache
 		$controllers = array();
 		foreach ($controllerList as $controller) {
 			if ($controller !== 'AppController') {
 				$controllerName = rtrim($controller,'Controller');
-				$controllers[$controllerName] = $this->_getControllerMethods($controller);
+				$controllers[$controllerName] = $this->getControllerMethods($controller);
 			}
 		}
 		return $controllers;
@@ -110,9 +110,9 @@ class ControllerListComponent extends Component {
  *
  * @param string $controllerName The name of the controller to query
  * @return array $classMethodsCleaned All of the methods from the class
- * @access protected
+ * @access public
  */
-	protected function _getControllerMethods($controllerName) {
+	public function getControllerMethods($controllerName) {
 		$classMethodsCleaned = array();
 		App::uses($controllerName, 'Controller');
 		$parentClassMethods = get_class_methods('Controller');

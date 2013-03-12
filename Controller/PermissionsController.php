@@ -32,25 +32,15 @@ class PermissionsController extends AppController {
  * @access public
  */
 	public function admin_index() {
-		$this->Permission->recursive = 0;
-		$this->set('permissions', $this->paginate());
-	}
+		$this->loadModel('Role');
+		$this->set('allRoles', $this->Role->formOptions());
 
-/**
- * Admin View
- * 
- * View a permission setting
- *
- * @param string $id The id of the permission to view
- * @return void
- * @access public
- */
-	public function admin_view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid permission'));
-			$this->redirect(array('action' => 'admin_index'));
-		}
-		$this->set('permission', $this->Permission->read(null, $id));
+        $this->set('controllerList', $this->ControllerList->getControllers());
+
+		$this->Permission->recursive = 0;
+		$permissions = $this->Permission->find('all');
+		$perms = Set::combine($permissions, '{n}.Permission.role', '{n}.Permission.id', '{n}.Permission.name');
+		$this->set('permissions', $perms);
 	}
 
 /**
@@ -62,52 +52,17 @@ class PermissionsController extends AppController {
  * @access public
  */
 	public function admin_add() {
-		if (!empty($this->request->data)) {
+		if (!empty($this->request->named)) {
+			$data['Permission']['name'] = $this->request->named['name'];
+			$data['Permission']['role'] = $this->request->named['role'];
 			$this->Permission->create();
-			if ($this->Permission->save($this->request->data)) {
+			if ($this->Permission->save($data)) {
 				$this->Session->setFlash(__('The permission has been saved'), 'flash_success');
-				$this->redirect(array('action' => 'admin_index'));
 			} else {
 				$this->Session->setFlash(__('The permission could not be saved. Please, try again.'));
 			}
 		}
-		$this->loadModel('Role');
-		$this->set('role', $this->Role->formOptions());
-        $controllerList = $this->ControllerList->methods();
-        array_unshift($controllerList, array('*' => '*'));
-		$this->set('controllerList', $controllerList);
-	}
-
-/**
- * Admin Edit
- *
- * Edit an existing permission
- *
- * @param string $id The id of the permission to edit
- * @return void
- * @access public
- */
-	public function admin_edit($id = null) {
-		if (!$id && empty($this->request->data)) {
-			$this->Session->setFlash(__('Invalid permission'));
-			$this->redirect(array('action' => 'admin_index'));
-		}
-		if (!empty($this->request->data)) {
-			if ($this->Permission->save($this->request->data)) {
-				$this->Session->setFlash(__('The permission has been saved'), 'flash_success');
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The permission could not be saved. Please, try again.'));
-			}
-		}
-		if (empty($this->request->data)) {
-			$this->request->data = $this->Permission->read(null, $id);
-		}
-		$this->loadModel('Role');
-		$this->set('role', $this->Role->formOptions());
-        $controllerList = $this->ControllerList->methods();
-        array_unshift($controllerList, array('*' => '*'));
-		$this->set('controllerList', $controllerList);
+		$this->redirect(array('controller' => 'permissions', 'action' => 'admin_index'));
 	}
 
 /**
@@ -130,57 +85,5 @@ class PermissionsController extends AppController {
 		}
 		$this->Session->setFlash(__('Permission was not deleted'));
 		$this->redirect(array('action' => 'admin_index'));
-	}
-
-/**
- * Admin Copy
- *
- * Inherit permissions from one role to another without having to select each one individually. This
- * will do a delete / copy so if the inheritance is run multiple times, it will not store multiple copies
- * of the permissions for a given user.role.
- *
- * @return void
- * @access public
- */
-	public function admin_copy() {
-		if (!empty($this->request->data)) {
-			if ($this->request->data['Permission']['copy_to'] == $this->request->data['Permission']['copy_from']) {
-				$this->Session->setFlash(__('The roles cannot match. Please, try again.'));
-			} else {
-				if ($this->Permission->copy($this->request->data['Permission']['copy_from'], $this->request->data['Permission']['copy_to'])) {
-					$this->Session->setFlash(__('The permissions have been updated'), 'flash_success');
-					$this->redirect(array('action' => 'index'));
-				} else {
-					$this->Session->setFlash(__('The copied permissions could not be saved. Please, try again.'));
-				}
-			}
-		}
-		$this->loadModel('Role');
-		$this->set('role', $this->Role->formOptions());
-	}
-
-/**
- * Admin Delete Copy
- *
- * Remove the permissions copied to this role from another role.
- *
- * @return void
- * @access public
- */
-	public function admin_delete_copy() {
-		if (!empty($this->request->data)) {
-			if ($this->request->data['Permission']['copy_to'] == $this->request->data['Permission']['copy_from']) {
-				$this->Session->setFlash(__('The roles cannot match. Please, try again.'));
-			} else {
-				if ($this->Permission->delete_copy($this->request->data['Permission']['copy_from'], $this->request->data['Permission']['copy_to'])) {
-					$this->Session->setFlash(__('The copied permissions have been deleted'), 'flash_success');
-					$this->redirect(array('action' => 'index'));
-				} else {
-					$this->Session->setFlash(__('The copied permission could not be removed. Please, try again.'));
-				}
-			}
-		}
-		$this->loadModel('Role');
-		$this->set('role', $this->Role->formOptions());
 	}
 }

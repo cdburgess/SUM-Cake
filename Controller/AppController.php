@@ -84,6 +84,9 @@ class AppController extends Controller {
 				Configure::write('user_id', $this->Auth->user('id'));
 			}
 		}
+		if ($this->Auth->user('role') == 'Admin') {
+			$this->Auth->allow();
+		}
 		$this->set('Auth', $this->Auth->user());
 	}
 

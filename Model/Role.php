@@ -15,8 +15,8 @@ class Role extends AppModel {
 /**
  * Form Options
  *
- * Build an options list array for the html form. 
- * 
+ * Build an options list array for the html form.
+ *
  * @return void
  * @author Chuck Burgess
  **/
