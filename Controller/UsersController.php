@@ -44,6 +44,13 @@ class UsersController extends AppController {
  */
 	public function login() {
 		if (!empty($this->request->data['User'])) {
+			if (!$this->Auth->login()) {
+				$user = $this->User->find('first', array(
+					'conditions' => array('username' => $this->Auth->request->data['User']['email_address']),
+					'fields' => array('email_address'),
+				));
+				$this->Auth->request->data['User']['email_address'] = $user['User']['email_address'];
+			}
 			if ($this->Auth->login()) {
 				if ($this->Auth->user('token_enabled')) {
 					$this->_prepareToken();
@@ -64,13 +71,22 @@ class UsersController extends AppController {
  * @access public
  */
 	public function admin_login() {
-		if (!empty($this->request->data['User']) && $this->Auth->login()) {
-			if ($this->Auth->user('token_enabled')) {
-				$this->_prepareToken();
+		if (!empty($this->request->data['User'])) {
+			if (!$this->Auth->login()) {
+				$user = $this->User->find('first', array(
+					'conditions' => array('username' => $this->Auth->request->data['User']['email_address']),
+					'fields' => array('email_address'),
+				));
+				$this->Auth->request->data['User']['email_address'] = $user['User']['email_address'];
 			}
-			$this->_finishLogin();
-		} else {
-			$this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
+			if ($this->Auth->login()) {
+				if ($this->Auth->user('token_enabled')) {
+					$this->_prepareToken();
+				}
+				$this->_finishLogin();
+			} else {
+				$this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
+			}
 		}
 	}
 

@@ -10,7 +10,7 @@
     <h2><?php echo __('Login'); ?></h2>
     <?php
     echo $this->Form->create('User', array('action' => 'login'));
-    echo $this->Form->input('email_address',array('between'=>'<br>','class'=>'text', 'label' => __('Email Address')));
+    echo $this->Form->input('email_address',array('between'=>'<br>','class'=>'text', 'label' => __('Email Address or Username')));
     echo $this->Form->input('password',array('between'=>'<br>','class'=>'text', 'label' => __('Password')));    
     echo $this->Form->end(__('Sign In'));    
     ?>
