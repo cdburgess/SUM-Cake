@@ -7,6 +7,7 @@
  * @subpackage app.controllers.components
  * @license http://creativecommons.org/licenses/by-sa/3.0/
  */
+App::uses('Component', 'Controller');
 class ControllerListComponent extends Component {
 
 /**
@@ -16,7 +17,7 @@ class ControllerListComponent extends Component {
  * @return void
  * @access public
  */
-    public function initialize($controller) {
+    public function initialize(Controller $controller) {
         $this->controller = $controller;
     }
 
@@ -27,7 +28,7 @@ class ControllerListComponent extends Component {
  * @access public
  * @author Chuck Burgess
  **/
-    public function shutdown() {
+    public function shutdown(Controller $controller) {
     }
 
 /**
@@ -39,7 +40,7 @@ class ControllerListComponent extends Component {
  * @return void
  * @access public
  */
-    public function startup($controller) {
+    public function startup(Controller $controller) {
     }
 
 /**
@@ -106,7 +107,8 @@ class ControllerListComponent extends Component {
  * Get Controller Methods
  *
  * Get all of the methods from each of the controllers. This will also include the controllers
- * found in paths included by App::build
+ * found in paths included by App::build. Use the reflection class and get only the names of 
+ * the public methods in the controller class, sort them, and return the array.
  *
  * @param string $controllerName The name of the controller to query
  * @return array $classMethodsCleaned All of the methods from the class
@@ -115,6 +117,13 @@ class ControllerListComponent extends Component {
 	public function getControllerMethods($controllerName) {
 		$classMethodsCleaned = array();
 		App::uses($controllerName, 'Controller');
+		$controller = new ReflectionClass($controllerName);
+		$methods = array();
+		foreach ($controller->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+			if ($method->class == $controllerName) {
+				$methods[] = $method->name;
+			}
+		}
 		$parentClassMethods = get_class_methods('Controller');
 		$subClassMethods = get_class_methods($controllerName);
 		$classMethods = array_diff($subClassMethods, $parentClassMethods);
@@ -123,6 +132,7 @@ class ControllerListComponent extends Component {
 				$classMethodsCleaned[] = $method;
 			}
 		}
+		sort($classMethodsCleaned);
 		return $classMethodsCleaned;
 	}
 
@@ -144,7 +154,7 @@ class ControllerListComponent extends Component {
 				$controllerList = App::objects($plugin.'.Controller');
 				foreach ($controllerList as $controller) {
 					$controllerName = $plugin.'.'. $controller;
-					$controllerName = rtrim($controllerName,'Controller');
+					$controllerName = preg_replace('/Controller$/', '',  $controller);
 					App::uses($controller, $plugin.'.Controller');
 					if ($controller !== $plugin.'AppController') {
 						$subClassMethods = get_class_methods($controller);

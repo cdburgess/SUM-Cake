@@ -96,9 +96,9 @@ class AppController extends Controller {
  * What does the user have access to? This will set the permissions availble to this users role
  *
  * @return mixed True/False If the user is authorized to access or not
- * @access public
+ * @access protected
  */
-	public function isAuthorized() {
+	protected function _isAuthorized() {
 		if ($this->Auth->user('disabled')) {
 			return false;
 		}
@@ -107,7 +107,7 @@ class AppController extends Controller {
 			$controller_name = Inflector::camelize($this->request->params['plugin']).'.'.$controller_name;
 		}
 		if (!$this->Session->check('Permissions')) {
-			$this->buildPermissions();
+			$this->_buildPermissions();
 		}
 		$permissions = $this->Session->read('Permissions');
 		if ( in_array('*', array_keys($permissions)) ||
@@ -129,9 +129,9 @@ class AppController extends Controller {
  * Get the list of permissions from the database and build an access array
  *
  * @return void
- * @access public
+ * @access protected
  */
-	public function buildPermissions() {
+	protected function _buildPermissions() {
 		$permissions = array();
 		$permissions['Users'][] = 'logout';
 		$this->loadModel('Permission');
