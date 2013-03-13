@@ -126,7 +126,7 @@ class User extends AppModel {
  * @return bool True
  * @access public
  */
-	public function beforeValidate() {
+	public function beforeValidate($options = Array()) {
 		if (isset($this->data['User']['email_address'])) {
 			$this->data['User']['email_address'] = strtolower($this->data['User']['email_address']);
 		}
