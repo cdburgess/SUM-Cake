@@ -141,6 +141,9 @@ Configure::write('Config.supported_languages', array(
 //	'es',
 ));
 
+if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+	$_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'en';
+}
 $supported_languages = Configure::read('Config.supported_languages');
 $accepted_languages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 foreach ($accepted_languages as $language) {

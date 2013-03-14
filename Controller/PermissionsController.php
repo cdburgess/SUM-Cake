@@ -31,7 +31,6 @@ class PermissionsController extends AppController {
  **/
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Security->unlockedActions = array('givestar');
 		if (isset($this->Security) && $this->action == 'admin_toggle' && $this->RequestHandler->isAjax()) {
 			$this->Security->enabled = false;
 			$this->Security->csrfCheck = false;
