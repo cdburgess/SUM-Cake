@@ -53,14 +53,14 @@ class PermissionsController extends AppController {
 
 		$this->Permission->recursive = 0;
 		$permissions = $this->Permission->find('all');
-		$perms = Set::combine($permissions, '{n}.Permission.role', '{n}.Permission.id', '{n}.Permission.name');
+		$perms = Hash::combine($permissions, '{n}.Permission.role', '{n}.Permission.id', '{n}.Permission.name');
 		$this->set('permissions', $perms);
 	}
 
 /**
- * Admin Add
+ * Admin Toggle
  *
- * Add a new permission
+ * Toggle permissions
  *
  * @return void
  * @access public

@@ -124,9 +124,13 @@ class ControllerListComponent extends Component {
 				$methods[] = $method->name;
 			}
 		}
-		$parentClassMethods = get_class_methods('Controller');
 		$subClassMethods = get_class_methods($controllerName);
+		$parentClass = get_parent_class($controllerName);
+		$parentClassMethods = get_class_methods($parentClass);
 		$classMethods = array_diff($subClassMethods, $parentClassMethods);
+
+		$parentClassMethods = get_class_methods('Controller');
+		$classMethods = array_diff($classMethods, $parentClassMethods);
 		foreach ($classMethods as $method) {
 			if ($method{0} <> "_") {
 				$classMethodsCleaned[] = $method;
