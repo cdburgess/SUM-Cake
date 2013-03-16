@@ -108,48 +108,4 @@ class PermissionsController extends AppController {
 		$this->set(compact('perm', 'role', 'id', 'data', 'success', 'permitted'));
 		$this->layout = 'ajax';
 	}
-
-/**
- * Admin Add
- *
- * Add a new permission
- *
- * @return void
- * @access public
- */
-	public function admin_add() {
-		if (!empty($this->request->named)) {
-			$data['Permission']['name'] = $this->request->named['name'];
-			$data['Permission']['role'] = $this->request->named['role'];
-			$this->Permission->create();
-			if ($this->Permission->save($data)) {
-				$this->Session->setFlash(__('The permission has been saved'), 'flash_success');
-			} else {
-				$this->Session->setFlash(__('The permission could not be saved. Please, try again.'));
-			}
-		}
-		$this->redirect(array('controller' => 'permissions', 'action' => 'admin_index'));
-	}
-
-/**
- * Admin Delete
- *
- * Delete an existing permission
- *
- * @param string $id The id of the permission to delete
- * @return void
- * @access public
- */
-	public function admin_delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for permission'));
-			$this->redirect(array('action' => 'admin_index'));
-		}
-		if ($this->Permission->delete($id)) {
-			$this->Session->setFlash(__('Permission deleted'), 'flash_success');
-			$this->redirect(array('action' => 'admin_index'));
-		}
-		$this->Session->setFlash(__('Permission was not deleted'));
-		$this->redirect(array('action' => 'admin_index'));
-	}
 }
