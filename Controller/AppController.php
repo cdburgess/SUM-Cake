@@ -98,7 +98,7 @@ class AppController extends Controller {
  * @return mixed True/False If the user is authorized to access or not
  * @access protected
  */
-	protected function _isAuthorized() {
+	public function isAuthorized() {
 		if ($this->Auth->user('disabled')) {
 			return false;
 		}
