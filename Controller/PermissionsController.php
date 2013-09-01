@@ -49,7 +49,7 @@ class PermissionsController extends AppController {
 		$this->loadModel('Role');
 		$this->set('allRoles', $this->Role->formOptions());
 
-        $this->set('controllerList', $this->ControllerList->getControllers());
+        $this->set('controllerList', $this->ControllerList->get());
 
 		$this->Permission->recursive = 0;
 		$permissions = $this->Permission->find('all');

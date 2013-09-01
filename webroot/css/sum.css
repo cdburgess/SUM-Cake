@@ -1,5 +1,5 @@
 /* Permissions */
-.controller-row { background: #6f6f6f !important; color: #fff; font-weight: bold; }
+.controller-row { background: #6f6f6f !important; color: #fff; font-weight: bold; cursor: pointer; }
 .expand { background: url('/img/arrow_state_grey_right.png') no-repeat; padding-left: 25px; }
 .collapse { background: url('/img/arrow_state_grey_expanded.png') no-repeat; padding-left: 25px; }
 .hidden { display: none; }

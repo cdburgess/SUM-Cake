@@ -52,7 +52,8 @@ class ControllerListComponent extends Component {
  * @access public
  */
     public function get() {
-        return $this->getControllers();
+        $controllersAndPluginControllers = array_merge($this->getControllers(), $this->_getPluginControllerMethods());
+		return $controllersAndPluginControllers;
     }
 
 /**
