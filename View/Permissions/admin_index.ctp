@@ -4,14 +4,14 @@
 
 	<?php foreach($controllerList as $controller => $methods): ?>
 		<tr class="controller-row">
-			<th><div class="controller expand"><?php echo $controller;?></div></th>
+			<th><div class="controller expand"><?php echo str_replace('.', '-', $controller);?></div></th>
 			<?php foreach ($allRoles as $role): ?>
 			<th><?php echo $role;?></th>
 			<?php endforeach; ?>
 		</tr>
 
 		<?php foreach($methods as $method): ?>
-			<tr class="hidden controller-<?php echo $controller;?>">
+			<tr class="hidden controller-<?php echo str_replace('.', '-', $controller);?>">
 				<td><?php echo $method; ?>&nbsp;</td>
 
 			<?php foreach ($allRoles as $role): ?>
