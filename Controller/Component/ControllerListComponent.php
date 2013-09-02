@@ -52,7 +52,8 @@ class ControllerListComponent extends Component {
  * @access public
  */
     public function get() {
-        return $this->getControllers();
+        $controllersAndPluginControllers = array_merge($this->getControllers(), $this->_getPluginControllerMethods());
+		return $controllersAndPluginControllers;
     }
 
 /**
@@ -157,8 +158,8 @@ class ControllerListComponent extends Component {
 			foreach ($plugins as $plugin) {
 				$controllerList = App::objects($plugin.'.Controller');
 				foreach ($controllerList as $controller) {
-					$controllerName = $plugin.'.'. $controller;
 					$controllerName = preg_replace('/Controller$/', '',  $controller);
+					$controllerName = $plugin.'.'. $controllerName;
 					App::uses($controller, $plugin.'.Controller');
 					if ($controller !== $plugin.'AppController') {
 						$subClassMethods = get_class_methods($controller);

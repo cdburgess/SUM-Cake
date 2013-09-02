@@ -49,7 +49,7 @@ class PermissionsController extends AppController {
 		$this->loadModel('Role');
 		$this->set('allRoles', $this->Role->formOptions());
 
-        $this->set('controllerList', $this->ControllerList->getControllers());
+        $this->set('controllerList', $this->ControllerList->get());
 
 		$this->Permission->recursive = 0;
 		$permissions = $this->Permission->find('all');
@@ -74,9 +74,9 @@ class PermissionsController extends AppController {
 
 		$conditions = array();
 		if ($id !== 'undefined') {
-			$conditions['Permission.id'] =  $id;
+			$conditions['Permission.id'] = $id;
 		} else {
-			$perm = preg_replace('/\./', ':', $perm);
+			$perm = preg_replace('/\.(?!.*\.)/', ':', $perm);
 			$conditions = array(
 				'Permission.name' => $perm,
 				'Permission.role' => $role,

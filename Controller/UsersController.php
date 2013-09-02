@@ -337,7 +337,7 @@ class UsersController extends AppController {
 				}
 				$this->Session->setFlash(__('You have been registered successfully.'), 'flash_success');
 				if (Configure::read('autoValidate') !== false) {
-					$this->_isAuthorized();
+					$this->isAuthorized();
 					$this->request->data['User'] = array_merge($this->request->data["User"], array('id' => $id, 'role' => 'User'));
 					$this->Auth->login($this->request->data['User']);
 					$this->_buildPermissions();
